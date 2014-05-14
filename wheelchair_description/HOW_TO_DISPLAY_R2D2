@@ -1,0 +1,1 @@
+roslaunch urdf_tutorial display.launch model:=<YOUR_PATH_HERE>/artoo.urdf 
