@@ -1,0 +1,13 @@
+<launch>  	
+  	<node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left">
+        <remap from="scan" to="/wheelchair_lasers/left" />
+        <remap from="scan_filtered" to="/scan_filtered_left"/>
+        <rosparam command="load" file="$(find ira_laser_tools)/laserscan_filter.yaml" />
+  	</node>
+
+  	<node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_right">
+        <remap from="scan" to="/wheelchair_lasers/right" />
+        <remap from="scan_filtered" to="/scan_filtered_right"/>
+        <rosparam command="load" file="$(find ira_laser_tools)/laserscan_filter.yaml" />
+ 	</node>
+</launch>
