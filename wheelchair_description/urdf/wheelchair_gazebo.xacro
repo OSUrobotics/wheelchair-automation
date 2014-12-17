@@ -18,7 +18,7 @@
     <publishTf>0</publishTf>
   </plugin>
 </gazebo>
-<!--
+
 <gazebo reference="right_scanner">
     <sensor type="ray" name="head_hokuyo_sensor">
       <pose>0 0 0 0 0 0</pose>
@@ -34,7 +34,7 @@
           </horizontal>
         </scan>
         <range>
-          <min>0.10</min>
+          <min>2</min>
           <max>30.0</max>
           <resolution>0.01</resolution>
         </range>
@@ -66,7 +66,7 @@
           </horizontal>
         </scan>
         <range>
-          <min>0.10</min>
+          <min>2</min>
           <max>30.0</max>
           <resolution>0.01</resolution>
         </range>
@@ -83,5 +83,5 @@
       </plugin>
     </sensor>
   </gazebo>
--->
+
 </robot>

@@ -3,7 +3,9 @@
   <param name="/use_sim_time" value="true"/>
 
   <node pkg="gmapping" type="slam_gmapping" name="gmapping"> 
-    <remap from="scan" to="wheelchair_lasers/right"/>
+    <remap from="scan" to="scan_multi"/>
+    <param name="map_udpate_interval" value="1.0"/>
+    <param name="minimumScore" value="100"/>
   </node>
 
 </launch>
