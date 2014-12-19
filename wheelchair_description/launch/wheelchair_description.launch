@@ -7,8 +7,8 @@
 
 
    <include file="$(find ira_laser_tools)/launch/laserscan_multi_merger.launch"/>
-   <include file="$(find wheelchair_description)/launch/wheelchair_odom.launch"/>
 <!--
+   <include file="$(find wheelchair_description)/launch/wheelchair_odom.launch"/>
   <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
     <param name="output_frame" value="odom"/>
     <param name="freq" value="30.0"/>
