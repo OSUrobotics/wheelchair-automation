@@ -1,0 +1,16 @@
+<package>
+  <description brief="wheelchair_automation">
+
+     wheelchair_automation
+
+  </description>
+  <author>Dan Lazewatsky</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/wheelchair_automation</url>
+  <export>
+    <metapackage />
+  </export>
+</package>
+
+
