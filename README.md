@@ -3,22 +3,29 @@ wheelchair-automation
 
 Code for automating a PERMOBIL wheelchair for the ALS foundation.
 
-Needed packages:
-libgsl0-dev
-ros-hydro-transmission-interface
-ros-hydro-joint-limits-interface
-ros-hydro-joint-trajectory-controller
-ros-hydro-controller-manager
+Package Descriptions
+---------------------
 
-wheelchair controlling:
+wheelchair_description: URDF and launch files for wheelchair initial bringup.
 
-Gazebo: bash gazebo_spawn_swivel_willow.bash 
+wheelchair_automation: AMCL and Navigation for the wheelchair.
 
-Joints: roslaunch wheelchair_description wheelchair_description.launch
+wheelchair_bringup: TODO
 
-Fake Odom: roslaunch wheelchair_description wheelchair_odom.launch
+wheelchair_mapping: Basic gmapping launch file and where maps should be saved. (TODO: Get rid of? Probably.)
 
-AMCL: roslaunch test_simulation amcl.launch
+Useful launch files
+---------------------
 
-Navigation: roslaunch test_simulation navigation.launch
+Gazebo (Only for simulation): bash gazebo_spawn_swivel_willow.bash 
+
+Hokuyo/Joint States/Robot States/Laser Scan Merger: roslaunch wheelchair_description wheelchair_description.launch
+
+Laser Scan Matcher (Odometry): roslaunch wheelchair_description wheelchair_odom.launch
+
+Note that Odometry becomes inaccurate when spinning in place. Causes localization to become inaccurate after a few full spins.
+
+AMCL: roslaunch wheelchair_automation amcl.launch
+
+Navigation: roslaunch wheelchair_automation navigation.launch
 
