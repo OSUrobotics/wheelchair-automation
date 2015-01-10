@@ -8,7 +8,7 @@ Package Descriptions
 
 wheelchair_description: URDF and launch files for wheelchair initial bringup.
 
-wheelchair_automation: AMCL and Navigation for the wheelchair.
+wheelchair_navigation: AMCL and Navigation parameters for the wheelchair.
 
 wheelchair_bringup: TODO
 
@@ -25,7 +25,7 @@ Laser Scan Matcher (Odometry): roslaunch wheelchair_description wheelchair_odom.
 
 Note that Odometry becomes inaccurate when spinning in place. Causes localization to become inaccurate after a few full spins.
 
-AMCL: roslaunch wheelchair_automation amcl.launch
+AMCL: roslaunch wheelchair_navigation amcl.launch
 
-Navigation: roslaunch wheelchair_automation navigation.launch
+Navigation: roslaunch wheelchair_navigation navigation.launch
 

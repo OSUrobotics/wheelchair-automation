@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>test_simulation</name>
+  <name>wheelchair_navigation</name>
   <version>0.0.0</version>
   <description>The test_simulation package</description>
 
