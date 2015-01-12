@@ -1,0 +1,3 @@
+[submodule "wheelchair_bringup/rosbag-rotate"]
+	path = wheelchair_bringup/rosbag-rotate
+	url = https://github.com/dlaz/rosbag-rotate.git
