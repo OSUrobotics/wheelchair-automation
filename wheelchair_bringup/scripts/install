@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
+# Much of this was adapted from husky_bringup
+
 source `rospack find rosbash`/rosbash
 
 echo "Installling udev rules"
-# TODO udev rules
+rospd wheelchair_bringup/udev > /dev/null
+sudo cp *.rules /etc/udev/rules.d/
+popd > /dev/null
+sudo udevadm trigger
 
-# Much of this was adapted from husky_bringup
 echo "Installing launch files"
 
 # For the setup.bash to use, first try ROBOT_SETUP, then fall back on setup.bash from active workspace.
