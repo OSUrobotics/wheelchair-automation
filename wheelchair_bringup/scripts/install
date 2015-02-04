@@ -4,6 +4,8 @@
 
 source `rospack find rosbash`/rosbash
 
+LOCAL_LOG_DIR="~/ros_logs"
+
 echo "Installling udev rules"
 rospd wheelchair_bringup/udev > /dev/null
 sudo cp *.rules /etc/udev/rules.d/
@@ -11,14 +13,17 @@ popd > /dev/null
 sudo udevadm trigger
 
 echo "Installing launch files"
-
 # For the setup.bash to use, first try ROBOT_SETUP, then fall back on setup.bash from active workspace.
 install_pkg="rosrun robot_upstart install"
 $install_pkg wheelchair_bringup/launch/hokuyo_multi.launch --job wheelchair-lasers \
                                                            --interface wlan0 \
                                                            --setup ${ROBOT_SETUP-$(roscd; echo `pwd`/setup.bash)}
 
+$install_pkg wheelchair_bringup/launch/logging.launch      --job wheelchair-logging \
+                                                           --interface wlan0 \
+                                                           --setup ${ROBOT_SETUP-$(roscd; echo `pwd`/setup.bash)}
+
 # Configure logging
-LOCAL_LOG_DIR="~/ros_logs"
+echo "Configuring logging"
 mkdir -p $LOCAL_LOG_DIR
 ./rosbag-rotate/setup.sh $LOCAL_LOG_DIR billsmart.mime.oregonstate.edu wheelchair_logs
