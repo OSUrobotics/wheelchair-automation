@@ -2,9 +2,10 @@
 
 # Much of this was adapted from husky_bringup
 
-source `rospack find rosbash`/rosbash
-
 LOCAL_LOG_DIR="$HOME/ros_logs"
+source `rospack find rosbash`/rosbash
+echo "export LOCAL_LOG_DIR=$LOCAL_LOG_DIR" > `rospack find wheelchair_bringup`/env/vars.bash
+ROBOT_SETUP=`rospack find wheelchair_bringup`/env/setup.bash
 
 echo "Installling udev rules"
 rospd wheelchair_bringup/udev > /dev/null
