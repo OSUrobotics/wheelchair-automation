@@ -1,0 +1,9 @@
+<launch>
+	<include file="$(find wheelchair_navigation)/launch/amcl.launch"/>
+	<include file="$(find wheelchair_description)/launch/wheelchair_odom.launch"/>
+	<include file="$(find wheelchair_description)/launch/wheelchair_description.launch"/>
+	
+	<!-- only for sim, but shouldn't interfere with anything -->
+	<node pkg="topic_tools" type="relay" name="scan_relay" args="/base_scan /scan_multi"/>
+
+</launch>

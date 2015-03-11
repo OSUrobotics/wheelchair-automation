@@ -1,6 +1,6 @@
 <launch>
 
-  <param name="/use_sim_time" value="true"/>
+  <!-- <param name="/use_sim_time" value="true"/> -->
 
   <node pkg="gmapping" type="slam_gmapping" name="gmapping"> 
     <remap from="scan" to="scan_multi"/>

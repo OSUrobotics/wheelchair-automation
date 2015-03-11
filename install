@@ -1,0 +1,8 @@
+- git:
+    uri: https://github.com/iralabdisco/ira_laser_tools.git
+    local-name: ira_laser_tools
+    version: master
+- git:
+    uri: https://github.com/ccny-ros-pkg/scan_tools.git
+    local-name: scan_tools
+    version: master

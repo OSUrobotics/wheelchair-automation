@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wheelchair">
+  <xacro:property name="PI" value="3.14159265359" />
+
+
   <xacro:property name="chair_width" value="0.643" /> <!-- From front wheel right joint to front wheel left joint -->
   <xacro:property name="chair_length" value="0.812" /> <!-- From front wheel joint to back wheel joint -->
   <xacro:property name="chair_height" value="1.191" /> <!-- From front wheel joint to head rest -->
@@ -62,6 +65,26 @@
       <xacro:box_intertia height="${chair_height}" length="${chair_length}" width="${chair_width}" weight="${chair_weight}" />
     </inertial>
   </link>
+
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1.0E-6" ixy="0" ixz="0" iyy="1.0E-6" iyz="0" izz="1.0E-6"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0" rpy="${PI} 0 0"/>
+  </joint>
 
 <!--Legs -->
   <link name="legs">
@@ -227,7 +250,7 @@
 
   <joint name="right_scanner_joint" type="fixed">
     <axis xyz="0 0 0" />
-    <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} -${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 0"/>
+    <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} -${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 1.5707"/>
     <parent link="right_bar"/>
     <child link="right_scanner"/>
   </joint>
@@ -252,7 +275,7 @@
 
   <joint name="left_scanner_joint" type="fixed">
     <axis xyz="0 0 0" />
-    <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} -${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 -3.14159265359"/>
+    <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} -${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 -1.5707"/>
     <parent link="left_bar"/>
     <child link="left_scanner"/>
   </joint>
