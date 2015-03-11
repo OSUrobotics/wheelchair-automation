@@ -1,0 +1,7 @@
+<launch>
+
+	<include file="$(find wheelchair_description)/launch/wheelchair_description.launch"/>
+
+	<include file="$(find wheelchair_description)/launch/wheelchair_odom.launch"/>
+	
+</launch>	
