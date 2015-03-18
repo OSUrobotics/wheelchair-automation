@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wheelchair">
+<xacro:include filename="$(find wheelchair_description)/urdf/wheelchair_description_c300.xacro" />
+
+<gazebo>
+  <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+    <alwaysOn>true</alwaysOn>
+    <updateRate>50</updateRate>
+    <leftJoint>left_main_wheel_joint</leftJoint>
+    <rightJoint>right_main_wheel_joint</rightJoint>
+    <wheelSeparation>${chair_width}</wheelSeparation>
+    <wheelDiameter>${main_wheel_radius*2}</wheelDiameter>
+    <torque>30</torque>
+    <commandTopic>cmd_vel</commandTopic>
+    <odometryTopic>odom_temp</odometryTopic>
+    <odometryFrame>odom_temp</odometryFrame>
+    <robotBaseFrame>base_footprint</robotBaseFrame>
+    <publishTf>0</publishTf>
+  </plugin>
+</gazebo>
+
+<gazebo>
+  <plugin name="quadrotor_imu_sim" filename="libhector_gazebo_ros_imu.so">
+    <updateRate>50.0</updateRate>
+    <bodyName>imu_link</bodyName>
+    <frameId>imu_link</frameId>
+    <topicName>imu/data</topicName>
+    <rpyOffsets>0 0 0</rpyOffsets> <!-- deprecated -->
+    <gaussianNoise>0</gaussianNoise>  <!-- deprecated -->
+    <accelDrift>0.5 0.5 0.5</accelDrift>
+    <accelGaussianNoise>0.05 0.05 0.05</accelGaussianNoise>
+    <rateDrift>0.1 0.1 0.1</rateDrift>
+    <rateGaussianNoise>0.05 0.05 0.015</rateGaussianNoise>
+    <headingDrift>0.1</headingDrift>
+    <headingGaussianNoise>0.05</headingGaussianNoise>
+  </plugin>
+</gazebo>  
+
+<gazebo reference="right_scanner">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>0</min_angle>
+            <max_angle>3.14159265359</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>2</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/wheelchair_lasers/right</topicName>
+        <frameName>right_scanner</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+<gazebo reference="left_scanner">
+    <sensor type="ray" name="head_hokuyo_sensor2">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>0</min_angle>
+            <max_angle>3.14159265359</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>2</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller2" filename="libgazebo_ros_laser.so">
+        <topicName>/wheelchair_lasers/left</topicName>
+        <frameName>left_scanner</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>
