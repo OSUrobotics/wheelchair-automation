@@ -1,3 +1,3 @@
 <launch>
-	<node name="laser_bagger" type="record" pkg="rosbag" args="-j --split --duration 1h /wheelchair_lasers/right /wheelchair_lasers/left /rosout /diagnostics -o $(env LOCAL_LOG_DIR)/wheelchair"/>
+	<node name="laser_bagger" type="record" pkg="rosbag" args="-j --split --duration 1h /wheelchair_lasers/right /wheelchair_lasers/left /imu/data /rosout /diagnostics -o $(env LOCAL_LOG_DIR)/wheelchair"/>
 </launch>
