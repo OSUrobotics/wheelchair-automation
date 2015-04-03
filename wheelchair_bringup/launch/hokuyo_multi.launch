@@ -1,13 +1,13 @@
 <launch>
-    <node name="hokuyo0" pkg="hokuyo_node" type="hokuyo_node">
+    <node name="right_laser_driver" pkg="hokuyo_node" type="hokuyo_node">
         <param name="port" type="string" value="/dev/sensors/hokuyo_H0709085" />
         <param name="frame_id" type="string" value="right_scanner"/>
         <remap from="scan" to="/wheelchair_lasers/left" />
         <!-- <param name="min_ang" type="double" value="-1.3" />
         <param name="max_ang" type="double" value="2.0" /> -->
     </node>
-    <node name="hokuyo1" pkg="hokuyo_node" type="hokuyo_node">
-        <param name="port" type="string" value="/dev/sensors/hokuyo_H1320217" />
+    <node name="left_laser_driver" pkg="hokuyo_node" type="hokuyo_node">
+        <param name="port" type="string" value="/dev/sensors/hokuyo_H0709129" />
         <param name="frame_id" type="string" value="left_scanner"/>
         <remap from="scan" to="/wheelchair_lasers/right" />
         <!-- <param name="min_ang" type="double" value="-1.7" />
