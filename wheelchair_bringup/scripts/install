@@ -16,13 +16,9 @@ sudo udevadm trigger
 echo "Installing launch files"
 # For the setup.bash to use, first try ROBOT_SETUP, then fall back on setup.bash from active workspace.
 install_pkg="rosrun robot_upstart install"
-$install_pkg wheelchair_bringup/launch/hokuyo_multi.launch --job wheelchair-lasers \
-                                                           --interface wlan0 \
-                                                           --setup ${ROBOT_SETUP-$(roscd; echo `pwd`/setup.bash)}
-
-$install_pkg wheelchair_bringup/launch/logging.launch      --job wheelchair-logging \
-                                                           --interface wlan0 \
-                                                           --setup ${ROBOT_SETUP-$(roscd; echo `pwd`/setup.bash)}
+$install_pkg wheelchair_bringup/launch/lasers_logging_imu.launch --job wheelchair-bringup \
+                                                                 --interface lo \
+                                                                 --setup ${ROBOT_SETUP-$(roscd; echo `pwd`/setup.bash)}
 
 # Configure logging
 echo "Configuring logging"

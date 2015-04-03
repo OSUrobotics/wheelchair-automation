@@ -1,0 +1,5 @@
+<launch>
+  <include file="$(find wheelchair_bringup)/hokuyo_multi.launch" />
+  <include file="$(find wheelchair_bringup)/logging.launch" />
+  <!--<include file=""/>-->
+</launch>
