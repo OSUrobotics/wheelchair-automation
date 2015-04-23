@@ -2,7 +2,7 @@ env_dir=$(dirname $BASH_SOURCE)
 dir=$(pwd)
 cd $env_dir
 
-source $env_dir/vars.bash
+source vars.bash
 
 # find the workspace's setup file
 while [ ! \( -e src -a -e src/CMakeLists.txt \) -a "$(pwd)" != "/" ] ; do

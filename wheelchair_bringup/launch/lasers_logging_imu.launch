@@ -1,7 +1,7 @@
 <launch>
-  <include file="$(find wheelchair_bringup)/hokuyo_multi.launch" />
-  <include file="$(find wheelchair_bringup)/logging.launch" />
-  <include file="$(find wheelchair_controller)/chiron_bringup.launch">
+  <include file="$(find wheelchair_bringup)/launch/hokuyo_multi.launch" />
+  <include file="$(find wheelchair_bringup)/launch/logging.launch" />
+  <include file="$(find wheelchair_description)/launch/wheelchair_imu.launch">
     <arg name="port" value="/dev/sensors/arduino"/>
   </include>
 </launch>

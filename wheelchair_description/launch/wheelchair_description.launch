@@ -1,5 +1,5 @@
 <launch>
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find wheelchair_description)/urdf/wheelchair_description.xacro'" />
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find wheelchair_description)/urdf/wheelchair_description_c300.xacro'" />
   
   <node name="robot_state_publisher" type="robot_state_publisher" pkg="robot_state_publisher"/>
 
