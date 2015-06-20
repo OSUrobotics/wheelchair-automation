@@ -1,7 +1,9 @@
 <launch>
   <param name="robot_description" command="$(find xacro)/xacro.py '$(find wheelchair_description)/urdf/wheelchair_description_c300.xacro'" />
   
-  <node name="robot_state_publisher" type="robot_state_publisher" pkg="robot_state_publisher"/>
+  <node name="robot_state_publisher" type="robot_state_publisher" pkg="robot_state_publisher">
+  	<param name="publish_frequency" value="100"/>
+  </node>
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
     
@@ -23,6 +25,11 @@
     <param name="cloud_destination_topic" value="/merged_cloud"/>
     <param name="scan_destination_topic" value="/scan_multi"/>
     <param name="laserscan_topics" value="/scan_filtered_right /scan_filtered_left" /> <!-- LIST OF THE LASER SCAN TOPICS TO SUBSCRIBE -->
+  </node>
+
+  <node name="set_merge_params" pkg="dynamic_reconfigure" type="dynparam" args="set_from_parameters laserscan_multi_merger">
+  	<param name="range_min" value="0.45"/>
+  	<param name="range_max" value="5.5"/>
   </node>
 
 </launch>
