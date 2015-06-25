@@ -27,7 +27,7 @@ def get_laser_status(laser_rate):
 
 def get_laser_driver_status(node_name, node_info):
     try:
-        proc = node_info.get_node_info(node_info)
+        proc = node_info.get_node_info(node_name)
         if proc.is_running():
             return 'RUNNING', curses.color_pair(curses.COLOR_GREEN)
         else:
@@ -99,7 +99,7 @@ if __name__ == '__main__':
             screen.addstr(5, 0, driver_txt, curses.A_NORMAL)
             screen.addstr(6, 0, data_txt, curses.A_NORMAL)
 
-            # update the left laser driver status
+            # update the right laser driver status
             status_text, color = get_laser_driver_status('/right_laser_driver', node_info)
             screen.addstr(5, len(driver_txt), status_text, color)
 
