@@ -1,5 +1,6 @@
 <launch>
-	<node name="map_server" pkg="map_server" type="map_server" args="$(find wheelchair_mapping)/map.yaml" />
+	<arg name="map_yaml"/>
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_yaml)" />
     
 
     <node name="amcl" pkg="amcl" type="amcl" output="screen">
