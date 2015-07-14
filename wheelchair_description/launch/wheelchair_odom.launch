@@ -1,12 +1,12 @@
 <launch>
-
+  <arg name="config_file" default="$(find wheelchair_description)/config/scan_matcher_config.yaml"/>
   <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" 
     name="laser_scan_matcher_node" output="screen">
-    <remap from="scan" to="/scan_filtered_left"/>
-    <remap from="imu/data" to="mpu6050"/>
-    <param name="fixed_frame" value="odom"/>
-    <param name="base_frame" value="base_footprint"/>
-    <param name="use_imu" value="false"/>
+    <!-- <remap from="imu/data" to="mpu6050"/> -->
+    <!-- <remap from="scan" to="/wheelchair_lasers/left"/> -->
+    <remap from="scan" to="/scan_multi"/>
+    <!-- <remap from="odom" to="odom_temp"/> -->
+    <rosparam file="$(arg config_file)" command="load"/>
   </node>
 
 </launch>
