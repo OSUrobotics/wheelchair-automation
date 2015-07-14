@@ -1,0 +1,30 @@
+# for real data
+fixed_frame: odom
+base_frame: base_footprint
+queue_size: 100
+# use_self_vel: true
+use_vel: true
+
+# for gazebo data
+# fixed_frame: odom_temp
+# base_frame: base_footprint
+
+# other params
+publish_tf: true
+use_imu: false
+use_odom: false
+publish_pose_stamped: true
+
+# Keyframes - 0 means frame-to-frame matching
+# kf_dist_linear: 0
+# kf_dist_angular: 0
+
+# # Scan Matching
+# max_iterations: 500
+# max_correspondence_dist: 0.2
+# restart: 1
+# orientation_neighbourhood: 100
+# do_visibility_test: 1
+# minimumScore: 50
+# epsilon_xy: 0.0000001
+# epsilon_theta: 0.0000001
