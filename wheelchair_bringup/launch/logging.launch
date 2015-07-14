@@ -1,3 +1,7 @@
 <launch>
-	<node name="laser_bagger" type="record" pkg="rosbag" args="-j --split --duration 1h /wheelchair_lasers/right /wheelchair_lasers/left /imu/data /rosout /diagnostics -o $(env LOCAL_LOG_DIR)/wheelchair"/>
+	<node name="laser_bagger" type="record" pkg="rosbag" args="-j --split --duration 1h /wheelchair_lasers/right /wheelchair_lasers/left /imu/data /rosout /diagnostics /imu/data /wifi_info /control_actuated -o $(env LOCAL_LOG_DIR)/wheelchair"/>
+	<node pkg="wifi_info" type="poll_wifi.py" name="poll_wifi">
+		<param name="interface" value="wlan0"/>
+	</node>
+	<node pkg="peac_bridge" type="actuation_logging_server.py" name="actuation_logging_server"/> 
 </launch>
