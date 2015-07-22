@@ -1,7 +1,6 @@
 <launch>
   <include file="$(find wheelchair_bringup)/launch/hokuyo_multi.launch" />
   <include file="$(find wheelchair_bringup)/launch/logging.launch" />
-  <include file="$(find wheelchair_description)/launch/wheelchair_imu.launch">
-    <arg name="port" value="/dev/sensors/arduino"/>
-  </include>
+  <include file="$(find phidgets_imu)/launch/imu.launch"/>
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
 </launch>
