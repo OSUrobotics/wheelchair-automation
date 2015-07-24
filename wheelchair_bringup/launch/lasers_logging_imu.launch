@@ -1,6 +1,22 @@
 <launch>
+  <arg name="map_yaml" value="$(find wheelchair_bringup)/config_data/map-to-use.yaml"/>
+
   <include file="$(find wheelchair_bringup)/launch/hokuyo_multi.launch" />
   <include file="$(find wheelchair_bringup)/launch/logging.launch" />
   <include file="$(find phidgets_imu)/launch/imu.launch"/>
   <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+
+  <include file="$(find privacy_zones)/launch/web_interface_demo.launch">
+    <arg name="map_yaml" value="$(arg map_yaml)"/>
+    <arg name="map_zones" value="$(find wheelchair_bringup)/config_data/ssalsr_zones.yaml"/>
+    <arg name="map_zone_controls" value="$(find wheelchair_bringup)/config_data/zone_controls.yaml"/>
+  </include> 
+
+  <include file="$(find wheelchair_bringup)/launch/basic_localization.launch">
+    <arg name="map_yaml" value="$(arg map_yaml)"/>
+  </include> 
+
+  <!-- for testing only - remove -->
+  <node name="odom_tf" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 odom base_footprint 100"/>
+
 </launch>
