@@ -93,7 +93,7 @@ class FlowTransformer(object):
         # self.listener.lookupTransform(self.base_frame, self.)
         print new_trans
         self.broadcaster.sendTransform(
-            new_trans[0], new_trans[1], rospy.Time.now(), 'flooooow', self.base_frame
+            new_trans[0], new_trans[1], rospy.Time.now(), self.fixed_frame, self.base_frame
         )
 
     def imu_cb(self, msg):
