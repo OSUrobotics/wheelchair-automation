@@ -1,19 +1,12 @@
 #!/usr/bin/env python
 import rospy
 import tf
-import tf2_ros
 from geometry_msgs.msg import TransformStamped, Vector3
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Imu
 from px_comm.msg import OpticalFlow
-from copy import deepcopy
 import numpy as np
-from tf.transformations import quaternion_about_axis, euler_from_quaternion, quaternion_from_euler
-from tf_conversions import fromTf, toTf
-
-from urdf_parser_py.urdf import URDF
-from pykdl_utils.kdl_parser import kdl_tree_from_urdf_model
-from pykdl_utils.kdl_kinematics import KDLKinematics
+from tf.transformations import quaternion_from_euler
 import PyKDL
 
 
@@ -53,24 +46,26 @@ class FlowTransformer(object):
         self.theta_t = 0
 
         print self.base_frame, self.flow_frame
-        self.listener.waitForTransform('odom_temp', self.flow_frame, rospy.Time(), rospy.Duration(5))
-        offset = self.listener.lookupTransform('odom_temp', self.flow_frame, rospy.Time())[0]
-        self.x_t = np.array(offset)
+        offset = (0, 0, 0)
+        try:
+            self.listener.waitForTransform(
+                'odom_temp',
+                self.flow_frame,
+                rospy.Time(),
+                rospy.Duration(5)
+            )
+            offset = self.listener.lookupTransform('odom_temp', self.flow_frame, rospy.Time())[0]
+        except tf.Exception:
+            pass
 
-        self.robot = URDF.from_parameter_server()
-        tree = kdl_tree_from_urdf_model(self.robot)
+        self.x_t = np.array(offset)
 
         rospy.Subscriber('flow', OpticalFlow, self.flow_cb)
         rospy.Subscriber('/imu/data', Imu, self.imu_cb)
 
         self.odom_pub = rospy.Publisher('odom', Odometry)
 
-        rospy.Timer(rospy.Duration(0.1), self.publish_odom)
-
-    def vel_from_frames(self, f0, f1, dt):
-        linear = (f1.p - f0.p) / dt
-        angular = (f1.M.GetRPY() - f0.M.GetRPY()) / dt
-        return linear, angular
+        rospy.Timer(rospy.Duration(0.05), self.publish_odom)
 
     def publish_odom(self, _):
         now = rospy.Time.now()
@@ -118,7 +113,11 @@ class FlowTransformer(object):
 
         # it seems silly to lookup the transform we just broadcast,
         # but this makes sure all the signs are correct
-        odom_trans, odom_rot = self.listener.lookupTransform(self.fixed_frame, self.base_frame, rospy.Time(0))
+        odom_trans, odom_rot = self.listener.lookupTransform(
+            self.fixed_frame,
+            self.base_frame,
+            rospy.Time(0)
+        )
 
         # load up the pose
         self.odom_msg.pose.pose.position.x = odom_trans[0]
@@ -131,7 +130,8 @@ class FlowTransformer(object):
         self.odom_msg.pose.pose.orientation.w = odom_rot[3]
 
         # calculate and load up the vel
-        lin_vel = np.subtract(self.last_odom_trans, odom_trans) / (now - self.last_odom_time).to_sec()
+        lin_vel = np.subtract(self.last_odom_trans, odom_trans) / \
+                    (now - self.last_odom_time).to_sec()
         self.odom_msg.twist.twist.linear.x = lin_vel[0]
         self.odom_msg.twist.twist.linear.y = lin_vel[1]
         self.odom_msg.twist.twist.linear.z = lin_vel[2]
