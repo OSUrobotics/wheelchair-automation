@@ -1,6 +1,6 @@
 <launch>
 	<arg name="map_yaml"/>
-	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_yaml)" />
+	<node name="map_server" pkg="map_server" type="map_server" args="/home/panacea/catkin_ws/src/map_lab_0615.yaml" />
     
 
     <node name="amcl" pkg="amcl" type="amcl" output="screen">
