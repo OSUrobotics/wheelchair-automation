@@ -1,0 +1,9 @@
+<launch>
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="headless" value="true"/>
+		<arg name="gui" value="false"/>
+	</include>
+	<include file="$(find wheelchair_description)/launch/wheelchair_description.launch"/>
+	<node name="simulate_flow" pkg="wheelchair_description" type="simulate_flow.py"/>
+	<node name="spawn" pkg="gazebo_ros" type="spawn_model" args="-file $(find wheelchair_description)/urdf/model.urdf -urdf -model wheelchair"/>
+</launch>
