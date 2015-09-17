@@ -19,8 +19,8 @@ if __name__ == '__main__':
             now = rospy.Time.now()
             past = now - r.sleep_dur
             l.waitForTransform('flow_sensor', 'odom_temp', now, rospy.Duration(5))
-            trans = l.lookupTransformFull('flow_sensor', now, 'flow_sensor', past, 'odom_temp')[0]
-            vel = (trans - last_pos) / (now - last_time).to_sec()
+            trans = l.lookupTransformFull('flow_sensor', past, 'flow_sensor', now, 'odom_temp')[0]
+            vel = np.asarray(trans) / (now - last_time).to_sec()
             flow.header.stamp = now
             flow.velocity_x = vel[0]
             flow.velocity_y = vel[1]

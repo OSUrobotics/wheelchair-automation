@@ -1,13 +1,20 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wheelchair">
 <xacro:include filename="$(find wheelchair_description)/urdf/wheelchair_description_c300.xacro" />
+<xacro:property name="laser_min" value="0.20" />
+<xacro:property name="laser_max" value="5.599999904632568" />
+<xacro:property name="laser_min_angle" value="-1.5707963705062866" />
+<xacro:property name="laser_max_angle" value="1.5646604299545288" />
+<xacro:property name="laser_update_rate" value="10" />
+<xacro:property name="laser_n_samples" value="512" />
 
 <gazebo>
   <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
     <alwaysOn>true</alwaysOn>
     <updateRate>50</updateRate>
-    <leftJoint>left_main_wheel_joint</leftJoint>
-    <rightJoint>right_main_wheel_joint</rightJoint>
+    <!-- don't know why these need to be reversed -->
+    <leftJoint>right_main_wheel_joint</leftJoint>
+    <rightJoint>left_main_wheel_joint</rightJoint>
     <wheelSeparation>${chair_width}</wheelSeparation>
     <wheelDiameter>${main_wheel_radius*2}</wheelDiameter>
     <torque>30</torque>
@@ -15,16 +22,16 @@
     <odometryTopic>odom_temp</odometryTopic>
     <odometryFrame>odom_temp</odometryFrame>
     <robotBaseFrame>base_footprint</robotBaseFrame>
-    <publishTf>0</publishTf>
+    <publishTf>1</publishTf>
   </plugin>
 </gazebo>
 
 <gazebo>
   <plugin name="quadrotor_imu_sim" filename="libhector_gazebo_ros_imu.so">
-    <updateRate>50.0</updateRate>
-    <bodyName>imu_link</bodyName>
-    <frameId>imu_link</frameId>
-    <topicName>imu/data</topicName>
+    <updateRate>250.0</updateRate>
+    <bodyName>imu</bodyName>
+    <frameId>imu</frameId>
+    <topicName>/imu/data</topicName>
     <rpyOffsets>0 0 0</rpyOffsets> <!-- deprecated -->
     <gaussianNoise>0</gaussianNoise>  <!-- deprecated -->
     <accelDrift>0.5 0.5 0.5</accelDrift>
@@ -40,19 +47,19 @@
     <sensor type="ray" name="head_hokuyo_sensor">
       <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
-      <update_rate>40</update_rate>
+      <update_rate>${laser_update_rate}</update_rate>
       <ray>
         <scan>
           <horizontal>
-            <samples>720</samples>
+            <samples>${laser_n_samples}</samples>
             <resolution>1</resolution>
-            <min_angle>0</min_angle>
-            <max_angle>3.14159265359</max_angle>
+            <min_angle>${laser_min_angle}</min_angle>
+            <max_angle>${laser_max_angle}</max_angle>
           </horizontal>
         </scan>
         <range>
-          <min>2</min>
-          <max>30.0</max>
+          <min>${laser_min}</min>
+          <max>${laser_max}</max>
           <resolution>0.01</resolution>
         </range>
         <noise>
@@ -72,19 +79,19 @@
     <sensor type="ray" name="head_hokuyo_sensor2">
       <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
-      <update_rate>40</update_rate>
+      <update_rate>${laser_update_rate}</update_rate>
       <ray>
         <scan>
           <horizontal>
-            <samples>720</samples>
+            <samples>${laser_n_samples}</samples>
             <resolution>1</resolution>
-            <min_angle>0</min_angle>
-            <max_angle>3.14159265359</max_angle>
+            <min_angle>${laser_min_angle}</min_angle>
+            <max_angle>${laser_max_angle}</max_angle>
           </horizontal>
         </scan>
         <range>
-          <min>2</min>
-          <max>30.0</max>
+          <min>${laser_min}</min>
+          <max>${laser_max}</max>
           <resolution>0.01</resolution>
         </range>
         <noise>

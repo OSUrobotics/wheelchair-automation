@@ -4,9 +4,9 @@
   <xacro:property name="PI" value="3.14159265359" />
 
 
-  <xacro:property name="chair_width" value="0.643" /> <!-- From front wheel right joint to front wheel left joint -->
-  <xacro:property name="chair_length" value="0.812" /> <!-- From front wheel joint to back wheel joint -->
-  <xacro:property name="chair_height" value="1.191" /> <!-- From front wheel joint to head rest -->
+  <xacro:property name="chair_width" value="0.643" /> <!-- From back wheel right joint to back wheel left joint -->
+  <xacro:property name="chair_length" value="0.812" /> <!-- From back wheel joint to back wheel joint -->
+  <xacro:property name="chair_height" value="1.191" /> <!-- From back wheel joint to head rest -->
   <xacro:property name="chair_weight" value="10.0" />
   
 
@@ -66,7 +66,7 @@
     </inertial>
   </link>
 
-  <link name="imu_link">
+  <link name="imu">
     <inertial>
       <mass value="0.01"/>
       <origin xyz="0 0 0"/>
@@ -82,9 +82,29 @@
 
   <joint name="imu_joint" type="fixed">
     <parent link="base_link"/>
-    <child link="imu_link"/>
-    <origin xyz="0 0 0" rpy="${PI} 0 0"/>
+    <child link="imu"/>
+    <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
   </joint>
+
+  <link name="flow_sensor">
+      <inertial>
+        <mass value="0.01"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="1.0E-6" ixy="0" ixz="0" iyy="1.0E-6" iyz="0" izz="1.0E-6"/>
+      </inertial>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <box size="0.01 0.01 0.01"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="flow_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="flow_sensor"/>
+      <origin xyz="0.5 0 0" rpy="0 0 0"/>
+    </joint>
 
 <!--Legs -->
   <link name="legs">
@@ -115,35 +135,6 @@
   </joint>
 
 <!--Right Bar -->
-  <link name="right_bar">
-    <visual>
-      <geometry>
-        <box size="${chair_length + chair_length/4} ${chair_width/4} ${chair_height/8}"/>
-      </geometry>
-      <material name="white">
-        <color rgba="1 1 1 1"/>
-      </material>
-    </visual>
-    <collision>
-      <geometry>
-        <box size="${chair_length + chair_length/4} ${chair_width/4} ${chair_height/8}"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="2.0"/>
-      <inertia ixx="1e-3" ixy="1e-3" ixz="1e-3" iyy="1e-3" iyz="1e-3" izz="1e-3"/>
-    </inertial>
-  </link>
-
-  <joint name="right_bar_joint" type="fixed">
-    <axis xyz="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="right_bar"/>
-    <origin rpy="0 0 0" xyz="0.0 ${chair_width/2} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
-  </joint>
-
-<!--Left Bar -->
-
   <link name="left_bar">
     <visual>
       <geometry>
@@ -168,38 +159,40 @@
     <axis xyz="0 0 0"/>
     <parent link="base_link"/>
     <child link="left_bar"/>
+    <origin rpy="0 0 0" xyz="0.0 ${chair_width/2} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
+  </joint>
+
+<!--Left Bar -->
+
+  <link name="right_bar">
+    <visual>
+      <geometry>
+        <box size="${chair_length + chair_length/4} ${chair_width/4} ${chair_height/8}"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${chair_length + chair_length/4} ${chair_width/4} ${chair_height/8}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <inertia ixx="1e-3" ixy="1e-3" ixz="1e-3" iyy="1e-3" iyz="1e-3" izz="1e-3"/>
+    </inertial>
+  </link>
+
+  <joint name="right_bar_joint" type="fixed">
+    <axis xyz="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="right_bar"/>
     <origin rpy="0 0 0" xyz="0.0 -${chair_width/2} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
   </joint>
 
 
 <!--Main Wheels -->
-
-  <joint name="right_main_wheel_joint" type="continuous">
-    <axis xyz="0 0 -1"/>
-    <parent link="right_bar"/>
-    <child link="right_main_wheel"/>
-    <origin rpy="1.57075 0 0" xyz="0.2 0.0 -${chair_height/8-0.076}"/>
-  </joint>
-
-  <link name="right_main_wheel">
-    <visual>
-      <geometry>
-        <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
-      </geometry>
-      <material name="white">
-        <color rgba="0 0 0 1"/>
-      </material>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="${main_wheel_weight}"/>
-      <xacro:cylinder_intertia length="${main_wheel_length}" radius="${main_wheel_radius}" weight="${main_wheel_weight}" />
-    </inertial>
-  </link>
 
   <joint name="left_main_wheel_joint" type="continuous">
     <axis xyz="0 0 -1"/>
@@ -228,7 +221,58 @@
     </inertial>
   </link>
 
+  <joint name="right_main_wheel_joint" type="continuous">
+    <axis xyz="0 0 -1"/>
+    <parent link="right_bar"/>
+    <child link="right_main_wheel"/>
+    <origin rpy="1.57075 0 0" xyz="0.2 0.0 -${chair_height/8-0.076}"/>
+  </joint>
+
+  <link name="right_main_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="${main_wheel_weight}"/>
+      <xacro:cylinder_intertia length="${main_wheel_length}" radius="${main_wheel_radius}" weight="${main_wheel_weight}" />
+    </inertial>
+  </link>
+
 <!--Laser Scanners -->
+
+  <link name="left_scanner">
+    <visual>
+      <origin xyz="0.0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05 0.05 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1e-5" />
+      <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3" />
+    </inertial>
+  </link>
+  <joint name="left_scanner_joint" type="fixed">
+    <axis xyz="0 0 0" />
+    <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} -${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 1.5707"/>
+    <parent link="left_bar"/>
+    <child link="right_scanner"/> <!-- TODO UNDO THIS! -->
+  </joint>
 
   <link name="right_scanner">
     <visual>
@@ -250,40 +294,15 @@
 
   <joint name="right_scanner_joint" type="fixed">
     <axis xyz="0 0 0" />
-    <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} -${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 1.5707"/>
-    <parent link="right_bar"/>
-    <child link="right_scanner"/>
-  </joint>
-
-  <link name="left_scanner">
-    <visual>
-      <origin xyz="0.0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <box size="0.05 0.05 0.1"/>
-      </geometry>
-    </visual>
-    <collision>
-      <geometry>
-        <box size="0.05 0.05 0.1"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="1e-5" />
-      <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3" />
-    </inertial>
-  </link>
-
-  <joint name="left_scanner_joint" type="fixed">
-    <axis xyz="0 0 0" />
     <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} -${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 -1.5707"/>
-    <parent link="left_bar"/>
-    <child link="left_scanner"/>
+    <parent link="right_bar"/>
+    <child link="left_scanner"/> <!-- TODO UNDO THIS! -->
   </joint>
 
 
 
-<!--Front Wheels -->
-  <link name="front_right_swivel">
+<!--back Wheels -->
+  <link name="back_left_swivel">
     <visual>
       <geometry>
         <cylinder length="0.065" radius="0.01"/>
@@ -304,24 +323,24 @@
   </link>
 
 
-   <joint name="front_right_swivel_joint" type="continuous">
+   <joint name="back_left_swivel_joint" type="continuous">
     <axis xyz="0 0 1"/>
-    <parent link="right_bar"/>
-    <child link="front_right_swivel"/>
+    <parent link="left_bar"/>
+    <child link="back_left_swivel"/>
     <origin rpy="0 0 0" xyz="-${chair_length/2} 0.0 -${chair_height/8}"/>
     <dynamics damping="0.0" friction="0.5" />
   </joint>
 
 
-  <joint name="front_right_wheel_joint" type="continuous">
+  <joint name="back_left_wheel_joint" type="continuous">
     <axis xyz="0 0 1"/>
-    <parent link="front_right_swivel"/>
-    <child link="front_right_wheel"/>
+    <parent link="back_left_swivel"/>
+    <child link="back_left_wheel"/>
     <origin rpy="1.57075 0 0" xyz="0.065 0 0"/>
     <dynamics damping="0" friction="0.5" />
   </joint>
 
-  <link name="front_right_wheel">
+  <link name="back_left_wheel">
     <visual>
       <geometry>
         <cylinder length="${small_wheel_length}" radius="${small_wheel_radius}"/>
@@ -348,7 +367,7 @@
       <xacro:cylinder_intertia length="${small_wheel_length}" radius="${small_wheel_radius}" weight="${small_wheel_weight}" />
     </inertial>
   </link>
-  <link name="front_left_swivel">
+  <link name="back_right_swivel">
     <visual>
       <geometry>
         <cylinder length="0.065" radius="0.01"/>
@@ -369,24 +388,24 @@
   </link>
 
 
-   <joint name="front_left_swivel_joint" type="continuous">
+   <joint name="back_right_swivel_joint" type="continuous">
     <axis xyz="0 0 1"/>
-    <parent link="left_bar"/>
-    <child link="front_left_swivel"/>
+    <parent link="right_bar"/>
+    <child link="back_right_swivel"/>
     <origin rpy="0 0 0" xyz="-${chair_length/2} 0.0 -${chair_height/8}"/>
     <dynamics damping="0.0" friction="0.5" />
   </joint>
 
 
-  <joint name="front_left_wheel_joint" type="continuous">
+  <joint name="back_right_wheel_joint" type="continuous">
     <axis xyz="0 0 1"/>
-    <parent link="front_left_swivel"/>
-    <child link="front_left_wheel"/>
+    <parent link="back_right_swivel"/>
+    <child link="back_right_wheel"/>
     <origin rpy="1.57075 0 0" xyz="0.065 0 0"/>
     <dynamics damping="0" friction="0.5" />
   </joint>
 
-  <link name="front_left_wheel">
+  <link name="back_right_wheel">
     <visual>
       <geometry>
         <cylinder length="0.05" radius="${small_wheel_radius}"/>

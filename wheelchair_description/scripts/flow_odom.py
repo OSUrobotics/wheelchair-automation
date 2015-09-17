@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 import rospy
 import tf
-from geometry_msgs.msg import TransformStamped, Vector3
+from geometry_msgs.msg import TransformStamped, Vector3, PoseStamped
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Imu
 from px_comm.msg import OpticalFlow
 import numpy as np
-from tf.transformations import quaternion_from_euler
+from tf.transformations import quaternion_from_euler, euler_from_quaternion
 import PyKDL
 
 
@@ -44,6 +44,8 @@ class FlowTransformer(object):
         # x,y,z position state vector
         self.x_t = np.array((0, 0, 0))
         self.theta_t = 0
+        self.last_d_theta = 0
+        self.rot = 0
 
         print self.base_frame, self.flow_frame
         offset = (0, 0, 0)
@@ -59,6 +61,7 @@ class FlowTransformer(object):
             pass
 
         self.x_t = np.array(offset)
+        self.flow_offset = self.listener.lookupTransform(self.flow_frame, self.base_frame, rospy.Time())
 
         rospy.Subscriber('flow', OpticalFlow, self.flow_cb)
         rospy.Subscriber('/imu/data', Imu, self.imu_cb)
@@ -76,6 +79,7 @@ class FlowTransformer(object):
         rot = quaternion_from_euler(0, 0, self.theta_t)
         f = PyKDL.Frame(
             PyKDL.Rotation.Quaternion(*rot),
+            # PyKDL.Rotation.RPY(0,0,-self.rot),
             PyKDL.Vector(*self.x_t)
         )
 
@@ -159,11 +163,14 @@ class FlowTransformer(object):
     def flow_cb(self, msg):
         dt = (msg.header.stamp - self.last_flow_time).to_sec()
         if self.flow_ready and dt > 0:
+            d_theta = self.theta_t - self.last_theta
+            dd_theta = d_theta - self.last_d_theta
+            print dd_theta
             vel = np.array([msg.velocity_x, msg.velocity_y])
             v_body = np.linalg.norm(vel)
 
             # sign is taken from the sign of the egocentric forward velocity
-            sign = -np.sign(vel[0])
+            sign = np.sign(vel[0])
             v_body = sign * v_body
 
             # this is a unit vector pointing in the direction of the robot's orientation
@@ -176,8 +183,65 @@ class FlowTransformer(object):
             self.v_t = v_t1
             self.x_t = x_t1
 
+            # self.dx_t = dt * np.array([msg.velocity_x, msg.velocity_y, 0])
+            # dx_t_viz = 10 * self.dx_t
+
+
+            # theta_t1_viz = np.arctan2(dx_t_viz[1], self.flow_offset[0][0] + dx_t_viz[0])
+            # theta_t1 = np.arctan2(self.dx_t[1], self.flow_offset[0][0] + self.dx_t[0])
+
+            # self.broadcaster.sendTransform(
+            #     dx_t_viz, quaternion_from_euler(0, 0, np.pi - theta_t1_viz), msg.header.stamp, 'next_flow_viz', self.flow_frame
+            # )
+
+            # theta_t_quat = quaternion_from_euler(0, 0, np.pi - theta_t1)
+            # next_pose = PoseStamped()
+            # next_pose.header.frame_id = self.flow_frame
+            # next_pose.header.stamp = msg.header.stamp
+            # next_pose.pose.position.x = self.dx_t[0]
+            # next_pose.pose.position.y = self.dx_t[1]
+            # next_pose.pose.position.z = 0
+
+            # next_pose.pose.orientation.x = theta_t_quat[0]
+            # next_pose.pose.orientation.y = theta_t_quat[1]
+            # next_pose.pose.orientation.z = theta_t_quat[2]
+            # next_pose.pose.orientation.w = theta_t_quat[3]
+
+            # pose_t = self.listener.transformPose(self.base_frame, next_pose)
+            # # print pose_t
+
+            # self.broadcaster.sendTransform(
+            #     (pose_t.pose.position.x, pose_t.pose.position.y, 0),
+            #     (next_pose.pose.orientation.x, next_pose.pose.orientation.y, next_pose.pose.orientation.z, next_pose.pose.orientation.w),
+            #     msg.header.stamp,
+            #     'next_flow',
+            #     self.base_frame
+            # )
+
+            # trans = l.lookupTransformFull('flow_sensor', past, 'flow_sensor', now, 'odom_temp')[0]
+
+            # try:
+            #     self.listener.waitForTransform('next_flow', self.base_frame, msg.header.stamp, rospy.Duration(5))
+            #     base_trans, base_rot = self.listener.lookupTransformFull(
+            #         self.base_frame,
+            #         self.last_flow_time,
+            #         self.base_frame,
+            #         msg.header.stamp,
+            #         'next_flow')
+            #     # print base_movement[0]
+            #     self.x_t += base_trans
+            #     self.rot += euler_from_quaternion(base_rot)[-1]
+            # except tf.ExtrapolationException:
+            #     # this will happen the first time
+            #     pass
+
+
+
+            self.last_d_theta = dd_theta
+
         self.flow_ready = True
         self.last_flow_time = msg.header.stamp
+        self.last_theta = self.theta_t
 
     def send_transform(self, transform):
         self.broadcaster.sendTransform(
@@ -198,7 +262,7 @@ if __name__ == '__main__':
     rospy.init_node('flow_odom')
     base_frame = rospy.get_param('~base_frame', 'base_footprint')
     flow_frame = rospy.get_param('~flow_frame', 'flow_cam_link')
-    fixed_frame = rospy.get_param('~fixed_frame', 'flodom')
+    fixed_frame = rospy.get_param('~fixed_frame', 'flow_odom')
 
     FlowTransformer(base_frame, flow_frame, fixed_frame)
 

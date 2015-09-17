@@ -15,7 +15,7 @@
     <odometryTopic>odom_temp</odometryTopic>
     <odometryFrame>odom_temp</odometryFrame>
     <robotBaseFrame>base_footprint</robotBaseFrame>
-    <publishTf>0</publishTf>
+    <publishTf>1</publishTf>
   </plugin>
 </gazebo>
 
