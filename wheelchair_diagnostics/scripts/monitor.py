@@ -47,6 +47,10 @@ if __name__ == '__main__':
     ti_left_laser   = TopicInfo('/wheelchair_lasers/left', 'sensor_msgs/LaserScan')
     ti_right_laser  = TopicInfo('/wheelchair_lasers/right', 'sensor_msgs/LaserScan')
     ti_merged_laser = TopicInfo('/scan_multi', 'sensor_msgs/LaserScan')
+    ti_imu_calib    = TopicInfo('/imu/is_calibrated', 'std_msgs/Bool')
+    ti_imu_data     = TopicInfo('/imu/data', 'sensor_msgs/Imu')
+    ti_imu_data_raw = TopicInfo('/imu/data_raw', 'sensor_msgs/Imu')
+    ti_imu_mag      = TopicInfo('/imu/mag', 'geometry_msgs/Vector3Stamped')
 
     rospy.Subscriber('/particlecloud', PoseArray, posearray_cb)
 
@@ -55,10 +59,17 @@ if __name__ == '__main__':
     ti_left_laser.start_monitoring()
     ti_right_laser.start_monitoring()
     ti_merged_laser.start_monitoring()
+    ti_imu_calib.start_monitoring()
+    ti_imu_data.start_monitoring()
+    ti_imu_data_raw.start_monitoring()
+    ti_imu_mag.start_monitoring()
 
     ti_left_laser.window_size = 10
     ti_right_laser.window_size = 10
     ti_merged_laser.window_size = 10
+    ti_imu_data.window_size = 10
+    ti_imu_data_raw.window_size = 10
+    ti_imu_mag.window_size = 10
 
     rospy.sleep(1)
 
@@ -76,6 +87,10 @@ if __name__ == '__main__':
         while not rospy.is_shutdown():
             left_laser_rate  = ti_left_laser.get_hz()[0]
             right_laser_rate = ti_right_laser.get_hz()[0]
+
+            imu_data_rate = ti_imu_data.get_hz()[0]
+            imu_raw_rate  = ti_imu_data_raw.get_hz()[0]
+            imu_mag_rate  = ti_imu_mag.get_hz()[0]
 
             screen.addstr(0, 0, 'Left Laser', curses.A_NORMAL)
             screen.addstr(4, 0, 'Right Laser', curses.A_NORMAL)
@@ -107,8 +122,19 @@ if __name__ == '__main__':
             status_text, color = get_laser_status(right_laser_rate)
             screen.addstr(6, len(data_txt), status_text, color)
 
-            screen.addstr(8, 0, 'Localization Status:')
-
+            # IMU
+            screen.addstr(8, 0, 'IMU Status:')
+            #screen.addstr(9, 0, '  Calibrated:')
+            screen.addstr(9, 0, '  Filtered:')
+            status_text, color = get_laser_status(imu_data_rate)
+            screen.addstr(9, 12, status_text, color)
+            screen.addstr(10, 0, '  Raw     :')
+            status_text, color = get_laser_status(imu_raw_rate)
+            screen.addstr(10, 12, status_text, color)
+            screen.addstr(11, 0, '  Mag     :')
+            status_text, color = get_laser_status(imu_mag_rate)
+            screen.addstr(11, 12, status_text, color)
+            screen.addstr(13, 0, 'Localization Status:')
             if posearray is None:
                 # screen.addstr(8, 21, 'UNKNOWN', curses.color_pair(curses.COLOR_YELLOW))
                 text = 'UNKNOWN'
@@ -124,7 +150,7 @@ if __name__ == '__main__':
                 else:
                     text = 'POOR'
                     color = curses.color_pair(curses.COLOR_RED)
-            screen.addstr(8, 21, text, color)
+            screen.addstr(13, 21, text, color)
 
 
             screen.refresh()
