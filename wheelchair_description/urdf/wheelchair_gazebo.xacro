@@ -18,15 +18,15 @@
     <publishTf>0</publishTf>
   </plugin>
 </gazebo>
-
+<!--
 <gazebo>
   <plugin name="quadrotor_imu_sim" filename="libhector_gazebo_ros_imu.so">
     <updateRate>50.0</updateRate>
     <bodyName>imu_link</bodyName>
     <frameId>imu_link</frameId>
     <topicName>imu/data</topicName>
-    <rpyOffsets>0 0 0</rpyOffsets> <!-- deprecated -->
-    <gaussianNoise>0</gaussianNoise>  <!-- deprecated -->
+    <rpyOffsets>0 0 0</rpyOffsets>
+    <gaussianNoise>0</gaussianNoise>
     <accelDrift>0.5 0.5 0.5</accelDrift>
     <accelGaussianNoise>0.05 0.05 0.05</accelGaussianNoise>
     <rateDrift>0.1 0.1 0.1</rateDrift>
@@ -35,30 +35,30 @@
     <headingGaussianNoise>0.05</headingGaussianNoise>
   </plugin>
 </gazebo>  
-
+-->
 <gazebo reference="right_scanner">
     <sensor type="ray" name="head_hokuyo_sensor">
       <pose>0 0 0 0 0 0</pose>
-      <visualize>false</visualize>
+      <visualize>true</visualize>
       <update_rate>40</update_rate>
       <ray>
         <scan>
           <horizontal>
             <samples>720</samples>
             <resolution>1</resolution>
-            <min_angle>0</min_angle>
-            <max_angle>3.14159265359</max_angle>
+            <min_angle>-2.3561925</min_angle>
+            <max_angle>1.57079</max_angle>
           </horizontal>
         </scan>
         <range>
-          <min>2</min>
-          <max>30.0</max>
+          <min>0.2</min>
+          <max>10.1</max>
           <resolution>0.01</resolution>
         </range>
         <noise>
           <type>gaussian</type>
           <mean>0.0</mean>
-          <stddev>0.01</stddev>
+          <stddev>0.02</stddev>
         </noise>
       </ray>
       <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
@@ -71,27 +71,26 @@
 <gazebo reference="left_scanner">
     <sensor type="ray" name="head_hokuyo_sensor2">
       <pose>0 0 0 0 0 0</pose>
-      <visualize>false</visualize>
+      <visualize>true</visualize>
       <update_rate>40</update_rate>
       <ray>
         <scan>
           <horizontal>
             <samples>720</samples>
             <resolution>1</resolution>
-            <min_angle>0</min_angle>
-            <max_angle>3.14159265359</max_angle>
+            <min_angle>-1.57079</min_angle>
+            <max_angle>2.3561925</max_angle>
           </horizontal>
         </scan>
         <range>
-          <min>2</min>
-          <max>30.0</max>
+          <min>0.2</min>
+          <max>10.1</max>
           <resolution>0.01</resolution>
         </range>
         <noise>
           <type>gaussian</type>
-
           <mean>0.0</mean>
-          <stddev>0.01</stddev>
+          <stddev>0.02</stddev>
         </noise>
       </ray>
       <plugin name="gazebo_ros_head_hokuyo_controller2" filename="libgazebo_ros_laser.so">
