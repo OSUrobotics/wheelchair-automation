@@ -3,5 +3,6 @@
 	<include file="$(find wheelchair_description)/launch/wheelchair_description.launch"/>
 
 	<include file="$(find wheelchair_description)/launch/wheelchair_odom.launch"/>
-	
+
+        <include file="$(find wheelchair_description)/launch/wheelchair_joy.launch"/>	
 </launch>	

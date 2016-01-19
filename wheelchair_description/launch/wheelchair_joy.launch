@@ -1,0 +1,8 @@
+<launch>
+
+    <node name="joystick" pkg="joy" type="joy_node">
+	<param name="autorepeat_rate" type="double" value="5"/>
+    </node>
+    <node name="joystick_controller" pkg="teleop_twist_joy" type="teleop_node"/>
+
+</launch>
