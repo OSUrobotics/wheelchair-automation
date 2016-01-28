@@ -1,0 +1,5 @@
+runstop rqt plugin
+plugin code is found in rqt_runstop/src/rqt_runstop/rqt_runstop_module.py
+python script to run is found in rqt_runstop/scripts/rqt_runstop
+
+to run: rosrun rqt_runstop rqt_runstop

@@ -1,0 +1,11 @@
+<library path="src">
+  <class name="RunStopPlugin" type="rqt_runstop.rqt_runstop_module.RunStopPlugin" base_class_type="rqt_gui_py::Plugin">
+    <description>
+      Python GUI plugin for a run-stop button
+    </description>
+    <qtgui>
+      <label>Rqt Run-Stop Plugin</label>
+      <icon type="theme">system-help</icon>
+    </qtgui>
+  </class>
+</library>
