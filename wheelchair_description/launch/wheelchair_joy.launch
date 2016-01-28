@@ -1,8 +1,12 @@
 <launch>
 
     <node name="joystick" pkg="joy" type="joy_node">
-	<param name="autorepeat_rate" type="double" value="5"/>
+        <param name="autorepeat_rate" type="double" value="5"/>
+	<param name="coalesce_interval" type="double" value="0.2"/>
     </node>
-    <node name="joystick_controller" pkg="teleop_twist_joy" type="teleop_node"/>
+    <node name="joystick_controller" pkg="teleop_twist_joy" type="teleop_node">
+	<param name="scale_linear" value="1"/>
+        <param name="scale_angular" value="1"/>
+    </node>
 
 </launch>
