@@ -21,7 +21,9 @@ Gazebo (Only for simulation): bash gazebo_spawn_swivel_willow.bash
 
 High Level Launch Order: 
 roslaunch wheelchair_description wheelchair_bringup.launch -- Hokuyo, Joint States, Robot States, Laser Scan Filter, Odometry
+
 roslaunch wheelchair_description wheelchair_merger.launch -- Laser Merger. Needs to be launched independently.
+
 roslaunch wheelchair_navigation move_base_local.launch -- Navigation without a map.
 
 
@@ -31,3 +33,11 @@ Hokuyo/Joint States/Robot States/Laser Scan Filter: roslaunch wheelchair_descrip
 Laser Scan Merger: roslaunch wheelchair_description wheelchair_merger.launch
 
 Laser Scan Matcher (Odometry): roslaunch wheelchair_description wheelchair_odom.launch
+
+Controller:
+
+ssh into iaso (raspberry pi).
+
+sudo su
+
+rosrun controller pro_controller2c.py
