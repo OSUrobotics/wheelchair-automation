@@ -5,7 +5,7 @@ raytrace_range: 20.0
 inflation_radius: 0.2
 
 obstacle_layer:
-  observation_sources: base_Scan
+  observation_sources: base_scan
 
 observation_sources: base_scan
 
