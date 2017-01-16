@@ -29,13 +29,15 @@
  
     <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left">
         <remap from="scan" to="/wheelchair_lasers/left" />
-        <remap from="scan_filtered" to="/scan_filtered_left"/>
+        <!-- <remap from="scan_filtered" to="/scan_filtered_left"/> -->
+	<!--<remap from="scan_filtered" to="/scan_multi"/>-->
         <rosparam command="load" file="$(find wheelchair_description)/laserscan_filter.yaml" />
     </node>
 
     <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_right">
         <remap from="scan" to="/wheelchair_lasers/right" />
-        <remap from="scan_filtered" to="/scan_filtered_right"/>
+        <!--<remap from="scan_filtered" to="/scan_filtered_right"/>-->
+	<remap from="scan_filtered" to="/scan_multi"/>
         <rosparam command="load" file="$(find wheelchair_description)/laserscan_filter.yaml" />
     </node>
 <!--

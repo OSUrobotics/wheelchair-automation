@@ -1,5 +1,5 @@
 <launch>
-    <node name="left_laser_driver" pkg="urg_node" type="urg_node">
+   <node name="left_laser_driver" pkg="urg_node" type="urg_node">
         <param name="serial_port" type="string" value="/dev/sensors/hokuyo_H1320217" />
         <param name="frame_id" type="string" value="left_scanner"/>
         <remap from="scan" to="/wheelchair_lasers/left" />
@@ -10,6 +10,7 @@
         <param name="serial_port" type="string" value="/dev/sensors/hokuyo_H1320239" />
         <param name="frame_id" type="string" value="right_scanner"/>
         <remap from="scan" to="/wheelchair_lasers/right" />
+	<!-- <remap from="scan" to="/scan_multi"/> -->
         <!-- <param name="min_ang" type="double" value="-1.7" />
         <param name="max_ang" type="double" value="1.6" /> -->
     </node>

@@ -1,0 +1,9 @@
+# IT IS UNLIKELY YOU WANT TO EDIT THIS FILE BY HAND,
+# UNLESS FOR REMOVING ENTRIES.
+# IF YOU WANT TO CHANGE THE ROS ENVIRONMENT VARIABLES
+# USE THE rosinstall TOOL INSTEAD.
+# IF YOU CHANGE IT, USE rosinstall FOR THE CHANGES TO TAKE EFFECT
+- git: {local-name: ira_laser_tools, uri: 'https://github.com/iralabdisco/ira_laser_tools.git',
+    version: master}
+- git: {local-name: scan_tools, uri: 'https://github.com/ccny-ros-pkg/scan_tools.git',
+    version: indigo}
