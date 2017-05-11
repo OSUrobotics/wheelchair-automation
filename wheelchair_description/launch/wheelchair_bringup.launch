@@ -4,5 +4,5 @@
 
 	<include file="$(find wheelchair_description)/launch/wheelchair_odom.launch"/>
 
-        <include file="$(find wheelchair_description)/launch/wheelchair_joy.launch"/>	
-</launch>	
+	<include file="$(find wheelchair_description)/launch/wheelchair_joy.launch"/>	
+</launch>
