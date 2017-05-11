@@ -1,0 +1,8 @@
+scan_filter_chain:
+- name: angle
+  type: LaserScanAngularBoundsFilter
+  params:
+    lower_angle: -1.50
+    upper_angle: 3.3
+#Lower angle sets left side of arc, upper angle sets right side.
+#Lower numbers move left for lower angle,Larger Numbers 
