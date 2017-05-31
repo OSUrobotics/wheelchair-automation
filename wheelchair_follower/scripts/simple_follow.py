@@ -17,7 +17,7 @@ class follower:
         self.joy_bool = False
         self.move_sub = rospy.Subscriber('/visualization_marker',Marker,self.move_callback)
 
-        self.follower_twist = rospy.Publisher('/vel', Twist,queue_size=3)
+        self.follower_twist = rospy.Publisher('/cmd_vel', Twist,queue_size=3)
         self.command = Twist()
 
 
@@ -48,6 +48,6 @@ class follower:
             return 0
 
 if __name__ == '__main__':
-	rospy.init_node('wheelchair_follower',log_level=rospy.DEBUG)
+	rospy.init_node('wheelchair_follower_controller',log_level=rospy.DEBUG)
 	follower = follower()
 	rospy.spin()
