@@ -27,7 +27,7 @@
         <remap from="scan" to="/wheelchair_lasers/left"/>
   </node>
 
-  <!-- -------------------------------------------------------------------------------------- -->
+  <!--  -->
 
     <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left">
         <remap from="scan" to="/wheelchair_lasers/left" />
@@ -43,7 +43,7 @@
         <rosparam command="load" file="$(find wheelchair_description)/params/laserscan_filter.yaml" />
     </node>
 
-<!-- -------------------------------------------------------------------------------------- -->
+<!-- -->
 
     <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left_range">
         <remap from="scan" to="/scan_filtered_left_semi" />
