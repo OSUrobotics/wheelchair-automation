@@ -4,3 +4,7 @@ scan_filter_chain:
   params:
     lower_angle: -2.356
     upper_angle: 2.356
+
+# scan_filter_chain:
+# - name: interpolation
+#   type: InterpolationFilter
