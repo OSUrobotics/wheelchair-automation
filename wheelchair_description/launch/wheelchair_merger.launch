@@ -6,5 +6,11 @@
     <param name="laserscan_topics" value="/scan_filtered_right /scan_filtered_left" />
   </node>
 
+  <node name="set_merge_params" pkg="dynamic_reconfigure" type="dynparam" args="set_from_parameters laserscan_multi_merger">
+  	<param name="range_min" value="0.45"/>
+   	<param name="range_max" value="10.1"/>
+    <param name="angle_min" value="-3.14"/>
+    <param name="angle_max" value="3.14"/>
+  </node>
 
 </launch>
