@@ -27,19 +27,38 @@
         <remap from="scan" to="/wheelchair_lasers/left"/>
   </node>
 
+  <!-- -------------------------------------------------------------------------------------- -->
+
     <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left">
         <remap from="scan" to="/wheelchair_lasers/left" />
-        <remap from="scan_filtered" to="/scan_filtered_left"/>
+        <remap from="scan_filtered" to="/scan_filtered_left_semi"/>
 	<!--<remap from="scan_filtered" to="/scan_multi"/>-->
-        <rosparam command="load" file="$(find wheelchair_description)/laserscan_filter.yaml" />
+        <rosparam command="load" file="$(find wheelchair_description)/params/laserscan_filter.yaml" />
     </node>
 
     <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_right">
         <remap from="scan" to="/wheelchair_lasers/right" />
+        <remap from="scan_filtered" to="/scan_filtered_right_semi"/>
+	<!--<remap from="scan_filtered" to="/scan_multi"/>-->
+        <rosparam command="load" file="$(find wheelchair_description)/params/laserscan_filter.yaml" />
+    </node>
+
+<!-- -------------------------------------------------------------------------------------- -->
+
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left_range">
+        <remap from="scan" to="/scan_filtered_left_semi" />
+        <remap from="scan_filtered" to="/scan_filtered_left"/>
+	<!--<remap from="scan_filtered" to="/scan_multi"/>-->
+        <rosparam command="load" file="$(find wheelchair_description)/params/range_laser_filter.yaml" />
+    </node>
+
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_right_range">
+        <remap from="scan" to="/scan_filtered_right_semi" />
         <remap from="scan_filtered" to="/scan_filtered_right"/>
 	<!--<remap from="scan_filtered" to="/scan_multi"/>-->
-        <rosparam command="load" file="$(find wheelchair_description)/laserscan_filter.yaml" />
+        <rosparam command="load" file="$(find wheelchair_description)/params/range_laser_filter.yaml" />
     </node>
+
 <!--
   <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen">
     <param name="destination_frame" value="/base_footprint"/>
@@ -49,12 +68,12 @@
 
   </node>
 -->
-  <node name="set_merge_params" pkg="dynamic_reconfigure" type="dynparam" args="set_from_parameters laserscan_multi_merger">
+  <!-- <node name="set_merge_params" pkg="dynamic_reconfigure" type="dynparam" args="set_from_parameters laserscan_multi_merger">
   	<param name="range_min" value="0.45"/>
    	<param name="range_max" value="10.1"/>
     <param name="angle_min" value="-3.14"/>
     <param name="angle_max" value="3.14"/>
-  </node>
+  </node> -->
 
 
 </launch>
