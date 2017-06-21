@@ -4,5 +4,5 @@ scan_filter_chain:
   params:
     min_angle: 10
     max_angle: 170
-    neighbors: 18
+    neighbors: 10
     window: 1
