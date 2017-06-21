@@ -36,7 +36,7 @@ class follower:
             return 0
 
     def joy_callback(self,joy):
-        if (joy.buttons[5] == 1):
+        if (joy.buttons[3] == 1):
             self.joy_bool = True
         else:
             self.joy_bool = False

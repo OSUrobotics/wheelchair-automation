@@ -13,4 +13,7 @@
         <rosparam file="$(find wheelchair_navigation)/local_costmap.local" command="load" />
         <rosparam file="$(find wheelchair_navigation)/global_costmap.local" command="load" />
     </node>
+
+		<node pkg="wheelchair_navigation" type="nav_joy.py" name="nav_joy"/>
+
 </launch>
