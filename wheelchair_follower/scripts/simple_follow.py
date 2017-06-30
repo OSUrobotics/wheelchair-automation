@@ -27,9 +27,9 @@ class follower:
                 return 0
             else:
                 x_vect = (marker.pose.position.x - self.past_marker.pose.position.x)
-                y_vect = (marker.pose.position.y - self.past_marker.pose.position.y)
+                # y_vect = (marker.pose.position.y - self.past_marker.pose.position.y)
                 self.command.linear.x = x_vect
-                self.command.linear.y = y_vect
+                # self.command.linear.y = y_vect
                 self.follower_twist.publish(self.command)
 
         else:

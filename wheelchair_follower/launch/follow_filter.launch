@@ -15,13 +15,15 @@
 
 <node pkg="leg_detector" type="leg_detector" name="leg_detector" args="scan:=base_scan $(find leg_detector)/config/trained_leg_detector.yaml" output="screen">
  <remap from ="scan" to ="scan_follower_filtered"/>
- <param name="use_sim_time" value="True"/>
+ <param name="use_sim_time" value="False"/>
  <param name="fixed_frame" value="base_footprint"/>
- <param name="leg_reliability_limit" value=".4"/>
- <param name="no_observation_timeout" value=".7"/>
- <param name="min_points_per_group" value="4"/>
- <!-- <param name="connection_threshold" value="4"/> -->
+ <param name="leg_reliability_limit" value=".60"/>
+ <!-- <param name="no_observation_timeout" value=".8"/>
+ <param name="min_points_per_group" value="10"/>
+ <param name="connection_threshold" value=".8"/> -->
 
 </node>
+
+<!-- <node pkg="wheelchair_follower" type="mouse_follow.py" name="mouse_follow"/> -->
 
 </launch>
