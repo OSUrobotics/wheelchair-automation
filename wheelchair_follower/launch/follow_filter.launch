@@ -17,10 +17,10 @@
  <remap from ="scan" to ="scan_follower_filtered"/>
  <param name="use_sim_time" value="False"/>
  <param name="fixed_frame" value="base_footprint"/>
- <param name="leg_reliability_limit" value=".60"/>
- <!-- <param name="no_observation_timeout" value=".8"/>
- <param name="min_points_per_group" value="10"/>
- <param name="connection_threshold" value=".8"/> -->
+ <param name="leg_reliability_limit" value=".50"/>
+ <!-- <param name="no_observation_timeout" value=".8"/> -->
+ <param name="min_points_per_group" value="8"/>
+ <!-- <param name="connection_threshold" value=".8"/> -->
 
 </node>
 

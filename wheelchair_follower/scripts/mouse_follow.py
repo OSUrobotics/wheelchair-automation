@@ -62,11 +62,11 @@ class follower:
             print marker.pose.position.x
             # print self.position_marker.pose.position.x
 
-            if (marker.pose.position.x >= (self.position_marker.pose.position.x)):
+            if (marker.pose.position.x >= (self.position_marker.pose.position.x+.15)):
                 print "greater"
                 self.command.linear.x = .75
                 self.follower_twist.publish(self.command)
-            elif (marker.pose.position.x <= (self.position_marker.pose.position.x-.1)):
+            elif (marker.pose.position.x <= (self.position_marker.pose.position.x-.15)):
                 self.command.linear.x = -.75
                 self.follower_twist.publish(self.command)
             else:
