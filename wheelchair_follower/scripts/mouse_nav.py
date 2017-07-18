@@ -116,7 +116,7 @@ class follower:
 				print "Less Than"
 				goal_pose.target_pose.pose.position.x = -2
 				waypoint_marker.pose.position.x = -2
-				waypoint_marker.pose.orientation.w = -1
+				waypoint_marker.pose.orientation.w = 1
 
 				self.client.send_goal(goal_pose)
 				rospy.loginfo('sent backwards goal')
