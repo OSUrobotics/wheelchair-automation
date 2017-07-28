@@ -1,0 +1,5 @@
+<launch>
+<!-- <include file="$(find realsense_camera)/launch/r200_nodelet_default.launch"/> -->
+<node name="img_throttler" type="throttle" pkg="topic_tools" args="messages /camera/color/image_raw 12 /img_throttle" />
+<!-- <node pkg="wheelchair_follower" type="visual_tracker.py" name="visual_tracker"/> -->
+</launch>
