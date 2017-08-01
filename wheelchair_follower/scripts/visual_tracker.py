@@ -52,7 +52,7 @@ class vfolllower:
         mid_top_x = np.size(cv_image, 1)/2
         mid_top_y = np.size(cv_image, 0)
         # cv2.rectangle(cv_image, (120,480),(450,0),(255,0,0), 2)
-        cv2.rectangle(cv_image, (120,1),(450,479),(255,0,0), 2)
+        cv2.rectangle(cv_image, (120,1),(450,479),(255,0,0), 3)
         cv2.line(cv_image, (mid_bottom_x,mid_bottom_y), (mid_top_x,mid_top_y), (0,0,255), 2);
         cv2.imshow("Image window", cv_image)
         cv2.waitKey(3)
