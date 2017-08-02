@@ -65,7 +65,7 @@ public:
     cv::Mat bw;
 
     cv::pyrDown(cv_ptr->image, downsampled, cv::Size(cv_ptr->image.cols/2, cv_ptr->image.rows/2));
-
+		cv::imshow("downsampled", downsampled);
     // //Skin Detection
     // cv::blur( downsampled, blurred, cv::Size(3,3) );
     // cv::cvtColor(blurred, hsv, CV_BGR2HSV);
@@ -86,7 +86,7 @@ public:
     // imshow("drw", drawing);
 
     //Test Mask Grabcut
-    cv::Mat1b markers(cv_ptr->image.rows, cv_ptr->image.cols);
+    cv::Mat1b markers(cv_ptr->image.rows/2, cv_ptr->image.cols/2);
     // let's set all of them to possible background first
     markers.setTo(cv::GC_PR_BGD);
     // cut out a small area in the middle of the image
@@ -94,29 +94,30 @@ public:
     int m_cols = 0.5 * cv_ptr->image.cols;
     // of course here you could also use cv::Rect() instead of cv::Range to select
     // the region of interest
-    cv::Mat1b fg_seed = markers(cv::Range(cv_ptr->image.rows/2 - m_rows/2, cv_ptr->image.rows/2 + m_rows/2),
-                                cv::Range(cv_ptr->image.cols/2 - m_cols/2, cv_ptr->image.cols/2 + m_cols/2));
+    cv::Mat1b fg_seed = markers(cv::Range(cv_ptr->image.rows/4 - m_rows/4, cv_ptr->image.rows/4 + m_rows/4),
+                                cv::Range(cv_ptr->image.cols/4 - m_cols/4, cv_ptr->image.cols/4 + m_cols/4));
     // mark it as foreground
     fg_seed.setTo(cv::GC_PR_FGD);
 
     // select first 5 rows of the image as background
-    cv::Mat1b bg_seed = markers(cv::Range(0, 10),cv::Range::all());
+    cv::Mat1b bg_seed = markers(cv::Range(0, 2),cv::Range::all());
     bg_seed.setTo(cv::GC_BGD);
 
-		 bg_seed = markers(cv::Range(470, 480),cv::Range::all());
+		 bg_seed = markers(cv::Range(10, 11),cv::Range::all());
 		bg_seed.setTo(cv::GC_BGD);
 
 
     cv::Mat bgd, fgd;
 
 		int iterations = 1;
-		cv::grabCut(cv_ptr->image, markers, cv::Rect(), bgd, fgd, iterations, cv::GC_INIT_WITH_MASK);
-
+		cv::grabCut(downsampled, markers, cv::Rect(), bgd, fgd, iterations, cv::GC_INIT_WITH_MASK);
+		cv::Mat resultUp;
     // let's get all foreground and possible foreground pixels
     cv::Mat1b mask_fgpf = ( markers == cv::GC_FGD) | ( markers == cv::GC_PR_FGD);
     // and copy all the foreground-pixels to a temporary image
+		cv::pyrUp(mask_fgpf, resultUp, cv::Size(result.cols*2, result.rows*2));
     cv::Mat3b tmp = cv::Mat3b::zeros(cv_ptr->image.rows, cv_ptr->image.cols);
-    cv_ptr->image.copyTo(tmp, mask_fgpf);
+    cv_ptr->image.copyTo(tmp, resultUp);
     // show it
     cv::imshow("foreground", tmp);
     cv::waitKey(3);
