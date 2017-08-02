@@ -38,9 +38,9 @@ class vfolllower:
             mask = np.ones(cv_image.shape[:2],np.uint8)
             rect = (120,1,450,479)
             # rect = (161,79,150,150)
-            # cv2.grabCut(cv_image,mask,rect,bgdModel,fgdModel,2,cv2.GC_INIT_WITH_RECT)
-            # mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
-            # img_cut = cv_image*mask2[:,:,np.newaxis]
+            cv2.grabCut(cv_image,mask,rect,bgdModel,fgdModel,2,cv2.GC_INIT_WITH_RECT)
+            mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
+            img_cut = cv_image*mask2[:,:,np.newaxis]
 
 
         except CvBridgeError as e:
