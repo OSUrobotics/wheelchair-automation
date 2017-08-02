@@ -90,20 +90,27 @@ public:
     // let's set all of them to possible background first
     markers.setTo(cv::GC_PR_BGD);
     // cut out a small area in the middle of the image
-    int m_rows = 0.1 * cv_ptr->image.rows;
-    int m_cols = 0.1 * cv_ptr->image.cols;
+    int m_rows = cv_ptr->image.rows;
+    int m_cols = 0.5 * cv_ptr->image.cols;
     // of course here you could also use cv::Rect() instead of cv::Range to select
     // the region of interest
     cv::Mat1b fg_seed = markers(cv::Range(cv_ptr->image.rows/2 - m_rows/2, cv_ptr->image.rows/2 + m_rows/2),
                                 cv::Range(cv_ptr->image.cols/2 - m_cols/2, cv_ptr->image.cols/2 + m_cols/2));
     // mark it as foreground
-    fg_seed.setTo(cv::GC_FGD);
+    fg_seed.setTo(cv::GC_PR_FGD);
 
     // select first 5 rows of the image as background
-    cv::Mat1b bg_seed = markers(cv::Range(0, 5),cv::Range::all());
+    cv::Mat1b bg_seed = markers(cv::Range(0, 10),cv::Range::all());
     bg_seed.setTo(cv::GC_BGD);
 
+		 bg_seed = markers(cv::Range(470, 480),cv::Range::all());
+		bg_seed.setTo(cv::GC_BGD);
+
+
     cv::Mat bgd, fgd;
+
+		int iterations = 1;
+		cv::grabCut(cv_ptr->image, markers, cv::Rect(), bgd, fgd, iterations, cv::GC_INIT_WITH_MASK);
 
     // let's get all foreground and possible foreground pixels
     cv::Mat1b mask_fgpf = ( markers == cv::GC_FGD) | ( markers == cv::GC_PR_FGD);
@@ -112,7 +119,7 @@ public:
     cv_ptr->image.copyTo(tmp, mask_fgpf);
     // show it
     cv::imshow("foreground", tmp);
-    cv::waitKey(0);
+    cv::waitKey(3);
 
 
     // cv::Rect rectangle(100,0,350,480);
