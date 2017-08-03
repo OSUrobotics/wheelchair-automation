@@ -4,6 +4,12 @@
 #include <sensor_msgs/image_encodings.h>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include "util.cpp"
+
+#include <opencv2/opencv.hpp>
+#include <opencv2/core/types_c.h>
+#include <opencv2/features2d/features2d.hpp>
+
 using namespace cv;
 static const std::string OPENCV_WINDOW = "Image window";
 int findBiggestContour(vector<vector<Point> >);
@@ -13,7 +19,8 @@ class ImageConverter
   ros::NodeHandle nh_;
   image_transport::ImageTransport it_;
   image_transport::Subscriber image_sub_;
-  image_transport::Publisher image_pub_;
+	image_transport::Publisher image_pub_;
+	image_transport::Publisher image_pub1_;
 
 public:
   ImageConverter()
@@ -22,7 +29,8 @@ public:
     // Subscrive to input video feed and publish output video feed
     image_sub_ = it_.subscribe("/camera/color/image_raw", 1,
       &ImageConverter::imageCb, this);
-    image_pub_ = it_.advertise("/image_converter/output_video", 1);
+		image_pub_ = it_.advertise("/image_converter/output_video", 1);
+    image_pub1_ = it_.advertise("/image_converter1/output_video", 1);
 
     cv::namedWindow(OPENCV_WINDOW);
   }
@@ -43,6 +51,29 @@ public:
     }
     return indexOfBiggestContour;
   }
+
+	cv::Mat findBiggestBlob(cv::Mat & matImage){
+	cv::Mat blank_slate = cv::Mat::zeros(matImage.size(), matImage.type()); //New image to draw blob on.
+	int largest_area=0;
+	  int largest_contour_index=0;
+
+	  vector< vector<Point> > contours; // Vector for storing contour
+	  vector<Vec4i> hierarchy;
+
+	  findContours( matImage, contours, hierarchy,CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE ); // Find the contours in the image
+
+	  for( int i = 0; i< contours.size(); i++ ) {// iterate through each contour.
+	      double a=contourArea( contours[i],false);  //  Find the area of contour
+	      if(a>largest_area){
+	          largest_area=a;
+	          largest_contour_index=i;                //Store the index of largest contour
+	          //bounding_rect=boundingRect(contours[i]); // Find the bounding rectangle for biggest contour
+	      }
+	  }
+
+	  drawContours( blank_slate, contours, largest_contour_index, Scalar(255), CV_FILLED, 8, hierarchy ); // Draw the largest contour using previously stored index.
+		return blank_slate;
+	}
 
   void imageCb(const sensor_msgs::ImageConstPtr& msg)
   {
@@ -65,7 +96,7 @@ public:
     cv::Mat bw;
 
     cv::pyrDown(cv_ptr->image, downsampled, cv::Size(cv_ptr->image.cols/2, cv_ptr->image.rows/2));
-		cv::imshow("downsampled", downsampled);
+		// cv::imshow("downsampled", downsampled);
     // //Skin Detection
     // cv::blur( downsampled, blurred, cv::Size(3,3) );
     // cv::cvtColor(blurred, hsv, CV_BGR2HSV);
@@ -100,10 +131,10 @@ public:
     fg_seed.setTo(cv::GC_PR_FGD);
 
     // select first 5 rows of the image as background
-    cv::Mat1b bg_seed = markers(cv::Range(0, 2),cv::Range::all());
+    cv::Mat1b bg_seed = markers(cv::Range(0, 5),cv::Range::all());
     bg_seed.setTo(cv::GC_BGD);
 
-		 bg_seed = markers(cv::Range(10, 11),cv::Range::all());
+		bg_seed = markers(cv::Range(235, 240),cv::Range::all());
 		bg_seed.setTo(cv::GC_BGD);
 
 
@@ -118,10 +149,29 @@ public:
 		cv::pyrUp(mask_fgpf, resultUp, cv::Size(result.cols*2, result.rows*2));
     cv::Mat3b tmp = cv::Mat3b::zeros(cv_ptr->image.rows, cv_ptr->image.cols);
     cv_ptr->image.copyTo(tmp, resultUp);
-    // show it
-    cv::imshow("foreground", tmp);
-    cv::waitKey(3);
 
+		cv::Mat returned_image;
+		cv::Mat bwImage;
+		cv::cvtColor(tmp, bwImage, CV_RGB2GRAY);
+		returned_image = findBiggestBlob(bwImage);
+
+		// Floodfill from point (0, 0)
+		cv::Mat im_floodfill = returned_image.clone();
+		floodFill(im_floodfill, cv::Point(0,0), Scalar(255));
+
+		// Invert floodfilled image
+		cv::Mat im_floodfill_inv;
+		bitwise_not(im_floodfill, im_floodfill_inv);
+
+		// Combine the two images to get the foreground.
+		cv::Mat im_out = (returned_image | im_floodfill_inv);
+		cv::Mat output_image;
+    cv_ptr->image.copyTo(output_image, im_out);
+
+
+    // show it
+    // cv::imshow("foreground", output_image);
+    // cv::waitKey(3);
 
     // cv::Rect rectangle(100,0,350,480);
     //
@@ -138,7 +188,8 @@ public:
     // cv::waitKey(3);
     //
     // // Output modified video stream
-    // image_pub_.publish(cv_ptr->toImageMsg());
+		image_pub_.publish(convertCVToSensorMsg(tmp));
+    image_pub1_.publish(convertCVToSensorMsg(output_image));
   }
 };
 
