@@ -140,6 +140,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(c_visual_tracker src/c_visual_tracker.cpp)
 add_executable(cd_visual_tracker src/cd_visual_tracker.cpp)
+add_executable(c_blob_tracker src/c_blob_tracker.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -151,10 +152,12 @@ add_executable(cd_visual_tracker src/cd_visual_tracker.cpp)
 ## same as for the library above
 add_dependencies(c_visual_tracker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(cd_visual_tracker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(c_blob_tracker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(c_visual_tracker ${catkin_LIBRARIES} ${OpenCV_INCLUDE_DIRS})
 target_link_libraries(cd_visual_tracker ${catkin_LIBRARIES} ${OpenCV_INCLUDE_DIRS})
+target_link_libraries(c_blob_tracker ${catkin_LIBRARIES} ${OpenCV_INCLUDE_DIRS})
 
 #############
 ## Install ##

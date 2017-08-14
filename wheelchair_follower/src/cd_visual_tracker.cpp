@@ -52,6 +52,25 @@ public:
     return indexOfBiggestContour;
   }
 
+static void floodFillPostprocess( Mat& img, const Scalar& colorDiff=Scalar::all(1) )
+{
+    CV_Assert( !img.empty() );
+    RNG rng = theRNG();
+    Mat mask( img.rows+2, img.cols+2, CV_8UC1, Scalar::all(0) );
+    for( int y = 0; y < img.rows; y++ )
+    {
+        for( int x = 0; x < img.cols; x++ )
+        {
+            if( mask.at<uchar>(y+1, x+1) == 0 )
+            {
+                Scalar newVal( rng(256), rng(256), rng(256) );
+                floodFill( img, mask, Point(x,y), newVal, 0, colorDiff, colorDiff );
+            }
+        }
+    }
+}
+
+
 	cv::Mat findBiggestBlob(cv::Mat & matImage){
 	cv::Mat blank_slate = cv::Mat::zeros(matImage.size(), matImage.type()); //New image to draw blob on.
 	int largest_area=0;
@@ -93,9 +112,14 @@ public:
     cv::Mat fgModel; // the models (internally used)
     cv::Mat blurred;
     cv::Mat hsv;
-    cv::Mat bw;
+		cv::Mat bw;
+    cv::Mat res;
+
+		// pyrMeanShiftFiltering( cv_ptr->image, res, 2, 60, 2);
+		// floodFillPostprocess( res, Scalar::all(2) );
 
     cv::pyrDown(cv_ptr->image, downsampled, cv::Size(cv_ptr->image.cols/2, cv_ptr->image.rows/2));
+
 		// cv::imshow("downsampled", downsampled);
     // //Skin Detection
     // cv::blur( downsampled, blurred, cv::Size(3,3) );
@@ -122,7 +146,7 @@ public:
     markers.setTo(cv::GC_PR_BGD);
     // cut out a small area in the middle of the image
     int m_rows = cv_ptr->image.rows;
-    int m_cols = 0.5 * cv_ptr->image.cols;
+    int m_cols = 0.7 * cv_ptr->image.cols;
     // of course here you could also use cv::Rect() instead of cv::Range to select
     // the region of interest
     cv::Mat1b fg_seed = markers(cv::Range(cv_ptr->image.rows/4 - m_rows/4, cv_ptr->image.rows/4 + m_rows/4),
@@ -185,7 +209,7 @@ public:
     //
     // // Update GUI Window
     // cv::imshow("Masked Image", foreground);
-    // cv::waitKey(3);
+    cv::waitKey(3);
     //
     // // Output modified video stream
 		image_pub_.publish(convertCVToSensorMsg(tmp));
