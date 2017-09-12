@@ -20,42 +20,67 @@ Useful launch files
 Gazebo (Only for simulation): bash gazebo_spawn_swivel_willow.bash
 
 High Level Launch Order:
-roslaunch wheelchair_description wheelchair_bringup.launch -- Hokuyo, Joint States, Robot States, Laser Scan Filter, Odometry
-roslaunch wheelchair_description wheelchair_merger.launch -- Laser Merger. Needs to be launched independently.
-roslaunch wheelchair_navigation move_base_local.launch -- Navigation without a map.
+
++ <p>roslaunch wheelchair_description wheelchair_bringup.launch</p>
+-- Hokuyo, Joint States, Robot States, Laser Scan Filter, Odometry
+
++ <p>roslaunch wheelchair_description wheelchair_merger.launch</p>
+ -- Laser Merger. Needs to be launched independently.
+
++ <p>roslaunch wheelchair_navigation move_base_local.launch</p>
+ -- Navigation without a map.
 
 Other Launch Files:
-Hokuyo/Joint States/Robot States/Laser Scan Filter: roslaunch wheelchair_description wheelchair_description.launch
++ <p>roslaunch wheelchair_description wheelchair_description.launch</p>
+ -- Hokuyo/Joint States/Robot States/Laser Scan Filter.
 
-Laser Scan Merger: roslaunch wheelchair_description wheelchair_merger.launch
++ <p>roslaunch wheelchair_description</p> wheelchair_merger.launch
+ -- Laser Scan Merger
 
-Laser Scan Matcher (Odometry): roslaunch wheelchair_description wheelchair_odom.launch
++ <p>roslaunch wheelchair_description wheelchair_odom.launch</p>
+ -- Laser Scan Matcher (Odometry)
 
 Dependances
 ---------------------
-ros-indigo-robot-upstart
-ros-indigo-scan-tools
-ros-indigo-move-base
++ ros-indigo-robot-upstart  
++ ros-indigo-scan-tools   
++ ros-indigo-move-base  
 
 laser_scan_matcher
 ---------------------
-$ cd [indigo catkin workspace directory]
-$ git clone https://github.com/ccny-ros-pkg/scan_tools
-$ sudo apt-get install libgsl0-dev
-$ catkin_make
-$ roslaunch laser_scan_matcher demo.launch
-
-
+1. cd [indigo catkin workspace directory]  
+2. git clone https://github.com/ccny-ros-pkg/scan_tools  
+3. sudo apt-get install libgsl0-dev  
+4. catkin_make  
+5. roslaunch laser_scan_matcher demo.launch  
 
 Simulation Bringup
 ---------------------
-~/catkin_ws/src/wheelchair-automation/wheelchair_description/gazebo_spawn.bash
-roslaunch wheelchair_description wheelchair_bringup.launch
-roslaunch wheelchair_description wheelchair_merger.launch
-roslaunch wheelchair_navigation move_base_local.launch
+1. ~/catkin_ws/src/wheelchair-automation/wheelchair_description/gazebo_spawn.bash  
+2. roslaunch wheelchair_description wheelchair_bringup.launch  
+3. roslaunch wheelchair_description wheelchair_merger.launch  
+4. roslaunch wheelchair_navigation move_base_local.launch  
 
 Bagfile Playback
 ---------------------
-roslaunch wheelchair_description wheelchair_bringup.launch
-roslaunch wheelchair_description wheelchair_merger.launch
-rosbag play [bagfile]
+1. roslaunch wheelchair_description wheelchair_bringup.launch
+2. roslaunch wheelchair_description wheelchair_merger.launch
+3. rosbag play [bagfile]
+
+Simple Telep Bringup
+---------------------
+1. roslaunch wheelchair_description wheelchair_bringup.launch
+2. roslaunch wheelchair_description wheelchair_merger.launch
+
+Simple Local Nav Bringup
+---------------------
+1. roslaunch wheelchair_description wheelchair_bringup.launch
+2. roslaunch wheelchair_description wheelchair_merger.launch
+3. roslaunch wheelchair_navigation move_base_local.launch
+
+Simple Follow Bringup
+---------------------
+1. roslaunch wheelchair_description wheelchair_bringup.launch
+2. roslaunch wheelchair_description wheelchair_merger.launch
+2. roslaunch wheelchair_follower follow_filter.launch
+3. roslaunch wheelchair_navigation move_base_local_follower.launch
