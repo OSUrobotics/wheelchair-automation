@@ -67,6 +67,20 @@ Bagfile Playback
 2. roslaunch wheelchair_description wheelchair_merger.launch
 3. rosbag play [bagfile]
 
+System Access/System Setup
+---------------------
+1. Connect to the Wifi:
+  + chironLAN2 (2.4 Ghz)
+  + chironLAN5 (5 Ghz)
+2. If internet is needed, plug ethernet cable to port 1 on the hAP ac
+3. SSH into Intel NUC and Raspberry Pi:
+  + ssh artemis@192.168.1.200
+  + ssh iaso@192.168.1.105
+4. Run one of the following bringup launch file groups (teleop, nav, follow) on the NUC
+5. Run interface launch on Raspberry Pi (must be run as root, roscore is on NUC)
+  + sudo su root
+  + rosrun controller pro_controller_i2c.py
+
 Simple Telep Bringup
 ---------------------
 1. roslaunch wheelchair_description wheelchair_bringup.launch
