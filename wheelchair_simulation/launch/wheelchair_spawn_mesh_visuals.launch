@@ -1,7 +1,7 @@
 <launch>
 <!-- Convert xacro and put on parameter server -->
 <!-- <param name="robot_description" command="$(find xacro)/xacro.py $(find wheelchair_description)/urdf/robot.urdf.xacro" /> -->
-<param name="robot_description" command="$(find xacro)/xacro.py $(find wheelchair_description)/urdf/wheelchair_gazebo.xacro" />
+<param name="robot_description" command="$(find xacro)/xacro.py $(find wheelchair_description)/urdf/wheelchair_description_mesh_visuals.xacro" />
 
 <!-- Spawn a robot into Gazebo -->
 <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model wheelchair_description" />

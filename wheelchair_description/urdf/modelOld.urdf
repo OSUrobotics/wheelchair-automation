@@ -8,31 +8,34 @@
   <!-- From front wheel joint to back wheel joint -->
   <!-- From front wheel joint to head rest -->
   <link name="base_footprint">
-    <origin rpy="0 0 0" xyz="0 0 .1"/>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <!-- <mesh filename="package://wheelchair_description/meshes/wheelchair_rot.dae" scale="0.20 0.20 0.20"/> -->
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
   </link>
   <joint name="base_footprint_joint" type="fixed">
-    <origin rpy="0 0 0" xyz=" 0 0 .7"/>
+    <origin rpy="0 0 0" xyz=" 0 0 0.7"/>
     <parent link="base_footprint"/>
     <child link="base_link"/>
   </joint>
   <link name="base_link">
     <visual>
-      <origin rpy="0 0 -1.571" xyz="0 0 -.59"/>
       <geometry>
-        <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
+        <box size="0.812 0.643 1.191"/>
       </geometry>
       <material name="white">
-        <color rgba="1 1 0 .01"/>
+        <color rgba="1 1 1 1"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 -1.571" xyz="0 0 -.59"/>
       <geometry>
-        <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
+        <box size="0.812 0.643 1.191"/>
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 -1.571" xyz="0 0 -.59"/>
       <mass value="10.0"/>
       <inertia ixx="1.66916666667" ixy="0" ixz="0" iyy="1.2125" iyz="0" izz="1.52833333333"/>
     </inertial>
@@ -46,17 +49,30 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.15 0.1 0.06"/>
+        <box size="0.01 0.01 0.01"/>
       </geometry>
     </visual>
   </link>
   <joint name="imu_joint" type="fixed">
     <parent link="base_link"/>
     <child link="imu_link"/>
-    <origin rpy="3.14159265359 0 0" xyz=".32 0 -.35"/>
+    <origin rpy="3.14159265359 0 0" xyz="0 0 0"/>
   </joint>
   <!--Legs -->
   <link name="legs">
+    <visual>
+      <geometry>
+        <box size="0.4064 0.4064 0.4064"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4064 0.4064 0.4064"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="2.0"/>
       <inertia ixx="0.135466666667" ixy="0" ixz="0" iyy="0.135466666667" iyz="0" izz="0.135466666667"/>
@@ -71,6 +87,19 @@
   </joint>
   <!--Right Bar -->
   <link name="right_bar">
+    <visual>
+      <geometry>
+        <box size="1.015 0.16075 0.148875"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="1.015 0.16075 0.148875"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="2.0"/>
       <inertia ixx="1e-3" ixy="1e-3" ixz="1e-3" iyy="1e-3" iyz="1e-3" izz="1e-3"/>
@@ -85,6 +114,19 @@
   </joint>
   <!--Left Bar -->
   <link name="left_bar">
+    <visual>
+      <geometry>
+        <box size="1.015 0.16075 0.148875"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="1.015 0.16075 0.148875"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="2.0"/>
       <inertia ixx="1e-3" ixy="1e-3" ixz="1e-3" iyy="1e-3" iyz="1e-3" izz="1e-3"/>
@@ -105,6 +147,14 @@
     <origin rpy="1.57075 0 0" xyz="0.0 0.0 -0.072875"/>
   </joint>
   <link name="right_main_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.065" radius="0.165"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.065" radius="0.165"/>
@@ -122,6 +172,14 @@
     <origin rpy="1.57075 0 0" xyz="0.0 0.0 -0.072875"/>
   </joint>
   <link name="left_main_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.065" radius="0.165"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.065" radius="0.165"/>
@@ -134,6 +192,17 @@
   </link>
   <!--Laser Scanners -->
   <link name="right_scanner">
+    <visual>
+      <origin rpy="0 0 0" xyz="0.0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05 0.05 0.1"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="1e-5"/>
       <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3"/>
@@ -146,6 +215,17 @@
     <child link="right_scanner"/>
   </joint>
   <link name="left_scanner">
+    <visual>
+      <origin rpy="0 0 0" xyz="0.0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05 0.05 0.1"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="1e-5"/>
       <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3"/>
@@ -159,6 +239,14 @@
   </joint>
   <!--Front Wheels -->
   <link name="front_right_swivel">
+    <visual>
+      <geometry>
+        <cylinder length="0.065" radius="0.01"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.065" radius="0.01"/>
@@ -184,6 +272,14 @@
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
   <link name="front_right_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.089"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.05" radius="0.089"/>
@@ -203,6 +299,14 @@
     </inertial>
   </link>
   <link name="front_left_swivel">
+    <visual>
+      <geometry>
+        <cylinder length="0.065" radius="0.01"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.065" radius="0.01"/>
@@ -228,6 +332,14 @@
     <dynamics damping="0" friction="0.5"/>
   </joint>
   <link name="front_left_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.089"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.05" radius="0.089"/>
@@ -248,6 +360,14 @@
   </link>
   <!--Rear Wheels -->
   <link name="rear_right_swivel">
+    <visual>
+      <geometry>
+        <cylinder length="0.065" radius="0.01"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.065" radius="0.01"/>
@@ -273,6 +393,14 @@
     <dynamics damping="0" friction="0.5"/>
   </joint>
   <link name="rear_right_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.089"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.05" radius="0.089"/>
@@ -292,6 +420,14 @@
     </inertial>
   </link>
   <link name="rear_left_swivel">
+    <visual>
+      <geometry>
+        <cylinder length="0.065" radius="0.01"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.065" radius="0.01"/>
@@ -317,6 +453,14 @@
     <dynamics damping="0" friction="0.5"/>
   </joint>
   <link name="rear_left_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.089"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.05" radius="0.089"/>
@@ -336,28 +480,6 @@
     </inertial>
   </link>
   <gazebo>
-    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-      <robotNamespace>/</robotNamespace>
-    </plugin>
-  </gazebo>
-  <gazebo reference="imu_link">
-    <sensor name="imu_sensor" type="imu">
-      <always_on>true</always_on>
-      <update_rate>100</update_rate>
-      <visualize>true</visualize>
-      <topic>__default_topic__</topic>
-      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-        <topicName>imu</topicName>
-        <bodyName>imu_link</bodyName>
-        <updateRateHZ>10.0</updateRateHZ>
-        <gaussianNoise>0.0</gaussianNoise>
-        <xyzOffset>0 0 0</xyzOffset>
-        <rpyOffset>0 0 0</rpyOffset>
-        <frameName>imu_link</frameName>
-      </plugin>
-    </sensor>
-  </gazebo>
-  <gazebo>
     <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
       <alwaysOn>true</alwaysOn>
       <updateRate>50</updateRate>
@@ -365,8 +487,7 @@
       <rightJoint>right_main_wheel_joint</rightJoint>
       <wheelSeparation>0.643</wheelSeparation>
       <wheelDiameter>0.33</wheelDiameter>
-      <wheelTorque>20</wheelTorque>
-      <wheelAcceleration>1</wheelAcceleration>
+      <torque>20</torque>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom_temp</odometryTopic>
       <odometryFrame>odom_temp</odometryFrame>
@@ -374,22 +495,24 @@
       <publishTf>0</publishTf>
     </plugin>
   </gazebo>
-  <gazebo>
-    <plugin filename="libhector_gazebo_ros_imu.so" name="quadrotor_imu_sim">
-      <updateRate>50.0</updateRate>
-      <bodyName>imu_link</bodyName>
-      <frameId>imu_link</frameId>
-      <topicName>imu/data</topicName>
-      <rpyOffsets>0 0 0</rpyOffsets>
-      <gaussianNoise>0</gaussianNoise>
-      <accelDrift>0.5 0.5 0.5</accelDrift>
-      <accelGaussianNoise>0.05 0.05 0.05</accelGaussianNoise>
-      <rateDrift>0.1 0.1 0.1</rateDrift>
-      <rateGaussianNoise>0.05 0.05 0.015</rateGaussianNoise>
-      <headingDrift>0.1</headingDrift>
-      <headingGaussianNoise>0.05</headingGaussianNoise>
-    </plugin>
-  </gazebo>
+  <!--
+<gazebo>
+  <plugin name="quadrotor_imu_sim" filename="libhector_gazebo_ros_imu.so">
+    <updateRate>50.0</updateRate>
+    <bodyName>imu_link</bodyName>
+    <frameId>imu_link</frameId>
+    <topicName>imu/data</topicName>
+    <rpyOffsets>0 0 0</rpyOffsets>
+    <gaussianNoise>0</gaussianNoise>
+    <accelDrift>0.5 0.5 0.5</accelDrift>
+    <accelGaussianNoise>0.05 0.05 0.05</accelGaussianNoise>
+    <rateDrift>0.1 0.1 0.1</rateDrift>
+    <rateGaussianNoise>0.05 0.05 0.015</rateGaussianNoise>
+    <headingDrift>0.1</headingDrift>
+    <headingGaussianNoise>0.05</headingGaussianNoise>
+  </plugin>
+</gazebo>  
+-->
   <gazebo reference="right_scanner">
     <sensor name="head_hokuyo_sensor" type="ray">
       <pose>0 0 0 0 0 0</pose>
