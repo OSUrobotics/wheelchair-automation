@@ -10,7 +10,8 @@
     <rightJoint>right_main_wheel_joint</rightJoint>
     <wheelSeparation>${chair_width}</wheelSeparation>
     <wheelDiameter>${main_wheel_radius*2}</wheelDiameter>
-    <torque>20</torque>
+    <wheelTorque>20</wheelTorque>
+    <wheelAcceleration>1</wheelAcceleration>
     <commandTopic>cmd_vel</commandTopic>
     <odometryTopic>odom_temp</odometryTopic>
     <odometryFrame>odom_temp</odometryFrame>
@@ -18,7 +19,7 @@
     <publishTf>0</publishTf>
   </plugin>
 </gazebo>
-<!--
+
 <gazebo>
   <plugin name="quadrotor_imu_sim" filename="libhector_gazebo_ros_imu.so">
     <updateRate>50.0</updateRate>
@@ -34,8 +35,8 @@
     <headingDrift>0.1</headingDrift>
     <headingGaussianNoise>0.05</headingGaussianNoise>
   </plugin>
-</gazebo>  
--->
+</gazebo>
+
 <gazebo reference="right_scanner">
     <sensor type="ray" name="head_hokuyo_sensor">
       <pose>0 0 0 0 0 0</pose>

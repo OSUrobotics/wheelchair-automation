@@ -33,33 +33,37 @@
 
 
   <link name="base_footprint">
-    <origin xyz="0 0 .1" rpy="0 0 0"/>
+    <visual>
+      <origin xyz="0 0 .1" rpy="0 0 -1.571" />
+        <geometry>
+    	    <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
+          <!--<box size="0.001 0.001 0.001" />-->
+      </geometry>
+    </visual>
   </link>
 
   <joint name="base_footprint_joint" type="fixed">
-    <origin xyz=" 0 0 .7" rpy="0 0 0"/>
+    <origin xyz=" 0 0 0.7" rpy="0 0 0"/>
     <parent link="base_footprint"/>
     <child link="base_link"/>
   </joint>
 
   <link name="base_link">
     <visual>
-      <origin xyz="0 0 -.59" rpy="0 0 -1.571" />
-        <geometry>
-    	    <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
-        </geometry>
+      <geometry>
+        <!--<mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>-->
+        <box size=".001 .001 .001"/>
+      </geometry>
       <material name="white">
-        <color rgba="1 1 0 1"/>
+        <color rgba="1 1 0 .01"/>
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 -.59" rpy="0 0 -1.571" />
       <geometry>
-        <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
+        <box size="${chair_length} ${chair_width} ${chair_height}"/>
       </geometry>
     </collision>
     <inertial>
-      <origin xyz="0 0 -.59" rpy="0 0 -1.571" />
       <mass value="${chair_weight}"/>
       <xacro:box_intertia height="${chair_height}" length="${chair_length}" width="${chair_width}" weight="${chair_weight}" />
     </inertial>
@@ -74,7 +78,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.15 0.1 0.06"/>
+        <box size="0.001 0.001 0.001"/>
       </geometry>
     </visual>
   </link>
@@ -82,18 +86,31 @@
   <joint name="imu_joint" type="fixed">
     <parent link="base_link"/>
     <child link="imu_link"/>
-    <origin xyz=".32 0 -.35" rpy="${PI} 0 0"/>
+    <origin xyz="0 0 0" rpy="${PI} 0 0"/>
   </joint>
 
 <!--Legs -->
   <link name="legs">
+    <visual>
+      <geometry>
+        <box size=".001 .001 .001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 .01"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${legs_length} ${legs_width} ${legs_height}"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="${legs_weight}"/>
       <xacro:box_intertia height="${legs_height}" length="${legs_length}" width="${legs_width}" weight="${legs_weight}" />
     </inertial>
   </link>
 
-  <joint name="legs_joint" type="fixed">
+    <joint name="legs_joint" type="fixed">
     <axis xyz="0 0 0"/>
     <parent link="base_link"/>
     <child link="legs"/>
@@ -102,6 +119,19 @@
 
 <!--Right Bar -->
   <link name="right_bar">
+    <visual>
+      <geometry>
+        <box size=".001 .001 .001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 .01"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${chair_length + chair_length/4} ${chair_width/4} ${chair_height/8}"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="2.0"/>
       <inertia ixx="1e-3" ixy="1e-3" ixz="1e-3" iyy="1e-3" iyz="1e-3" izz="1e-3"/>
@@ -112,12 +142,25 @@
     <axis xyz="0 0 0"/>
     <parent link="base_link"/>
     <child link="right_bar"/>
-    <origin rpy="0 0 0" xyz="0.0 ${chair_width/2 + .1} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
+    <origin rpy="0 0 0" xyz="0.0 ${chair_width/2} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
   </joint>
 
 <!--Left Bar -->
 
   <link name="left_bar">
+    <visual>
+      <geometry>
+        <box size=".001 .001 .001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 .01"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${chair_length + chair_length/4} ${chair_width/4} ${chair_height/8}"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="2.0"/>
       <inertia ixx="1e-3" ixy="1e-3" ixz="1e-3" iyy="1e-3" iyz="1e-3" izz="1e-3"/>
@@ -128,7 +171,7 @@
     <axis xyz="0 0 0"/>
     <parent link="base_link"/>
     <child link="left_bar"/>
-    <origin rpy="0 0 0" xyz="0.0 -${chair_width/2 + .1} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
+    <origin rpy="0 0 0" xyz="0.0 -${chair_width/2} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
   </joint>
 
 
@@ -142,6 +185,14 @@
   </joint>
 
   <link name="right_main_wheel">
+    <visual>
+      <geometry>
+        <cylinder length=".001" radius=".001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 .01"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
@@ -161,6 +212,14 @@
   </joint>
 
   <link name="left_main_wheel">
+    <visual>
+      <geometry>
+        <cylinder length=".001" radius=".001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 .01"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
@@ -175,6 +234,17 @@
 <!--Laser Scanners -->
 
   <link name="right_scanner">
+    <visual>
+      <origin xyz="0.0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05 0.05 0.1"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="1e-5" />
       <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3" />
@@ -183,12 +253,23 @@
 
   <joint name="right_scanner_joint" type="fixed">
     <axis xyz="0 0 0" />
-    <origin xyz="${chair_length/2 - 0.1/2 + chair_length/8} ${0.05/2 - .025} ${chair_height/16 + 0.05}" rpy="0 0 1.5707"/>
+    <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} ${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 1.5707"/>
     <parent link="right_bar"/>
     <child link="right_scanner"/>
   </joint>
 
   <link name="left_scanner">
+    <visual>
+      <origin xyz="0.0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05 0.05 0.1"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="1e-5" />
       <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3" />
@@ -197,7 +278,7 @@
 
   <joint name="left_scanner_joint" type="fixed">
     <axis xyz="0 0 0" />
-    <origin xyz="${chair_length/2 - 0.1/2 + chair_length/8} -${0.05/2 - .025} ${chair_height/16 + 0.05}" rpy="0 0 -1.5707"/>
+    <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} -${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 -1.5707"/>
     <parent link="left_bar"/>
     <child link="left_scanner"/>
   </joint>
@@ -206,6 +287,14 @@
 
 <!--Front Wheels -->
   <link name="front_right_swivel">
+    <visual>
+      <geometry>
+        <cylinder length="0.001" radius="0.001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 .01"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.065" radius="0.01"/>
@@ -222,7 +311,7 @@
     <axis xyz="0 0 1"/>
     <parent link="right_bar"/>
     <child link="front_right_swivel"/>
-    <origin rpy="0 0 0" xyz="-${chair_length/2 + .04} 0.0725 -${chair_height/8}"/>
+    <origin rpy="0 0 0" xyz="-${chair_length/2} 0.0 -${chair_height/8}"/>
     <dynamics damping="0.0" friction="0.5" />
   </joint>
 
@@ -236,6 +325,14 @@
   </joint>
 
   <link name="front_right_wheel">
+    <visual>
+      <geometry>
+        <cylinder length=".001" radius=".001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 .01"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="${small_wheel_length}" radius="${small_wheel_radius}"/>
@@ -255,6 +352,14 @@
     </inertial>
   </link>
   <link name="front_left_swivel">
+    <visual>
+      <geometry>
+        <cylinder length=".001" radius=".001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 .01"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.065" radius="0.01"/>
@@ -271,7 +376,7 @@
     <axis xyz="0 0 1"/>
     <parent link="left_bar"/>
     <child link="front_left_swivel"/>
-    <origin rpy="0 0 0" xyz="-${chair_length/2 + .04} -0.0725 -${chair_height/8}"/>
+    <origin rpy="0 0 0" xyz="-${chair_length/2} 0.0 -${chair_height/8}"/>
     <dynamics damping="0.0" friction="0.5" />
   </joint>
 
@@ -285,6 +390,14 @@
   </joint>
 
   <link name="front_left_wheel">
+    <visual>
+      <geometry>
+        <cylinder length=".001" radius=".001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 .01"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.05" radius="${small_wheel_radius}"/>
@@ -306,6 +419,14 @@
 <!--Rear Wheels -->
 
   <link name="rear_right_swivel">
+    <visual>
+      <geometry>
+        <cylinder length=".001" radius=".001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 .01"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.065" radius="0.01"/>
@@ -322,7 +443,7 @@
     <axis xyz="0 0 1"/>
     <parent link="right_bar"/>
     <child link="rear_right_swivel"/>
-    <origin rpy="0 0 0" xyz="${chair_length/2 - .04} 0.035 -${chair_height/8}"/>
+    <origin rpy="0 0 0" xyz="${chair_length/2} 0.0 -${chair_height/8}"/>
     <dynamics damping="0.0" friction="0.5" />
   </joint>
 
@@ -336,6 +457,14 @@
   </joint>
 
   <link name="rear_right_wheel">
+    <visual>
+      <geometry>
+        <cylinder length=".001" radius=".001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 .01"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.05" radius="${small_wheel_radius}"/>
@@ -356,6 +485,14 @@
   </link>
 
   <link name="rear_left_swivel">
+    <visual>
+      <geometry>
+        <cylinder length=".001" radius=".001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 .01"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.065" radius="0.01"/>
@@ -368,11 +505,11 @@
   </link>
 
 
-  <joint name="rear_left_swivel_joint" type="continuous">
+   <joint name="rear_left_swivel_joint" type="continuous">
     <axis xyz="0 0 1"/>
     <parent link="left_bar"/>
     <child link="rear_left_swivel"/>
-    <origin rpy="0 0 0" xyz="${chair_length/2 - .04} -0.035 -${chair_height/8}"/>
+    <origin rpy="0 0 0" xyz="${chair_length/2} 0.0 -${chair_height/8}"/>
     <dynamics damping="0.0" friction="0.5" />
   </joint>
 
@@ -386,6 +523,14 @@
   </joint>
 
   <link name="rear_left_wheel">
+    <visual>
+      <geometry>
+        <cylinder length=".001" radius=".001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0 0 0 .01"/>
+      </material>
+    </visual>
     <collision>
       <geometry>
         <cylinder length="0.05" radius="${small_wheel_radius}"/>
@@ -404,17 +549,4 @@
       <xacro:cylinder_intertia length="${small_wheel_length}" radius="${small_wheel_radius}" weight="${small_wheel_weight}" />
     </inertial>
   </link>
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
-    </plugin>
-  </gazebo>
-  <gazebo reference="imu_link">
-    <sensor name="imu_sensor" type="imu">
-      <always_on>true</always_on>
-      <update_rate>100</update_rate>
-      <visualize>true</visualize>
-      <topic>__default_topic__</topic>
-    </sensor>
-  </gazebo>
 </robot>

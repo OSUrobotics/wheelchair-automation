@@ -11,7 +11,7 @@ use_vel: true
 
 # other params
 publish_tf: true
-use_imu: false
+use_imu: true
 use_odom: false
 publish_pose_stamped: true
 

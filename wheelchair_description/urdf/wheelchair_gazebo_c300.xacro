@@ -34,7 +34,7 @@
     <headingDrift>0.1</headingDrift>
     <headingGaussianNoise>0.05</headingGaussianNoise>
   </plugin>
-</gazebo>  
+</gazebo>
 
 <gazebo reference="right_scanner">
     <sensor type="ray" name="head_hokuyo_sensor">
