@@ -23,5 +23,5 @@ roslaunch wheelchair_navigation move_base_local.launch & movePid=$!
 
 sleep 5
 
-rosrun rviz rviz & rvizPid=$!
+rosrun rviz rviz -d ./WheelchairSetup.rviz & rvizPid=$!
 wait
