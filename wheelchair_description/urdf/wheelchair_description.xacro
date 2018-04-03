@@ -47,9 +47,9 @@
       <origin xyz="0 0 -.59" rpy="0 0 -1.571" />
         <geometry>
     	    <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
-      </geometry>
+        </geometry>
       <material name="white">
-        <color rgba="1 1 0 .01"/>
+        <color rgba="1 1 0 1"/>
       </material>
     </visual>
     <collision>
@@ -112,7 +112,7 @@
     <axis xyz="0 0 0"/>
     <parent link="base_link"/>
     <child link="right_bar"/>
-    <origin rpy="0 0 0" xyz="0.0 ${chair_width/2} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
+    <origin rpy="0 0 0" xyz="0.0 ${chair_width/2 + .1} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
   </joint>
 
 <!--Left Bar -->
@@ -128,7 +128,7 @@
     <axis xyz="0 0 0"/>
     <parent link="base_link"/>
     <child link="left_bar"/>
-    <origin rpy="0 0 0" xyz="0.0 -${chair_width/2} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
+    <origin rpy="0 0 0" xyz="0.0 -${chair_width/2 + .1} -${chair_height/4 + chair_height/8}"/> <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
   </joint>
 
 
@@ -183,7 +183,7 @@
 
   <joint name="right_scanner_joint" type="fixed">
     <axis xyz="0 0 0" />
-    <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} ${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 1.5707"/>
+    <origin xyz="${chair_length/2 - 0.1/2 + chair_length/8} ${0.05/2 - .025} ${chair_height/16 + 0.05}" rpy="0 0 1.5707"/>
     <parent link="right_bar"/>
     <child link="right_scanner"/>
   </joint>
@@ -197,7 +197,7 @@
 
   <joint name="left_scanner_joint" type="fixed">
     <axis xyz="0 0 0" />
-    <origin xyz="${chair_length/2 - 0.05/2 + chair_length/8} -${0.05/2} ${chair_height/16 + 0.05}" rpy="0 0 -1.5707"/>
+    <origin xyz="${chair_length/2 - 0.1/2 + chair_length/8} -${0.05/2 - .025} ${chair_height/16 + 0.05}" rpy="0 0 -1.5707"/>
     <parent link="left_bar"/>
     <child link="left_scanner"/>
   </joint>
@@ -222,7 +222,7 @@
     <axis xyz="0 0 1"/>
     <parent link="right_bar"/>
     <child link="front_right_swivel"/>
-    <origin rpy="0 0 0" xyz="-${chair_length/2} 0.0 -${chair_height/8}"/>
+    <origin rpy="0 0 0" xyz="-${chair_length/2 + .04} 0.0725 -${chair_height/8}"/>
     <dynamics damping="0.0" friction="0.5" />
   </joint>
 
@@ -271,7 +271,7 @@
     <axis xyz="0 0 1"/>
     <parent link="left_bar"/>
     <child link="front_left_swivel"/>
-    <origin rpy="0 0 0" xyz="-${chair_length/2} 0.0 -${chair_height/8}"/>
+    <origin rpy="0 0 0" xyz="-${chair_length/2 + .04} -0.0725 -${chair_height/8}"/>
     <dynamics damping="0.0" friction="0.5" />
   </joint>
 
@@ -322,7 +322,7 @@
     <axis xyz="0 0 1"/>
     <parent link="right_bar"/>
     <child link="rear_right_swivel"/>
-    <origin rpy="0 0 0" xyz="${chair_length/2} 0.0 -${chair_height/8}"/>
+    <origin rpy="0 0 0" xyz="${chair_length/2 - .04} 0.035 -${chair_height/8}"/>
     <dynamics damping="0.0" friction="0.5" />
   </joint>
 
@@ -368,11 +368,11 @@
   </link>
 
 
-   <joint name="rear_left_swivel_joint" type="continuous">
+  <joint name="rear_left_swivel_joint" type="continuous">
     <axis xyz="0 0 1"/>
     <parent link="left_bar"/>
     <child link="rear_left_swivel"/>
-    <origin rpy="0 0 0" xyz="${chair_length/2} 0.0 -${chair_height/8}"/>
+    <origin rpy="0 0 0" xyz="${chair_length/2 - .04} -0.035 -${chair_height/8}"/>
     <dynamics damping="0.0" friction="0.5" />
   </joint>
 
@@ -415,15 +415,6 @@
       <update_rate>100</update_rate>
       <visualize>true</visualize>
       <topic>__default_topic__</topic>
-      <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so">
-        <topicName>imu</topicName>
-        <bodyName>imu_link</bodyName>
-        <updateRateHZ>10.0</updateRateHZ>
-        <gaussianNoise>0.0</gaussianNoise>
-        <xyzOffset>0 0 0</xyzOffset>
-        <rpyOffset>0 0 0</rpyOffset>
-        <frameName>imu_link</frameName>
-      </plugin>
     </sensor>
   </gazebo>
 </robot>

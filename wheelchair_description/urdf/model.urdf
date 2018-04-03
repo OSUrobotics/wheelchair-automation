@@ -22,7 +22,7 @@
         <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
       </geometry>
       <material name="white">
-        <color rgba="1 1 0 .01"/>
+        <color rgba="1 1 0 1"/>
       </material>
     </visual>
     <collision>
@@ -80,7 +80,7 @@
     <axis xyz="0 0 0"/>
     <parent link="base_link"/>
     <child link="right_bar"/>
-    <origin rpy="0 0 0" xyz="0.0 0.3215 -0.446625"/>
+    <origin rpy="0 0 0" xyz="0.0 0.4215 -0.446625"/>
     <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
   </joint>
   <!--Left Bar -->
@@ -94,7 +94,7 @@
     <axis xyz="0 0 0"/>
     <parent link="base_link"/>
     <child link="left_bar"/>
-    <origin rpy="0 0 0" xyz="0.0 -0.3215 -0.446625"/>
+    <origin rpy="0 0 0" xyz="0.0 -0.4215 -0.446625"/>
     <!--chair_height/4 + chair_height/8 because this is relative to the center of the bar -->
   </joint>
   <!--Main Wheels -->
@@ -141,7 +141,7 @@
   </link>
   <joint name="right_scanner_joint" type="fixed">
     <axis xyz="0 0 0"/>
-    <origin rpy="0 0 1.5707" xyz="0.4825 0.025 0.1244375"/>
+    <origin rpy="0 0 1.5707" xyz="0.4575 0.0 0.1244375"/>
     <parent link="right_bar"/>
     <child link="right_scanner"/>
   </joint>
@@ -153,7 +153,7 @@
   </link>
   <joint name="left_scanner_joint" type="fixed">
     <axis xyz="0 0 0"/>
-    <origin rpy="0 0 -1.5707" xyz="0.4825 -0.025 0.1244375"/>
+    <origin rpy="0 0 -1.5707" xyz="0.4575 -0.0 0.1244375"/>
     <parent link="left_bar"/>
     <child link="left_scanner"/>
   </joint>
@@ -173,7 +173,7 @@
     <axis xyz="0 0 1"/>
     <parent link="right_bar"/>
     <child link="front_right_swivel"/>
-    <origin rpy="0 0 0" xyz="-0.406 0.0 -0.148875"/>
+    <origin rpy="0 0 0" xyz="-0.446 0.0725 -0.148875"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
   <joint name="front_right_wheel_joint" type="continuous">
@@ -217,7 +217,7 @@
     <axis xyz="0 0 1"/>
     <parent link="left_bar"/>
     <child link="front_left_swivel"/>
-    <origin rpy="0 0 0" xyz="-0.406 0.0 -0.148875"/>
+    <origin rpy="0 0 0" xyz="-0.446 -0.0725 -0.148875"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
   <joint name="front_left_wheel_joint" type="continuous">
@@ -262,7 +262,7 @@
     <axis xyz="0 0 1"/>
     <parent link="right_bar"/>
     <child link="rear_right_swivel"/>
-    <origin rpy="0 0 0" xyz="0.406 0.0 -0.148875"/>
+    <origin rpy="0 0 0" xyz="0.366 0.035 -0.148875"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
   <joint name="rear_right_wheel_joint" type="continuous">
@@ -306,7 +306,7 @@
     <axis xyz="0 0 1"/>
     <parent link="left_bar"/>
     <child link="rear_left_swivel"/>
-    <origin rpy="0 0 0" xyz="0.406 0.0 -0.148875"/>
+    <origin rpy="0 0 0" xyz="0.366 -0.035 -0.148875"/>
     <dynamics damping="0.0" friction="0.5"/>
   </joint>
   <joint name="rear_left_wheel_joint" type="continuous">
@@ -346,15 +346,6 @@
       <update_rate>100</update_rate>
       <visualize>true</visualize>
       <topic>__default_topic__</topic>
-      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-        <topicName>imu</topicName>
-        <bodyName>imu_link</bodyName>
-        <updateRateHZ>10.0</updateRateHZ>
-        <gaussianNoise>0.0</gaussianNoise>
-        <xyzOffset>0 0 0</xyzOffset>
-        <rpyOffset>0 0 0</rpyOffset>
-        <frameName>imu_link</frameName>
-      </plugin>
     </sensor>
   </gazebo>
   <gazebo>

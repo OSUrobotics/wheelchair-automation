@@ -1,0 +1,7 @@
+<launch>
+
+  <include file="$(find wheelchair_description)/launch/wheelchair_bringup.launch"/>
+  <include file="$(find wheelchair_description)/launch/wheelchair_merger.launch"/>
+  <include file="$(find wheelchair_navigation)/launch/move_base_local.launch"/>
+
+</launch>
