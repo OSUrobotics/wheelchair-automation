@@ -12,5 +12,9 @@
         <!-- Load global navigation specific parameters -->
         <rosparam file="$(find wheelchair_navigation)/local_costmap_params.yaml" command="load" />
         <rosparam file="$(find wheelchair_navigation)/global_costmap_params.yaml" command="load" />
+
+	<param name="base_global_planner" value="autonomous_wc/GlobalPlannerCostmap3D"/>
     </node>
+
+	<node pkg="wheelchair_navigation" type="nav_joy.py" name="nav_joy"/>
 </launch>

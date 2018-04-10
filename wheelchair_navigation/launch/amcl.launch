@@ -11,6 +11,7 @@
 	<param name="odom_alpha1" value="0.6"/>
 	<param name="odom_alpha2" value="0.6"/>
 	<param name="update_min_a" value="3.14" />
+	<param name="update_min_d" value="0.01" />
     </node>
 
 </launch>

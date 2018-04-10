@@ -2,10 +2,11 @@ map_type: costmap
 transform_tolerance: 0.2
 obstacle_range: 20.0
 raytrace_range: 20.0
-inflation_radius: 0.2
+inflation_radius: 0.6
+cost_scaling_factor: 4.0
 
 obstacle_layer:
-  observation_sources: base_Scan
+  observation_sources: base_scan
 
 observation_sources: base_scan
 
@@ -16,6 +17,5 @@ base_scan: {sensor_frame: base_footprint,
             observation_persistence: 0.0,
             marking: true,
             clearing: true,
-            min_obstacle_height: -0.10,
-            max_obstacle_height: 2.0}
-
+            min_obstacle_height: -5.10,
+            max_obstacle_height: 5.0}
