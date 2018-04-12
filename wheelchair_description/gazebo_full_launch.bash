@@ -1,5 +1,4 @@
 
-#Not yet functional
 
 rosrun xacro xacro.py urdf/wheelchair_gazebo.xacro > urdf/model.urdf
 

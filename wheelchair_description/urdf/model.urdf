@@ -396,7 +396,7 @@
           </horizontal>
         </scan>
         <range>
-          <min>0.06</min>
+          <min>0.2</min>
           <max>10.1</max>
           <resolution>0.01</resolution>
         </range>
@@ -427,7 +427,7 @@
           </horizontal>
         </scan>
         <range>
-          <min>0.06</min>
+          <min>0.2</min>
           <max>10.1</max>
           <resolution>0.01</resolution>
         </range>
@@ -444,3 +444,4 @@
     </sensor>
   </gazebo>
 </robot>
+

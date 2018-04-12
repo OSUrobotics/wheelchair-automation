@@ -8,19 +8,11 @@ roslaunch wheelchair_description wheelchair_world_willow.launch & fooPid=$!
 
 rosrun gazebo_ros spawn_model -file urdf/model.urdf -urdf -model wheelchair -x -2 -y 1 & barPid=$!
 
-sleep 10
+sleep 8
 
 roslaunch wheelchair_description wheelchair_bringup.launch & spawnPid=$!
 
-sleep 10
-
-roslaunch wheelchair_description wheelchair_merger.launch & mergerPid=$!
-
-sleep 10
-
-roslaunch wheelchair_navigation move_base_local.launch & movePid=$!
-
-sleep 5
+sleep 8
 
 rosrun rviz rviz -d ./WheelchairSetup.rviz & rvizPid=$!
 wait
