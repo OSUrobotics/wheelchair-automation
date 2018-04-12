@@ -1,16 +1,23 @@
 <launch>
 	<arg name="map_yaml"/>
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_yaml)" />
-    
+
 
     <node name="amcl" pkg="amcl" type="amcl" output="screen">
         <remap from="scan" to="/scan_multi" />
         <param name="odom_frame_id" value="odom"/>
-    
+
         <param name="base_frame_id" value="base_footprint"/>
 	<param name="odom_alpha1" value="0.6"/>
 	<param name="odom_alpha2" value="0.6"/>
+
+	<!--~update_min_a (double, default: π/6.0 radians)
+    Rotational movement required before performing a filter update. -->
 	<param name="update_min_a" value="3.14" />
+
+	<!--~update_min_d (double, default: 0.2 meters)
+	    Translational movement required before performing a filter update.-->
+	<param name="update_min_d" value="0.01" />
     </node>
 
 </launch>
