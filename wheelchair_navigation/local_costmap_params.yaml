@@ -8,6 +8,6 @@ local_costmap:
    rolling_window: true
    width: 40.0
    height: 40.0
-   resolution: 0.05
+   resolution: 0.025
    transform_tolerance: 1.0
    map_type: costmap
