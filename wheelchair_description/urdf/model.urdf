@@ -383,10 +383,14 @@
   </gazebo>
   <gazebo>
     <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+      <alwaysOn>true</alwaysOn>
       <frameName>map</frameName>
       <bodyName>base_link</bodyName>
       <topicName>odom</topicName>
       <updateRate>30.0</updateRate>
+      <gaussianNoise>0.01</gaussianNoise>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
     </plugin>
   </gazebo>
   <gazebo reference="right_scanner">
