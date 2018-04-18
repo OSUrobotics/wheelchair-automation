@@ -382,8 +382,7 @@
     </plugin>
   </gazebo>
   <gazebo>
-    <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
-      <alwaysOn>true</alwaysOn>
+    <plugin filename="libgazebo_ros_p3d.so" name="ground_truth">
       <frameName>map</frameName>
       <bodyName>base_link</bodyName>
       <topicName>odom</topicName>
