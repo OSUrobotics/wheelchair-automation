@@ -23,6 +23,14 @@
   <xacro:property name="small_wheel_length" value=".05" />
   <xacro:property name="small_wheel_weight" value="1.0" />
 
+  <xacro:property name="imu_x" value=".32" />
+  <xacro:property name="imu_z" value="-.35" />
+
+  <xacro:property name="base_link_z" value="-.59" />
+  <xacro:property name="base_link_rot_y" value="-1.571" />
+  <xacro:property name="footprint_z" value=".1" />
+  <xacro:property name="footprint_joint_z" value=".7" />
+
   <xacro:macro name="box_intertia" params="height length width weight" >
     <inertia ixx="${1/12 * weight * (height + length)}" ixy="0" ixz="0" iyy="${1/12 * weight * (width + length)}" iyz="0" izz="${1/12 * weight * (width + height)}" />
   </xacro:macro>
@@ -31,20 +39,19 @@
     <inertia ixx="${1/12 * weight * (3 * radius * radius + length * length)}" ixy="0" ixz="0" iyy="${1/12 * weight * (3 * radius*radius + length*length)}" iyz="0" izz="${1/2 * weight * radius*radius}" />
   </xacro:macro>
 
-
   <link name="base_footprint">
-    <origin xyz="0 0 .1" rpy="0 0 0"/>
+    <origin xyz="0 0 ${footprint_z}" rpy="0 0 0"/>
   </link>
 
   <joint name="base_footprint_joint" type="fixed">
-    <origin xyz=" 0 0 .7" rpy="0 0 0"/>
+    <origin xyz=" 0 0 ${footprint_joint_z}" rpy="0 0 0"/>
     <parent link="base_footprint"/>
     <child link="base_link"/>
   </joint>
 
   <link name="base_link">
     <visual>
-      <origin xyz="0 0 -.59" rpy="0 0 -1.571" />
+      <origin xyz="0 0 ${base_link_z}" rpy="0 0 ${base_link_rot_y}" />
         <geometry>
     	    <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
         </geometry>
@@ -53,13 +60,13 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 -.59" rpy="0 0 -1.571" />
+      <origin xyz="0 0 ${base_link_z}" rpy="0 0 ${base_link_rot_y}" />
       <geometry>
         <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
       </geometry>
     </collision>
     <inertial>
-      <origin xyz="0 0 -.59" rpy="0 0 -1.571" />
+      <origin xyz="0 0 ${base_link_z}" rpy="0 0 ${base_link_rot_y}" />
       <mass value="${chair_weight}"/>
       <xacro:box_intertia height="${chair_height}" length="${chair_length}" width="${chair_width}" weight="${chair_weight}" />
     </inertial>
@@ -82,7 +89,7 @@
   <joint name="imu_joint" type="fixed">
     <parent link="base_link"/>
     <child link="imu_link"/>
-    <origin xyz=".32 0 -.35" rpy="${PI} 0 0"/>
+    <origin xyz="${imu_x} 0 ${imu_z}" rpy="${PI} 0 0"/>
   </joint>
 
 <!--Legs -->
@@ -412,8 +419,8 @@
   <gazebo>
     <plugin filename="libgazebo_ros_p3d.so" name="ground_truth">
       <always_on>true</always_on>
-      <frameName>map</frameName>
-      <bodyName>base_link</bodyName>
+      <frameName>world</frameName>
+      <bodyName>base_footprint</bodyName>
       <topicName>odom</topicName>
       <updateRate>30.0</updateRate>
       <gaussianNoise>0.01</gaussianNoise>

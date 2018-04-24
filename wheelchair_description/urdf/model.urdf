@@ -8,16 +8,16 @@
   <!-- From front wheel joint to back wheel joint -->
   <!-- From front wheel joint to head rest -->
   <link name="base_footprint">
-    <origin rpy="0 0 0" xyz="0 0 .1"/>
+    <origin rpy="0 0 0" xyz="0 0 0.1"/>
   </link>
   <joint name="base_footprint_joint" type="fixed">
-    <origin rpy="0 0 0" xyz=" 0 0 .7"/>
+    <origin rpy="0 0 0" xyz=" 0 0 0.7"/>
     <parent link="base_footprint"/>
     <child link="base_link"/>
   </joint>
   <link name="base_link">
     <visual>
-      <origin rpy="0 0 -1.571" xyz="0 0 -.59"/>
+      <origin rpy="0 0 -1.571" xyz="0 0 -0.59"/>
       <geometry>
         <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
       </geometry>
@@ -26,13 +26,13 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 -1.571" xyz="0 0 -.59"/>
+      <origin rpy="0 0 -1.571" xyz="0 0 -0.59"/>
       <geometry>
         <mesh filename="package://wheelchair_description/meshes/Wheel_Chair.dae" scale="0.20 0.20 0.20"/>
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 -1.571" xyz="0 0 -.59"/>
+      <origin rpy="0 0 -1.571" xyz="0 0 -0.59"/>
       <mass value="10.0"/>
       <inertia ixx="1.66916666667" ixy="0" ixz="0" iyy="1.2125" iyz="0" izz="1.52833333333"/>
     </inertial>
@@ -53,7 +53,7 @@
   <joint name="imu_joint" type="fixed">
     <parent link="base_link"/>
     <child link="imu_link"/>
-    <origin rpy="3.14159265359 0 0" xyz=".32 0 -.35"/>
+    <origin rpy="3.14159265359 0 0" xyz="0.32 0 -0.35"/>
   </joint>
   <!--Legs -->
   <link name="legs">
@@ -340,6 +340,18 @@
       <robotNamespace>/</robotNamespace>
     </plugin>
   </gazebo>
+  <gazebo>
+    <plugin filename="libgazebo_ros_p3d.so" name="ground_truth">
+      <always_on>true</always_on>
+      <frameName>world</frameName>
+      <bodyName>base_footprint</bodyName>
+      <topicName>odom</topicName>
+      <updateRate>30.0</updateRate>
+      <gaussianNoise>0.01</gaussianNoise>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin>
+  </gazebo>
   <gazebo reference="imu_link">
     <sensor name="imu_sensor" type="imu">
       <always_on>true</always_on>
@@ -379,17 +391,6 @@
       <rateGaussianNoise>0.05 0.05 0.015</rateGaussianNoise>
       <headingDrift>0.1</headingDrift>
       <headingGaussianNoise>0.05</headingGaussianNoise>
-    </plugin>
-  </gazebo>
-  <gazebo>
-    <plugin filename="libgazebo_ros_p3d.so" name="ground_truth">
-      <frameName>map</frameName>
-      <bodyName>base_link</bodyName>
-      <topicName>odom</topicName>
-      <updateRate>30.0</updateRate>
-      <gaussianNoise>0.01</gaussianNoise>
-      <xyzOffsets>0 0 0</xyzOffsets>
-      <rpyOffsets>0 0 0</rpyOffsets>
     </plugin>
   </gazebo>
   <gazebo reference="right_scanner">
@@ -455,3 +456,4 @@
     </sensor>
   </gazebo>
 </robot>
+
