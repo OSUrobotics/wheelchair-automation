@@ -153,6 +153,14 @@
       <geometry>
         <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>100000.0</mu>
+            <mu2>100000.0</mu2>
+          </ode>
+        </friction>
+      </surface>
     </collision>
     <inertial>
       <mass value="${main_wheel_weight}"/>
@@ -172,6 +180,14 @@
       <geometry>
         <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>100000.0</mu>
+            <mu2>100000.0</mu2>
+          </ode>
+        </friction>
+      </surface>
     </collision>
     <inertial>
       <mass value="${main_wheel_weight}"/>
