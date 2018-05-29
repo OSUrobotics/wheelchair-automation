@@ -6,7 +6,7 @@ trap 'kill $fooPid $barPid $extraPid $rvizPid $spawnPid $mergerPid $movePid' EXI
 
 roslaunch wheelchair_description wheelchair_world.launch & fooPid=$!
 
-rosrun gazebo_ros spawn_model -file ../urdf/model.urdf -urdf -model wheelchair -x -2 -y 1 & barPid=$!
+rosrun gazebo_ros spawn_model -file ./urdf/model.urdf -urdf -model wheelchair -x -2 -y 1 & barPid=$!
 
 sleep 10
 

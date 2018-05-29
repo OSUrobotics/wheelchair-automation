@@ -4,9 +4,6 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="wheelchair" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <!-- From front wheel right joint to front wheel left joint -->
-  <!-- From front wheel joint to back wheel joint -->
-  <!-- From front wheel joint to head rest -->
   <link name="base_footprint">
     <origin rpy="0 0 0" xyz="0 0 .1"/>
   </link>
