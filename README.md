@@ -40,11 +40,13 @@ Other Launch Files:
 + <p>roslaunch wheelchair_description wheelchair_odom.launch</p>
  -- Laser Scan Matcher (Odometry)
 
-Dependances
+Dependencies
 ---------------------
 + ros-indigo-robot-upstart  
 + ros-indigo-scan-tools   
 + ros-indigo-move-base  
++ ros-urg-node
++ ros-teleop-twist-joy
 
 laser_scan_matcher
 ---------------------
@@ -53,6 +55,12 @@ laser_scan_matcher
 3. sudo apt-get install libgsl0-dev  
 4. catkin_make  
 5. roslaunch laser_scan_matcher demo.launch  
+
+ira_laser_tools
+---------------------
+1. cd [indigo catkin workspace directory]  
+2. git clone https://github.com/iralabdisco/ira_laser_tools.git
+3. catkin_make  
 
 Simulation Bringup
 ---------------------
