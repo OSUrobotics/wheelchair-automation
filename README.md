@@ -6,13 +6,25 @@ Code for automating a PERMOBIL wheelchair for the ALS foundation.
 Package Descriptions
 ---------------------
 
-wheelchair_description: URDF and launch files for wheelchair initial bringup.
+wheelchair_description: URDF and launch files for wheelchair initial bringup. Bash files for full simulation bringup.
 
 wheelchair_navigation: AMCL and Navigation parameters for the wheelchair.
 
 wheelchair_bringup: Nothing ATM
 
 wheelchair_mapping: Basic gmapping launch file and where maps should be saved.
+
+wheelchair_diagnostics: Files for wheelchair debug and diagnostics
+
+wheelchair_follower: 
+
+wheelchair_gui: Framework for a GUI
+
+wheelchair_mapping: Launch file for gmapping with wheelchair
+
+wheelchair_power: Nothing ATM
+
+wheelchair_simulation: Launch files for spawning a wheelchair into Gazebo
 
 Useful launch files
 ---------------------
@@ -45,8 +57,8 @@ Dependencies
 + ros-indigo-robot-upstart  
 + ros-indigo-scan-tools   
 + ros-indigo-move-base  
-+ ros-urg-node
-+ ros-teleop-twist-joy
++ ros-indigo-urg-node
++ ros-indigo-teleop-twist-joy
 
 laser_scan_matcher
 ---------------------
