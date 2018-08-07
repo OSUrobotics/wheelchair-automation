@@ -2,7 +2,7 @@
 
 rosrun xacro xacro.py urdf/wheelchair_gazebo.xacro > urdf/model.urdf
 
-trap 'kill $fooPid $barPid $extraPid $rvizPid $spawnPid $mergerPid $movePid' EXIT
+trap 'kill $fooPid $barPid $extraPid $rvizPid $spawnPid $mergerPid $movePid $navPid' EXIT
 
 roslaunch wheelchair_description wheelchair_world.launch & fooPid=$!
 
@@ -19,6 +19,10 @@ roslaunch wheelchair_description wheelchair_merger.launch & mergerPid=$!
 sleep 10
 
 roslaunch wheelchair_navigation move_base_local.launch & movePid=$!
+
+sleep 2
+
+roslaunch wheelchair_description wheelchair_nav_priorities.launch & navPid=$!
 
 sleep 5
 

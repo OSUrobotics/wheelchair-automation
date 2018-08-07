@@ -1,0 +1,20 @@
+subscribers:
+  - name:        "Nav stack"
+    topic:       "input/nav/cmd_vel"
+    timeout:     0.1
+    priority:    0
+    short_desc: "Navigation stack controller"
+
+  - name:        "Spaceball"
+    topic:       "input/spaceball/cmd_vel"
+    timeout:     0.5
+    priority:    1
+    short_desc: "Joystick controls"
+
+  - name:        "Joystick"
+    topic:       "input/joy/cmd_vel"
+    timeout:     0.5
+    priority:    2
+    short_desc: "Joystick controls"
+
+publisher: "cmd_vel"
