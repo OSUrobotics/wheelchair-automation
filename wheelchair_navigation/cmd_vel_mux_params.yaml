@@ -6,10 +6,17 @@ subscribers:
     short_desc: "Navigation stack controller"
 
   - name:        "Spaceball"
+<<<<<<< HEAD
     topic:       "input/spacenav/cmd_vel"
     timeout:     0.5
     priority:    1
     short_desc: "Spacenav controls"
+=======
+    topic:       "input/spaceball/cmd_vel"
+    timeout:     0.5
+    priority:    1
+    short_desc: "Joystick controls"
+>>>>>>> 722d21f63dba23bc4337915c6cd7ab9daeb416c9
 
   - name:        "Joystick"
     topic:       "input/joy/cmd_vel"

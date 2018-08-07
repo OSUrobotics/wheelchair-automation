@@ -1,13 +1,23 @@
 <launch>
+<<<<<<< HEAD
  <include file="$(find spacenav_node)/launch/classic.launch"/>
   <node name="joystick" pkg="joy" type="joy_node">
+=======
+  <include file="$(find spacenav_node)/launch/classic.launch"/>
+
+    <node name="joystick" pkg="joy" type="joy_node">
+>>>>>>> 722d21f63dba23bc4337915c6cd7ab9daeb416c9
         <param name="autorepeat_rate" type="double" value="5"/>
 	<param name="coalesce_interval" type="double" value="0.2"/>
     </node>
     <node name="joystick_controller" pkg="teleop_twist_joy" type="teleop_node">
 	<param name="scale_linear" value="1"/>
         <param name="scale_angular" value="1"/>
+<<<<<<< HEAD
 	<remap from="cmd_vel" to="input/joy/cmd_vel"/>
+=======
+  <remap from="cmd_vel" to="input/joy/cmd_vel"/>
+>>>>>>> 722d21f63dba23bc4337915c6cd7ab9daeb416c9
     </node>
 
 </launch>
