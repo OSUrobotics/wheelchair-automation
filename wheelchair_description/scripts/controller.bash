@@ -1,6 +1,6 @@
 #! /bin/bash
 
-trap 'kill $extraPid $rvizPid $joyPid $mergerPid $movePid $odomPid $navPid' EXIT
+trap 'kill $joyPid $mergerPid $odomPid $navPid' EXIT
 
 roslaunch wheelchair_description wheelchair_odom.launch &odomPid=$!
 
