@@ -34,7 +34,7 @@ public:
     geometry_msgs::Twist newVel;
 
     // Scale values are based on real world max speeds for x and base_local_planner_params.yaml for z
-    double xScale = 2.68;
+    double xScale = 2.68224;
     double zScale = 1.75;
 
     newVel.angular.z = oldVel->angular.z/zScale;
