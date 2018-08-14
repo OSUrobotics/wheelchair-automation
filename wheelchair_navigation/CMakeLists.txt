@@ -5,11 +5,16 @@ project(wheelchair_navigation)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  roslib
   rospy
   std_msgs
   sensor_msgs
   actionlib_msgs
+  geometry_msgs
 )
+
+add_compile_options(-std=c++11)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -105,15 +110,18 @@ include_directories(
 
 ## Declare a cpp executable
 # add_executable(test_simulation_node src/test_simulation_node.cpp)
+add_executable(move_base_scaler_node src/move_base_scaler.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(test_simulation_node test_simulation_generate_messages_cpp)
+add_dependencies(move_base_scaler_node move_base_scaler_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(test_simulation_node
 #   ${catkin_LIBRARIES}
 # )
+target_link_libraries(move_base_scaler_node ${catkin_LIBRARIES})
 
 #############
 ## Install ##
