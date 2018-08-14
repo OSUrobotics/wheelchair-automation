@@ -8,6 +8,8 @@ find_package(catkin REQUIRED COMPONENTS
   urdf
 )
 
+add_compile_options(-std=c++11)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -100,9 +102,10 @@ include_directories(
 #   src/${PROJECT_NAME}/wheelchair_description.cpp
 # )
 
-
+add_executable(spacenav_scaler_node src/spacenav_scaler.cpp)
 add_executable(parser src/parser.cpp)
 target_link_libraries(parser ${catkin_LIBRARIES})
+target_link_libraries(spacenav_scaler_node ${catkin_LIBRARIES})
 
 ## Declare a cpp executable
 # add_executable(wheelchair_description_node src/wheelchair_description_node.cpp)
