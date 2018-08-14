@@ -1,0 +1,6 @@
+<launch>
+
+	<node pkg="wheelchair_description" name="controller" type="controller.bash"/>
+	<node pkg="ros_pim_bridge" name="ros_pim_bridge_node" type="ros_pim_bridge_node"/>
+
+</launch>
