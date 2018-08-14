@@ -1,14 +1,8 @@
 #! /bin/bash
 
-trap 'kill $joyPid $mergerPid $odomPid $navPid' EXIT
+trap 'kill $mergerPid $bringPid $navPid' EXIT
 
-roslaunch wheelchair_description wheelchair_odom.launch &odomPid=$!
-
-sleep 5
-
-roslaunch wheelchair_description wheelchair_joy.launch & joyPid=$!
-
-sleep 5
+roslaunch wheelchair_description wheelchair_bringup.launch &bringPid=$!
 
 roslaunch wheelchair_description wheelchair_nav_priorities.launch &navPid=$!
 

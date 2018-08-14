@@ -16,7 +16,7 @@ wheelchair_mapping: Basic gmapping launch file and where maps should be saved.
 
 wheelchair_diagnostics: Files for wheelchair debug and diagnostics
 
-wheelchair_follower: 
+wheelchair_follower:
 
 wheelchair_gui: Framework for a GUI
 
@@ -46,11 +46,14 @@ Other Launch Files:
 + <p>roslaunch wheelchair_description wheelchair_description.launch</p>
  -- Hokuyo/Joint States/Robot States/Laser Scan Filter.
 
-+ <p>roslaunch wheelchair_description</p> wheelchair_merger.launch
++ <p>roslaunch wheelchair_description</p> wheelchair_merger.launch</p>
  -- Laser Scan Merger
 
 + <p>roslaunch wheelchair_description wheelchair_odom.launch</p>
  -- Laser Scan Matcher (Odometry)
+
++ <p>roslaunch wheelchair_description wheelchair_full_startup.launch</p>
+ -- Full teleop startup
 
 Dependencies
 ---------------------
@@ -59,6 +62,11 @@ Dependencies
 + ros-indigo-move-base  
 + ros-indigo-urg-node
 + ros-indigo-teleop-twist-joy
++ ros-indigo-spacenav-node
++ ros-indigo-yocs-cmd-vel-mux
++ ros-indigo-joy-node
++ ros-indigo-laser-geometry
++ ira_laser_tools
 
 laser_scan_matcher
 ---------------------
@@ -132,3 +140,7 @@ Simple Follow Bringup
 2. roslaunch wheelchair_description wheelchair_merger.launch
 2. roslaunch wheelchair_follower follow_filter.launch
 3. roslaunch wheelchair_navigation move_base_local_follower.launch
+
+Full Teleop Bringup
+-------------------
+1. roslaunch wheelchair_description wheelchair_full_startup.launch
