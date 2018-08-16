@@ -21,6 +21,10 @@
 #include <unistd.h>
 #endif
 
+// If SPACENAV_CHECK = 0, the spacenav will constantly publish 0's if unplugged or in resting position
+#define SPACENAV_CHECK 1
+
+using namespace std;
 
 class SubscribeAndPublish{
 public:
@@ -37,12 +41,26 @@ public:
     newVel.angular.z = oldVel->angular.z/scale;
     newVel.linear.x = oldVel->linear.x/scale;
 
-    velPub.publish(newVel);
+// Loop designed to prevent spacenav's constant publishing from interfering with lower priority devices
+    if((newVel.angular.z != velCheck.angular.z || newVel.linear.x != velCheck.linear.x) && SPACENAV_CHECK){
+      velCheck = newVel;
+      velPub.publish(newVel);
+    }
+
+// Loop part to prevent lower devices taking control if the spacenav is stationary, but not at 0
+    else if(newVel.angular.z != 0 && newVel.linear.x != 0 && SPACENAV_CHECK){
+      velPub.publish(newVel);
+    }
+
+    else if(!SPACENAV_CHECK){
+      velPub.publish(newVel);
+    }
 
   }
 protected:
   ros::Publisher velPub;
   ros::Subscriber velSub;
+  geometry_msgs::Twist velCheck;
 };
 
 int main(int argc, char **argv){

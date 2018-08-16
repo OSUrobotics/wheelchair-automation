@@ -1,20 +1,26 @@
 subscribers:
+  - name: 	 "Manual input"
+    topic:	 "input/manual/cmd_vel"
+    timeout:	 0.5
+    priority:    0
+    short_desc:  "Any manually publishes cmd_vel"
+
   - name:        "Nav stack"
     topic:       "input/nav/cmd_vel"
-    timeout:     0.1
-    priority:    0
+    timeout:     0.5
+    priority:    1
     short_desc: "Navigation stack controller"
 
   - name:        "Spacenav"
     topic:       "input/spacenav/cmd_vel"
     timeout:     0.5
-    priority:    1
+    priority:    2
     short_desc: "Spacenav controls"
 
   - name:        "Joystick"
     topic:       "input/joy/cmd_vel"
     timeout:     0.5
-    priority:    2
+    priority:    3
     short_desc: "Joystick controls"
 
 publisher: "cmd_vel"
