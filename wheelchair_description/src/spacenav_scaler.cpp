@@ -38,8 +38,8 @@ public:
     geometry_msgs::Twist newVel;
     double scale = .69;
 
-    newVel.angular.z = oldVel->angular.z/scale;
-    newVel.linear.x = oldVel->linear.x/scale;
+    newVel.angular.z = oldVel->angular.x/scale;
+    newVel.linear.x = oldVel->angular.y/scale;
 
 // Loop designed to prevent spacenav's constant publishing from interfering with lower priority devices
     if((newVel.angular.z != velCheck.angular.z || newVel.linear.x != velCheck.linear.x) && SPACENAV_CHECK){
