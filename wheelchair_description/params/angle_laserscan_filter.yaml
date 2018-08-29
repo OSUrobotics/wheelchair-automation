@@ -2,8 +2,8 @@ scan_filter_chain:
 - name: angle
   type: LaserScanAngularBoundsFilter
   params:
-    lower_angle: 0
-    upper_angle: 0
+    lower_angle: -2.96
+    upper_angle: 2.96
 
 # scan_filter_chain:
 # - name: interpolation

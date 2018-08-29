@@ -2,7 +2,7 @@
   <arg name="nodelet_manager_name"  value="nodelet_manager"/>
   <arg name="config_file" value="$(find wheelchair_navigation)/cmd_vel_mux_params.yaml"/>
  <!-- <remap from="yocs_cmd_vel_mux/cmd_vel" to="output/cmd_vel"/> -->
-  <remap from="yocs_cmd_vel_mux/cmd_vel" to="cmd_vel"/>
+  <remap from="yocs_cmd_vel_mux/cmd_vel" to="output/cmd_vel"/>
   <remap from="yocs_cmd_vel_mux/input/joy/cmd_vel" to="input/joy/cmd_vel"/>
   <remap from="yocs_cmd_vel_mux/input/nav/cmd_vel" to="input/nav/cmd_vel"/>
   <remap from="yocs_cmd_vel_mux/input/spacenav/cmd_vel" to="input/spacenav/cmd_vel"/>
