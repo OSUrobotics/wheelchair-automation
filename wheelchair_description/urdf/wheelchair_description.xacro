@@ -147,6 +147,11 @@
         <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
       </geometry>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="${main_wheel_weight}"/>
       <xacro:cylinder_intertia length="${main_wheel_length}" radius="${main_wheel_radius}" weight="${main_wheel_weight}" />
@@ -166,6 +171,11 @@
         <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
       </geometry>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="${main_wheel_length}" radius="${main_wheel_radius}"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="${main_wheel_weight}"/>
       <xacro:cylinder_intertia length="${main_wheel_length}" radius="${main_wheel_radius}" weight="${main_wheel_weight}" />
@@ -180,11 +190,17 @@
       <mass value="1e-5" />
       <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3" />
     </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </visual>
   </link>
 
   <joint name="right_scanner_joint" type="fixed">
     <axis xyz="0 0 0" />
-    <origin xyz="${chair_length/2 - 0.1/2 + chair_length/8} -${0.05/2 + .1125} ${chair_height/16 + 0.05}" rpy="0 0 1.5707"/>
+    <origin xyz="${chair_length/2 - 0.1/2 + chair_length/8} -${0.05/2 + .1025} ${chair_height/16 + 0.05}" rpy="0 0 1.5707"/>
     <parent link="right_bar"/>
     <child link="right_scanner"/>
   </joint>
@@ -194,11 +210,17 @@
       <mass value="1e-5" />
       <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3" />
     </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </visual>
   </link>
 
   <joint name="left_scanner_joint" type="fixed">
     <axis xyz="0 0 0" />
-    <origin xyz="${chair_length/2 - 0.1/2 + chair_length/8} ${0.05/2 + .1125} ${chair_height/16 + 0.05}" rpy="0 0 -1.5707"/>
+    <origin xyz="${chair_length/2 - 0.1/2 + chair_length/8} ${0.05/2 + .1025} ${chair_height/16 + 0.05}" rpy="0 0 -1.5707"/>
     <parent link="left_bar"/>
     <child link="left_scanner"/>
   </joint>
@@ -250,11 +272,17 @@
         </friction>
       </surface>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="${small_wheel_length}" radius="${small_wheel_radius}"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="${small_wheel_weight}"/>
       <xacro:cylinder_intertia length="${small_wheel_length}" radius="${small_wheel_radius}" weight="${small_wheel_weight}" />
     </inertial>
   </link>
+
   <link name="front_left_swivel">
     <collision>
       <geometry>
@@ -299,6 +327,11 @@
         </friction>
       </surface>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="${small_wheel_length}" radius="${small_wheel_radius}"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="${small_wheel_weight}"/>
       <xacro:cylinder_intertia length="${small_wheel_length}" radius="${small_wheel_radius}" weight="${small_wheel_weight}" />
@@ -350,6 +383,11 @@
         </friction>
       </surface>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="${small_wheel_radius}"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="${small_wheel_weight}"/>
       <xacro:cylinder_intertia length="${small_wheel_length}" radius="${small_wheel_radius}" weight="${small_wheel_weight}" />
@@ -400,6 +438,11 @@
         </friction>
       </surface>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="${small_wheel_radius}"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="${small_wheel_weight}"/>
       <xacro:cylinder_intertia length="${small_wheel_length}" radius="${small_wheel_radius}" weight="${small_wheel_weight}" />

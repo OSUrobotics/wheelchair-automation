@@ -38,7 +38,7 @@ public:
     geometry_msgs::Twist newVel;
     double scale = .69;
 
-    newVel.angular.z = oldVel->angular.x/scale;
+    newVel.angular.z = oldVel->angular.x/scale * -1;
     newVel.linear.x = oldVel->angular.y/scale;
 
 // Loop designed to prevent spacenav's constant publishing from interfering with lower priority devices
