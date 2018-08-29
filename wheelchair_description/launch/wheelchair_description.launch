@@ -60,8 +60,8 @@
     </node>
 
 <!-- Angle Filter -->
-
-<!-- <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left_angle">
+<!--
+ <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left_angle">
     <remap from="scan" to="/scan_filtered_left_shadow" />
     <remap from="scan_filtered" to="/scan_filtered_left"/>
     <rosparam command="load" file="$(find wheelchair_description)/params/angle_laserscan_filter.yaml" />
