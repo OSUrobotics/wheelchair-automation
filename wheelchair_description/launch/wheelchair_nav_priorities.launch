@@ -18,5 +18,5 @@
   </include>
 
   <node pkg="wheelchair_description" type="spacenav_scaler_node" name="spacenav_scaler"/>
-  <node pkg="vector_field_movement" type="field_movement.py" name="vector_field"/>
+  <!-- <node pkg="vector_field_movement" type="field_movement.py" name="vector_field"/> -->
 </launch>
