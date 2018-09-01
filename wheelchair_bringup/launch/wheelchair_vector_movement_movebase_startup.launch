@@ -1,0 +1,6 @@
+<!-- Launch file for automated and teleop movement with vector field adjustments -->
+
+<launch>
+  <include file="$(find wheelchair_description)/launch/wheelchair_vector_movement_core.launch"/>
+  <include file="$(find wheelchair_navigation)/launch/move_base_local_real_world.launch"/>
+</launch>

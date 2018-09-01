@@ -10,7 +10,7 @@ wheelchair_description: URDF and launch files for wheelchair initial bringup. Ba
 
 wheelchair_navigation: AMCL and Navigation parameters for the wheelchair.
 
-wheelchair_bringup: Nothing ATM
+wheelchair_bringup: Demo launch files.
 
 wheelchair_mapping: Basic gmapping launch file and where maps should be saved.
 

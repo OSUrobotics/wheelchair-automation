@@ -1,3 +1,5 @@
+<!-- Launch file for nodelet manager and yocs_cmd_vel_mux -->
+
 <launch>
   <arg name="nodelet_manager_name"  value="nodelet_manager"/>
   <arg name="config_file" value="$(find wheelchair_navigation)/cmd_vel_mux_params.yaml"/>
@@ -14,5 +16,8 @@
     <arg name="config_file" value="$(arg config_file)"/>
   </include>
 
+
+  <!-- Node to modify spacenav values -->
   <node pkg="wheelchair_description" type="spacenav_scaler_node" name="spacenav_scaler"/>
+
 </launch>

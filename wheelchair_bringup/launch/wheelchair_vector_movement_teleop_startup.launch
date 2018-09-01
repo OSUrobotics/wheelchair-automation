@@ -1,0 +1,5 @@
+<!-- Launch file for teleop movement with vector field adjustments (no movebase) -->
+
+<launch>
+  <include file="$(find wheelchair_description)/launch/wheelchair_vector_movement_core.launch"/>
+</launch>

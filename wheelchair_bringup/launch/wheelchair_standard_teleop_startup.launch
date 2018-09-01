@@ -1,0 +1,5 @@
+<!-- Launch file for unaltered teleop control (no movebase or vector field adjustments)-->
+
+<launch>
+  <include file="$(find wheelchair_description)/launch/wheelchair_standard_core.launch"/>
+</launch>

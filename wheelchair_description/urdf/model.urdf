@@ -4,9 +4,6 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="wheelchair" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <!-- From front wheel right joint to front wheel left joint -->
-  <!-- From front wheel joint to back wheel joint -->
-  <!-- From front wheel joint to head rest -->
   <link name="base_footprint">
     <origin rpy="0 0 0" xyz="0 0 .1"/>
   </link>
@@ -110,6 +107,11 @@
         <cylinder length="0.065" radius="0.165"/>
       </geometry>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="0.065" radius="0.165"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="2.0"/>
       <inertia ixx="0.0143166666667" ixy="0" ixz="0" iyy="0.0143166666667" iyz="0" izz="0.027225"/>
@@ -127,21 +129,33 @@
         <cylinder length="0.065" radius="0.165"/>
       </geometry>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="0.065" radius="0.165"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="2.0"/>
       <inertia ixx="0.0143166666667" ixy="0" ixz="0" iyy="0.0143166666667" iyz="0" izz="0.027225"/>
     </inertial>
   </link>
   <!--Laser Scanners -->
+  <!--Magic numbers for brute force turning-->
   <link name="right_scanner">
     <inertial>
       <mass value="1e-5"/>
       <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3"/>
     </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </visual>
   </link>
   <joint name="right_scanner_joint" type="fixed">
     <axis xyz="0 0 0"/>
-    <origin rpy="0 0 1.5707" xyz="0.4575 0.0 0.1244375"/>
+    <origin rpy="0 0 1.5707" xyz="0.4575 -0.1275 0.1244375"/>
     <parent link="right_bar"/>
     <child link="right_scanner"/>
   </joint>
@@ -150,10 +164,16 @@
       <mass value="1e-5"/>
       <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3"/>
     </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </visual>
   </link>
   <joint name="left_scanner_joint" type="fixed">
     <axis xyz="0 0 0"/>
-    <origin rpy="0 0 -1.5707" xyz="0.4575 -0.0 0.1244375"/>
+    <origin rpy="0 0 -1.5707" xyz="0.4575 0.1275 0.1244375"/>
     <parent link="left_bar"/>
     <child link="left_scanner"/>
   </joint>
@@ -197,6 +217,11 @@
         </friction>
       </surface>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.089"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="1.0"/>
       <inertia ixx="0.00218858333333" ixy="0" ixz="0" iyy="0.00218858333333" iyz="0" izz="0.0039605"/>
@@ -241,6 +266,11 @@
         </friction>
       </surface>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.089"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="1.0"/>
       <inertia ixx="0.00218858333333" ixy="0" ixz="0" iyy="0.00218858333333" iyz="0" izz="0.0039605"/>
@@ -286,6 +316,11 @@
         </friction>
       </surface>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.089"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="1.0"/>
       <inertia ixx="0.00218858333333" ixy="0" ixz="0" iyy="0.00218858333333" iyz="0" izz="0.0039605"/>
@@ -330,6 +365,11 @@
         </friction>
       </surface>
     </collision>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.089"/>
+      </geometry>
+    </visual>
     <inertial>
       <mass value="1.0"/>
       <inertia ixx="0.00218858333333" ixy="0" ixz="0" iyy="0.00218858333333" iyz="0" izz="0.0039605"/>

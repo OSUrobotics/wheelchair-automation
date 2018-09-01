@@ -1,3 +1,5 @@
+<!-- Launch file containing TF and state data for the wheelchair as well as laserscan filters -->
+
 <launch>
   <param name="robot_description" command="$(find xacro)/xacro.py '$(find wheelchair_description)/urdf/wheelchair_description.xacro'" />
 

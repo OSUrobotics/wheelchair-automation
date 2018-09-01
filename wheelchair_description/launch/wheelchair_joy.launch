@@ -1,3 +1,5 @@
+<!-- Launch file for physical controllers -->
+
 <launch>
   <include file="$(find spacenav_node)/launch/classic.launch"/>
 
