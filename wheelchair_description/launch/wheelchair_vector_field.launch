@@ -1,0 +1,10 @@
+<launch>
+  <include file="$(find wheelchair_description)/launch/wheelchair_nav_priorities.launch">
+    <remap from="cmd_vel" to="mux_output/cmd_vel">
+  </include>
+
+  <node pkg="vector_field_movement" type="field_movement.py" name="vector_field">
+    <remap from="scan" to="scan_multi"/>
+    <remap from="output/cmd_vel" to="mux_output/cmd_vel"/>
+  </node>
+</launch>

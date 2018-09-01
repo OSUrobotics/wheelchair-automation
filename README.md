@@ -57,15 +57,15 @@ Other Launch Files:
 
 Dependencies
 ---------------------
-+ ros-indigo-robot-upstart  
-+ ros-indigo-scan-tools   
-+ ros-indigo-move-base  
-+ ros-indigo-urg-node
-+ ros-indigo-teleop-twist-joy
-+ ros-indigo-spacenav-node
-+ ros-indigo-yocs-cmd-vel-mux
-+ ros-indigo-joy-node
-+ ros-indigo-laser-geometry
++ sudo apt-get install ros-indigo-robot-upstart  
++ sudo apt-get install ros-indigo-scan-tools   
++ sudo apt-get install ros-indigo-move-base  
++ sudo apt-get install ros-indigo-urg-node
++ sudo apt-get install ros-indigo-teleop-twist-joy
++ sudo apt-get install ros-indigo-spacenav-node
++ sudo apt-get install ros-indigo-yocs-cmd-vel-mux
++ sudo apt-get install ros-indigo-joy
++ sudo apt-get install ros-indigo-laser-geometry
 + ira_laser_tools
 
 laser_scan_matcher
@@ -109,7 +109,7 @@ System Access/System Setup
   + sudo su root
   + rosrun controller pro_controller_i2c.py
 
-Simple Telep Bringup
+Simple Teleop Bringup
 ---------------------
 1. Connect to the Wifi:
   + chironLAN2 (2.4 Ghz)
@@ -122,11 +122,6 @@ Simple Telep Bringup
 5. Run interface launch on Raspberry Pi (must be run as root, roscore is on NUC)
   + sudo su root
   + rosrun controller pro_controller_i2c.py
-
-Simple Teleop Bringup
----------------------
-1. roslaunch wheelchair_description wheelchair_bringup.launch
-2. roslaunch wheelchair_description wheelchair_merger.launch
 
 Simple Local Nav Bringup
 ---------------------
