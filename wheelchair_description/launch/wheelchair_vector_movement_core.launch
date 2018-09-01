@@ -11,5 +11,6 @@
   <node pkg="wheelchair_description" name="wheelchair_merger" type="merger_delay.bash"/>
   <node pkg="vector_field_movement" name="vector_field_movement" type="field_movement.py">
       <remap from="cmd_vel_mux/input/teleop" to="vector_output/cmd_vel"/>
+      <remap from="scan" to="scan_multi"/>
   </node>
 </launch>
