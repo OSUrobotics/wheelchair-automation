@@ -1,0 +1,17 @@
+scan_filter_chain:
+- name: side1
+  type: LaserScanAngularBoundsFilter
+  params:
+    lower_angle: 0.5
+    upper_angle: 3.14
+
+- name: side2
+  type: LaserScanAngularBoundsFilter
+  params:
+    lower_angle: -3.14
+    upper_angle: -0.5
+
+
+# scan_filter_chain:
+# - name: interpolation
+#   type: InterpolationFilter
