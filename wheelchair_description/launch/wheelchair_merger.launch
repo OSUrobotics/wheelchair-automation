@@ -13,4 +13,10 @@
     <param name="angle_max" value="3.14"/>
   </node>
 
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_scan_multi">
+    <remap from="scan" to="/scan_multi" />
+    <remap from="scan_filtered" to="/scan_multi_angle_filter"/>
+    <rosparam command="load" file="$(find wheelchair_description)/params/angle_scan_multi_filter.yaml" />
+  </node>
+
 </launch>
