@@ -15,10 +15,10 @@
   <!-- Launches nodelet manager, yocs_cmd_vel_mux, and a node to modify and rearrange spacenav data -->
   <include file="$(find wheelchair_description)/launch/wheelchair_nav_priorities.launch"/>
 
-  <!-- Runs the ROS-PIM interface -->
-  <node pkg="ros_pim_bridge" name="ros_pim_bridge_node" type="ros_pim_bridge_node">
+  <!-- Runs the ROS-PIM interface (not in use since PIM is now launched from Up board) -->
+<!--  <node pkg="ros_pim_bridge" name="ros_pim_bridge_node" type="ros_pim_bridge_node">
     <remap from="cmd_vel" to="vector_output/cmd_vel"/>
-  </node>
+  </node> -->
 
   <!-- Runs a bash file which launches wheelchair_merger.launch after a 3 second delay -->
   <node pkg="wheelchair_description" name="wheelchair_merger" type="merger_delay.bash"/>
