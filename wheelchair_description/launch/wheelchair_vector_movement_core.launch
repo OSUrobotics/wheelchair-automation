@@ -26,6 +26,6 @@
   <!-- Runs the vector_field_movement node which adjusts the cmd_vel values coming out of cmd_vel_mux -->
   <node pkg="vector_field_movement" name="vector_field_movement" type="field_movement.py">
       <remap from="cmd_vel_mux/input/teleop" to="vector_output/cmd_vel"/>
-      <remap from="scan" to="scan_multi"/>
+      <remap from="scan" to="scan_multi_angle_filter"/>
   </node>
 </launch>
