@@ -125,9 +125,7 @@ Simple Teleop Bringup
 
 Simple Local Nav Bringup
 ---------------------
-1. roslaunch wheelchair_description wheelchair_bringup.launch
-2. roslaunch wheelchair_description wheelchair_merger.launch
-3. roslaunch wheelchair_navigation move_base_local.launch
+1. roslaunch wheelchair_bringup wheelchair_standard_movebase_bringup.launch
 
 Simple Follow Bringup
 ---------------------
@@ -138,4 +136,4 @@ Simple Follow Bringup
 
 Full Teleop Bringup
 -------------------
-1. roslaunch wheelchair_description wheelchair_full_startup.launch
+1. roslaunch wheelchair_bringup wheelchair_standard_teleop_bringup.launch
