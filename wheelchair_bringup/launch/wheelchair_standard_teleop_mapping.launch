@@ -2,4 +2,5 @@
 
 <launch>
   <include file="$(find wheelchair_description)/launch/wheelchair_standard_core.launch"/>
+  <include file="$(find wheelchair_mapping)/launch/wheelchair_mapping_gmapping.launch"/>
 </launch>
