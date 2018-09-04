@@ -1,7 +1,12 @@
 <!-- Launch file for physical controllers -->
 
 <launch>
+  
   <include file="$(find spacenav_node)/launch/classic.launch"/>
+
+  <node name="keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py">
+	<remap from="cmd_vel" to="input/keyboard/cmd_vel"/>
+  </node>
 
   <node name="joystick" pkg="joy" type="joy_node">
     <param name="autorepeat_rate" type="double" value="5"/>
