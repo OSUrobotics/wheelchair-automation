@@ -1,15 +1,84 @@
 scan_filter_chain:
+
+- name: backBox
+  type: LaserScanBoxFilter
+  params:
+    box_frame: base_link
+    min_x: -30.0
+    max_x: 0.0
+    min_y: -30.0 
+    max_y: 30.0
+    min_z: -1.0
+    max_z: 5.0
+
+- name: leftBox
+  type: LaserScanBoxFilter
+  params:
+    box_frame: base_link
+    min_x: -30.0
+    max_x: 30.0
+    min_y: -30.0
+    max_y: -0.54
+    min_z: -1.0
+    max_z: 5.0
+
+- name: rightBox
+  type: LaserScanBoxFilter
+  params:
+    box_frame: base_link
+    min_x: -30.0
+    max_x: 30.0
+    min_y: 0.54
+    max_y: 30.0
+    min_z: -1.0
+    max_z: 5.0
+
+#- name: leftMidBox
+#  type: LaserScanBoxFilter
+#  params:
+#    box_frame: base_link
+#    min_x: 1.8
+#    max_x: 3.0
+#    min_y: -30.0
+#    max_y: -0.58
+#    min_z: -1.0
+#    max_z: 5.0
+
+#- name: rightMidBox
+#  type: LaserScanBoxFilter
+#  params:
+#    box_frame: base_link
+#    min_x: 1.8
+#    max_x: 3.0
+#    min_y: 0.58
+#    max_y: 30.0
+#    min_z: -1.0
+#    max_z: 5.0
+
 - name: side1
   type: LaserScanAngularBoundsFilter
   params:
     lower_angle: 0.45
-    upper_angle: 3.14
+    upper_angle: 0.6
 
 - name: side2
   type: LaserScanAngularBoundsFilter
   params:
-    lower_angle: -3.14
+    lower_angle: -0.6
     upper_angle: -0.45
+
+- name: back1
+  type: LaserScanAngularBoundsFilter
+  params:
+    lower_angle: 0.7
+    upper_angle: 3.14
+
+- name: back2
+  type: LaserScanAngularBoundsFilter
+  params:
+    lower_angle: -0.7
+    upper_angle: -3.14
+
 
 
 # scan_filter_chain:
