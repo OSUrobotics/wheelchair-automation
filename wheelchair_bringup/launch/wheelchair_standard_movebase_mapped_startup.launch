@@ -1,6 +1,0 @@
-<!-- Launch file for unaltered automated and teleop driving (no vector field adjustments) -->
-
-<launch>
-  <include file="$(find wheelchair_description)/launch/wheelchair_standard_core.launch"/>
-  <include file="$(find wheelchair_navigation)/launch/move_base_local_real_world.launch"/>
-</launch>

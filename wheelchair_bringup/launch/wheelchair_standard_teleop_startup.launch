@@ -2,4 +2,6 @@
 
 <launch>
   <include file="$(find wheelchair_description)/launch/wheelchair_standard_core.launch"/>
+<!--  <machine name="paean" address="192.168.1.200" env-loader="/opt/ros/indigo/remote_env.sh" user="paean" password="Robots!"/>
+  <node machine="paean" pkg="ros_pim_bridge" name="ros_pim_bridge_node" type="ros_pim_bridge_node"/> -->
 </launch>

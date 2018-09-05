@@ -1,5 +1,5 @@
 <launch>
-	<arg name="map_yaml"/>
+	<arg name="map_yaml" value="$(find wheelchair_mapping)/maps/good_full_map.yaml"/>
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_yaml)" />
 
 

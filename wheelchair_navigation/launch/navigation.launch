@@ -3,4 +3,6 @@
 
 	<include file="$(find wheelchair_navigation)/launch/move_base.launch"/>
 
-</launch>	
+	<remap from="cmd_vel" to="input/nav/cmd_vel"/>
+
+</launch>
