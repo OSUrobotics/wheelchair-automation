@@ -1,7 +1,7 @@
 <launch>
 	<include file="$(find wheelchair_navigation)/launch/amcl.launch"/>
 
-	<include file="$(find wheelchair_navigation)/launch/move_base.launch"/>
+	<include file="$(find wheelchair_navigation)/launch/move_base_local_real_world.launch"/>
 
 	<remap from="cmd_vel" to="input/nav/cmd_vel"/>
 
