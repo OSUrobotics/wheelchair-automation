@@ -1,7 +1,7 @@
 <launch>
   <arg name="config_file" default="$(find wheelchair_description)/config/scan_matcher_config.yaml"/>
-  <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" 
-    name="laser_scan_matcher_node" output="screen">
+  <node pkg="laser_scan_matcher_odom" type="laser_scan_matcher_odom_node"
+    name="laser_scan_matcher_odom_node" output="screen">
     <!-- <remap from="imu/data" to="mpu6050"/> -->
     <!-- <remap from="scan" to="/wheelchair_lasers/left"/> -->
     <remap from="scan" to="/scan_multi"/>

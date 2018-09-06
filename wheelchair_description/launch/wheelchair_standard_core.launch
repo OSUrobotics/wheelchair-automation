@@ -19,5 +19,5 @@
 <!--  <node pkg="ros_pim_bridge" name="ros_pim_bridge_node" type="ros_pim_bridge_node"/> -->
 
   <!-- Runs a bash file which launches wheelchair_merger.launch after a 3 second delay -->
-  <node pkg="wheelchair_description" name="wheelchair_merger" type="merger_delay.bash"/>
+  <node pkg="wheelchair_description" name="wheelchair_merger" type="merger_delay.bash"/> 
 </launch>

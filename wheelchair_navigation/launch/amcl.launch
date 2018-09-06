@@ -1,15 +1,15 @@
 <launch>
-	<arg name="map_yaml" value="$(find wheelchair_mapping)/maps/good_full_map.yaml"/>
+	<arg name="map_yaml" value="$(find wheelchair_mapping)/maps/lab_map.yaml"/>
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_yaml)" />
 
 
     <node name="amcl" pkg="amcl" type="amcl" output="screen">
         <remap from="scan" to="/scan_multi" />
         <param name="odom_frame_id" value="odom"/>
-
+				<param name="global_frame_id" value="map"/>
         <param name="base_frame_id" value="base_footprint"/>
-	<param name="odom_alpha1" value="0.6"/>
-	<param name="odom_alpha2" value="0.6"/>
+	<param name="odom_alpha1" value="0.06"/>
+	<param name="odom_alpha2" value="0.06"/>
 
 	<!--~update_min_a (double, default: π/6.0 radians)
     Rotational movement required before performing a filter update. -->
