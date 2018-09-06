@@ -59,26 +59,25 @@ scan_filter_chain:
   type: LaserScanAngularBoundsFilter
   params:
     lower_angle: 0.45
-    upper_angle: 0.6
+    upper_angle: 3.14
 
 - name: side2
   type: LaserScanAngularBoundsFilter
   params:
-    lower_angle: -0.6
+    lower_angle: -3.14
     upper_angle: -0.45
 
-- name: back1
-  type: LaserScanAngularBoundsFilter
-  params:
-    lower_angle: 0.7
-    upper_angle: 3.14
-
-- name: back2
-  type: LaserScanAngularBoundsFilter
-  params:
-    lower_angle: -0.7
-    upper_angle: -3.14
-
+#- name: back1
+#  type: LaserScanAngularBoundsFilter
+#  params:
+#    lower_angle: 0.7
+#    upper_angle: 3.14
+#
+#- name: back2
+#  type: LaserScanAngularBoundsFilter
+#  params:
+#    lower_angle: -0.7
+#    upper_angle: -3.14
 
 
 # scan_filter_chain:
