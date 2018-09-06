@@ -2,7 +2,7 @@
 
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base_node" output="screen">
 	    <!-- <remap from="cmd_vel" to="/twist" /> -->
-			<remap from="cmd_vel" to="move_base/cmd_vel"/>
+			<remap from="cmd_vel" to="input/nav/cmd_vel"/>
         <!-- Load common configuration files -->
         <rosparam file="$(find wheelchair_navigation)/move_base_params.yaml" command="load" />
         <rosparam file="$(find wheelchair_navigation)/costmap_common_params.yaml" command="load" ns="global_costmap" />
@@ -16,6 +16,6 @@
 
 		<node pkg="wheelchair_navigation" type="nav_joy.py" name="nav_joy"/>
 		
-		<node pkg="wheelchair_navigation" type="move_base_scaler_node" name="move_base_scaler"/>
+	<!--	<node pkg="wheelchair_navigation" type="move_base_scaler_node" name="move_base_scaler"/>   -->
 
 </launch>

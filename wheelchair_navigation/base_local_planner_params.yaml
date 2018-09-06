@@ -1,9 +1,9 @@
 # Robot Configuration Parameters
-acc_lim_x: 2.5
+acc_lim_x: 5.5
 acc_lim_y: 2.5
 acc_lim_th: 3.2
 max_vel_x: 2.68
-min_vel_x: 0.1
+min_vel_x: .1
 max_rotational_vel: 1.75
 min_in_place_rotational_vel: 1.0
 escape_vel: -0.1
@@ -15,12 +15,12 @@ holonomic_robot: false
 #xy_goal_tolerance: 0.1
 #yaw_goal_tolerance: 0.2
 
-xy_goal_tolerance: .2
-yaw_goal_tolerance: .2
+xy_goal_tolerance: .9
+yaw_goal_tolerance: .9
 
 
 # Forward Simulation Parameters
-sim_time: 1.7
+sim_time: 2.7
 sim_granularity: 0.025
 vx_samples: 3
 vtheta_samples: 20

@@ -15,9 +15,9 @@ scan_filter_chain:
   params:
     box_frame: base_link
     min_x: -1.2
-    max_x: .90
-    min_y: -0.3
-    max_y: .3
+    max_x: 1.0
+    min_y: -0.33
+    max_y: .33
     min_z: -1.5
     max_z: 1.5
 
