@@ -1,7 +1,7 @@
 <!-- Launch file for physical controllers -->
 
 <launch>
-  
+
   <include file="$(find spacenav_node)/launch/classic.launch"/>
 
   <node name="keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py">
@@ -11,6 +11,7 @@
   <node name="joystick" pkg="joy" type="joy_node">
     <param name="autorepeat_rate" type="double" value="5"/>
 	  <param name="coalesce_interval" type="double" value="0.2"/>
+		<param name= "deadzone" type="double" value=".15"/>
   </node>
 
   <node name="joystick_controller" pkg="teleop_twist_joy" type="teleop_node">

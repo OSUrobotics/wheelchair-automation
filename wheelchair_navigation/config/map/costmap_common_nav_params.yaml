@@ -5,7 +5,6 @@ raytrace_range: 20.0
 
 
 inflation_radius: 1.0
-
 cost_scaling_factor: = 3.5
 
 obstacle_layer:
@@ -17,7 +16,7 @@ base_scan: {sensor_frame: base_footprint,
             data_type: LaserScan,
             topic: /scan_multi,
             expected_update_rate: 0.2,
-            observation_persistence: 0.2,
+            observation_persistence: 0.15,
             marking: true,
             clearing: true,
             min_obstacle_height: -0.10,
