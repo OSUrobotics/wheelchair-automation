@@ -1,0 +1,23 @@
+<!-- Core launch file for wheelchair operations without vector field adjustments -->
+
+<launch>
+  <!-- Launches nodes for robot description and TF data -->
+  <include file="$(find wheelchair_description)/launch/wheelchair_description.launch"/>
+
+  <!-- Launches laser scan matcher node with proper config -->
+<!--  <include file="$(find wheelchair_description)/launch/wheelchair_odom.launch"/> -->
+
+  <!-- Runs nodes for joystick control, joystick to twist messages, and spacenav node -->
+  <include file="$(find wheelchair_description)/launch/wheelchair_joy.launch">
+    <param name="deadzone" type="double" value=".1"/>
+  </include>
+
+  <!-- Launches nodelet manager, yocs_cmd_vel_mux, and a node to modify and rearrange spacenav data -->
+  <include file="$(find wheelchair_description)/launch/wheelchair_nav_priorities.launch"/>
+
+  <!-- Runs the ROS-PIM interface (Not used since PIM now runs on Up board) -->
+<!--  <node pkg="ros_pim_bridge" name="ros_pim_bridge_node" type="ros_pim_bridge_node"/> -->
+
+  <!-- Runs a bash file which launches wheelchair_merger.launch after a 3 second delay -->
+<!--  <node pkg="wheelchair_description" name="wheelchair_merger" type="merger_delay.bash"/> -->
+</launch>
