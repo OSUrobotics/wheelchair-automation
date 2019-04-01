@@ -74,6 +74,7 @@ add_compile_options(-std=c++11)
 generate_messages(
   DEPENDENCIES
   std_msgs
+  geometry_msgs
 )
 
 ###################################
@@ -88,7 +89,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES test_simulation
-#  CATKIN_DEPENDS rospy std_msgs
+  CATKIN_DEPENDS rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -115,7 +116,7 @@ add_executable(move_base_scaler_node src/move_base_scaler.cpp)
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(test_simulation_node test_simulation_generate_messages_cpp)
-add_dependencies(move_base_scaler_node move_base_scaler_generate_messages_cpp)
+add_dependencies(move_base_scaler_node move_base_scaler_generate_messages_cpp wheelchair_navigation_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(test_simulation_node
