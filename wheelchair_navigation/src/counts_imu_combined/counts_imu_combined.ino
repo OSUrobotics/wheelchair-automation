@@ -5,7 +5,7 @@
 #include <ros.h>
 #include <std_msgs/Int32MultiArray.h>
 #include <std_msgs/Float32MultiArray.h>
-#include <wheelchair_navigation_msgs/imu_enc_merged.h>
+#include <wheelchair_navigation/imu_enc_merged.h>
 
 ros::NodeHandle nh;
 
@@ -16,9 +16,9 @@ std_msgs::Float32MultiArray IMU;
 //ros::Publisher imu_pub = ros::Publisher("IMU",&IMU);
 imu::Quaternion quat;
 
-wheelchair_navigation_msgs::imu_enc_merged merged;
+wheelchair_navigation::imu_enc_merged merged;
 
-ros::Publisher combined_pub = ros::Publisher("merged_imu_encoder", &imu_enc_merged)
+ros::Publisher combined_pub = ros::Publisher("merged_imu_encoder", &merged);
 
 Adafruit_BNO055 bno = Adafruit_BNO055();
 
@@ -32,14 +32,14 @@ void setup() {
   nh.initNode();
   counts.data_length = 2;
   IMU.data_length = 4;
-  IMU.data = malloc(sizeof(int));
-  counts.data = malloc(sizeof(int));
-  merged.imu_data = malloc(sizeof(IMU));
-  merged.counts = malloc(sizeof(counts));
+//  IMU.data = malloc(sizeof(int));
+//  counts.data = malloc(sizeof(int));
+//  merged.imu_data.data = malloc(sizeof(int));
+//  merged.counts.data = malloc(sizeof(int));
 //  nh.advertise(imu_pub);
 //  nh.advertise(counts_pub);
 
-  nh.advertise(combined_pub)
+  nh.advertise(combined_pub);
 
   pinMode(2, INPUT_PULLUP); // internal pullup input pin 2
   pinMode(3, INPUT_PULLUP); // internal pullup input pin 3
