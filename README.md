@@ -62,10 +62,12 @@ Dependencies
 + sudo apt-get install ros-indigo-move-base  
 + sudo apt-get install ros-indigo-urg-node
 + sudo apt-get install ros-indigo-teleop-twist-joy
++ sudo apt-get install ros-indigo-teleop-twist-keyboard
 + sudo apt-get install ros-indigo-spacenav-node
 + sudo apt-get install ros-indigo-yocs-cmd-vel-mux
 + sudo apt-get install ros-indigo-joy
 + sudo apt-get install ros-indigo-laser-geometry
++ sudo apt-get install ros-indigi-laser-scan-matcher
 + ira_laser_tools
 
 laser_scan_matcher

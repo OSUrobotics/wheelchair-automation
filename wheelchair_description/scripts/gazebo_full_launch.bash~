@@ -18,7 +18,7 @@ roslaunch wheelchair_description wheelchair_merger.launch & mergerPid=$!
 
 sleep 10
 
-roslaunch wheelchair_navigation move_base_local.launch & movePid=$!
+#roslaunch wheelchair_navigation move_base_local.launch & movePid=$!
 
 sleep 2
 
@@ -26,5 +26,5 @@ roslaunch wheelchair_description wheelchair_nav_priorities.launch & navPid=$!
 
 sleep 5
 
-rosrun rviz rviz -d ../WheelchairSetup.rviz & rvizPid=$!
+#rosrun rviz rviz -d ../WheelchairSetup.rviz & rvizPid=$!
 wait
