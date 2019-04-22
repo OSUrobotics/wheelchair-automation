@@ -13,3 +13,9 @@ apt-get remove ros-indigo-yocs-cmd-vel-mux
 apt-get remove ros-indigo-joy
 apt-get remove ros-indigo-laser-geometry
 apt-get remove ros-indigo-laser-scan-matcher
+
+cd ../
+rm -r scan_tools/
+rm -r ira_laser_tools/
+
+sudo -k

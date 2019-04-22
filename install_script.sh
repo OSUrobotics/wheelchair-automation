@@ -18,3 +18,8 @@ apt-get install ros-indigo-joy
 apt-get install ros-indigo-laser-geometry
 apt-get install ros-indigo-laser-scan-matcher
 apt-get install libgsl0-dev
+
+sudo -k
+
+cd ../
+catkin_make
