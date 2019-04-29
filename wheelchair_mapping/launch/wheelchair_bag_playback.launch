@@ -1,0 +1,7 @@
+<launch>
+  <arg name="bag_file"/>
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find wheelchair_description)/urdf/wheelchair_description.xacro'" />
+
+<!--  <node name="bag_player" pkg="rosbag" type="play" args="$(arg bag_file)"/> -->
+
+</launch>

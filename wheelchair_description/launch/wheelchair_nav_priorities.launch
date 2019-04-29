@@ -8,6 +8,7 @@
   <remap from="yocs_cmd_vel_mux/input/nav/cmd_vel" to="input/nav/cmd_vel"/>
   <remap from="yocs_cmd_vel_mux/input/spacenav/cmd_vel" to="input/spacenav/cmd_vel"/>
   <remap from="yocs_cmd_vel_mux/input/keyboard/cmd_vel" to="input/keyboard/cmd_vel"/>
+  <remap from="yocs_cmd_vel_mux/input/misc/cmd_vel" to="input/misc/cmd_vel"/>
   <remap from="scan" to="scan_multi"/>
   <!-- nodelet manager -->
   <node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager_name)" args="manager"/>
