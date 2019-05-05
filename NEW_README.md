@@ -1,5 +1,5 @@
-wheelchair-automation
-=====================
+<b>wheelchair-automation</b>
+=============================
 
 Code for automating a PERMOBIL wheelchair for the ALS foundation.
 
@@ -65,12 +65,9 @@ High-Level System Bringup
  --Starts the PIM-ROS interface
 
 
-System Access/System Setup
+System Setup
 ---------------------
 <h6>For NUC-UP Board systems:</h6>
-<p><b>System Access:</b></p>
-
-<p><b>System Setup:</b></p>
 <ol>
 <li>On both NUC and UP board, install Ubuntu 14.04 (http://releases.ubuntu.com/14.04/)</li>
 <li>On both, install ROS Indigo (http://wiki.ros.org/indigo/Installation/Ubuntu)</li>
@@ -111,8 +108,6 @@ On the UP Board:
 </ol>
 
 <h6>For NUC-Only systems:</h6>
-<p><b>System Access:</b></p>
-<p><b>System Setup:</b></p>
 <ol>
 <li>Git clone the Wheelchair Automation repository into your workspace’s src folder (https://github.com/OSUrobotics/wheelchair-automation.git)
 
@@ -138,17 +133,18 @@ On the UP Board:
 
 Dependencies
 ---------------------
-+ sudo apt-get install ros-indigo-robot-upstart  
-+ sudo apt-get install ros-indigo-scan-tools   
-+ sudo apt-get install ros-indigo-move-base  
-+ sudo apt-get install ros-indigo-urg-node
-+ sudo apt-get install ros-indigo-teleop-twist-joy
-+ sudo apt-get install ros-indigo-teleop-twist-keyboard
-+ sudo apt-get install ros-indigo-spacenav-node
-+ sudo apt-get install ros-indigo-yocs-cmd-vel-mux
-+ sudo apt-get install ros-indigo-joy
-+ sudo apt-get install ros-indigo-laser-geometry
-+ sudo apt-get install ros-indigo-laser-scan-matcher
++ ros-indigo-robot-upstart  
++ ros-indigo-scan-tools   
++ ros-indigo-move-base  
++ ros-indigo-urg-node
++ ros-indigo-teleop-twist-joy
++ ros-indigo-teleop-twist-keyboard
++ ros-indigo-spacenav-node
++ ros-indigo-yocs-cmd-vel-mux
++ ros-indigo-joy
++ ros-indigo-laser-geometry
++ ros-indigo-laser-scan-matcher
++ ros-indigo-serial
 + ira_laser_tools
 
 <b>ira_laser_tools installation:</b>
