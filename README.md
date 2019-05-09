@@ -67,7 +67,7 @@ Dependencies
 + sudo apt-get install ros-indigo-yocs-cmd-vel-mux
 + sudo apt-get install ros-indigo-joy
 + sudo apt-get install ros-indigo-laser-geometry
-+ sudo apt-get install ros-indigi-laser-scan-matcher
++ sudo apt-get install ros-indigo-laser-scan-matcher
 + ira_laser_tools
 
 laser_scan_matcher
