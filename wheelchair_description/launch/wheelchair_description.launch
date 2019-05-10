@@ -2,6 +2,7 @@
 
 <launch>
   <param name="robot_description" command="$(find xacro)/xacro.py '$(find wheelchair_description)/urdf/wheelchair_description.xacro'" />
+  <rosparam command="load" file="$(find wheelchair_description)/params/pointcloud_merger_params.yaml"/>
 
   <node name="robot_state_publisher" type="robot_state_publisher" pkg="robot_state_publisher">
   	<param name="publish_frequency" value="100"/>

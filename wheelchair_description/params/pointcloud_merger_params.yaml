@@ -1,0 +1,12 @@
+pointcloud_merger:
+  - name: left_scanner
+    type: LaserScan
+    params:
+      frame_id: left_scanner
+      topic: /wheelchair_lasers/left
+
+  - name: right_scanner
+    type: LaserScan
+    params:
+      frame_id: right_scanner
+      topic: /wheelchair_lasers/right
