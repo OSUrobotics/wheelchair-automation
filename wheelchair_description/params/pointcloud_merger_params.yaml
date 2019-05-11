@@ -10,3 +10,25 @@ pointcloud_merger:
     params:
       frame_id: right_scanner
       topic: /wheelchair_lasers/right
+
+pointcloud_filters:
+#Filters out all points within a given three dimensional box
+  - name: chair_volume_filter
+    type: BoxFilter
+    params:
+      base_frame: base_link
+      x_max: 0.43
+      x_min: -0.43
+      y_max: 0.5
+      y_min: -0.5
+      z_max: 1.5
+      z_min: -0.5
+
+#Anything with a value outside of the given range is removed.
+  - name: chair_height_filter
+    type: OneDimensionalFilter
+    params:
+      base_frame: base_link
+      dimension: 'z'
+      max_val: 3.0
+      min_val: -1.0

@@ -11,7 +11,7 @@ class Merger:
         self.nh = rospy.init_node('pointcloud_merger', anonymous = True)
         self.pc_pub = rospy.Publisher('merged_pointcloud', PointCloud, queue_size = 1)
         self.pc_message = PointCloud()
-        self.rate = 30
+        self.rate = 10
         self.base_frame = 'base_link'
         self.data_raw = []
         self.pc_data = []
@@ -43,9 +43,8 @@ class Merger:
                 self.subscribers.append(rospy.Subscriber(param['params']['topic'], PointCloud, self.pc_callback))
 
         self.r = rospy.Rate(self.rate)
-        while not rospy.is_shutdown():
-            self.loop()
-            self.r.sleep()
+        self.loop()
+
 
     #Checks for pointcloud_merger params. Retries up to 10 times at 2 second intervals
     #before crashing with fatal error.
@@ -90,51 +89,56 @@ class Merger:
 
 
     def loop(self):
-        for i in range(len(self.data_raw)):
-            try:
-                frame = self.data_raw[i]['frame_id']
-                data = self.data_raw[i]['data']
-                (trans,rot) = self.listen.lookupTransform(self.base_frame, frame, rospy.Time(0))
+        while not rospy.is_shutdown():
+            for i in range(len(self.data_raw)):
+                self.pc_data[i] = []
                 try:
-                    if self.data_raw[i]['type'] == 'LaserScan':
-                        angle_increment = self.data_raw[i]['angle_increment']
-                        angle_min = self.data_raw[i]['angle_min']
-                        for j in range(len(data)):
-                            if not math.isnan(data[j]):
-                                point = Point32()
-                                dist = data[j]
-                                e_rot = tf.transformations.euler_from_quaternion(rot)
-                                theta = float(j) * angle_increment + angle_min - e_rot[2]
-                                point.x = -(dist * math.cos(theta) - trans[0])
-                                point.y = -(dist * math.sin(theta) - trans[1])
-                                point.z = -trans[2]
-                                #Makes sure there are enough spots in the data array
-                                if i > len(self.pc_data):
-                                    self.pc_data.append([])
-                                if j > len(self.pc_data[i]) - 1:
-                                    self.pc_data[i].append(point)
-                                else:
-                                    self.pc_data[i][j] = point
+                    frame = self.data_raw[i]['frame_id']
+                    data = self.data_raw[i]['data']
+                    (trans,rot) = self.listen.lookupTransform(self.base_frame, frame, rospy.Time(0))
+                    try:
+                        if self.data_raw[i]['type'] == 'LaserScan':
+                            angle_increment = self.data_raw[i]['angle_increment']
+                            angle_min = self.data_raw[i]['angle_min']
+                            for j in range(len(data)):
+                                if not math.isnan(data[j]):
+                                    point = Point32()
+                                    dist = data[j]
+                                    e_rot = tf.transformations.euler_from_quaternion(rot)
+                                    theta = float(j) * angle_increment + angle_min - e_rot[2]
+                                    point.x = -(dist * math.cos(theta) - trans[0])
+                                    point.y = -(dist * math.sin(theta) - trans[1])
+                                    point.z = trans[2]
+                                    #Makes sure there are enough spots in the data array
+                                    if i > len(self.pc_data):
+                                        self.pc_data.append([])
+                                    if j > len(self.pc_data[i]) - 1:
+                                        self.pc_data[i].append(point)
+                                    else:
+                                        self.pc_data[i][j] = point
 
-                except:
-                    print "Error\n"
+                    except:
+                        print "Error\n"
+                        pass
+
+                except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                     pass
 
-            except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
-                pass
+            self.pc_merged = []
 
-        self.pc_merged = []
+            for i in range(len(self.pc_data)):
+                for j in range(len(self.pc_data[i])):
+                    self.pc_merged.append(self.pc_data[i][j])
 
-        for i in range(len(self.pc_data)):
-            for j in range(len(self.pc_data[i])):
-                self.pc_merged.append(self.pc_data[i][j])
+            self.pc_message.header.frame_id = self.base_frame
+            self.pc_message.header.stamp = rospy.get_rostime()
+            self.pc_message.points = self.pc_merged
 
-        self.pc_message.header.frame_id = self.base_frame
-        self.pc_message.header.stamp = rospy.get_rostime()
-        self.pc_message.points = self.pc_merged
+            self.pc_pub.publish(self.pc_message)
 
-        self.pc_pub.publish(self.pc_message)
-
+            self.pc_message.points = []
+            self.pc_merged = []
+            self.r.sleep()
 
 
 if __name__ == '__main__':
