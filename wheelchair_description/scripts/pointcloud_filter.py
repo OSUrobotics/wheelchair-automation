@@ -20,6 +20,8 @@ class PCFilter:
 
         self.get_params(0)
 
+        rospy.sleep(rospy.Duration(5.0))
+
         self.loop()
 
 

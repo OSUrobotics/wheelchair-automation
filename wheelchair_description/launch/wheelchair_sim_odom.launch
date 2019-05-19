@@ -1,0 +1,18 @@
+<launch>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/wheelchair" args="joint_state_controller"/>
+
+  <node name="fake_localization" pkg="fake_localization" type="fake_localization"/>
+  <launch>
+    <arg name="config_file" default="$(find wheelchair_description)/config/scan_matcher_config.yaml"/>
+    <node pkg="laser_scan_matcher_odom" type="laser_scan_matcher_odom_node"
+      name="laser_scan_matcher_odom_node" output="screen">
+      <!-- <remap from="imu/data" to="mpu6050"/> -->
+      <!-- <remap from="scan" to="/wheelchair_lasers/left"/> -->
+      <remap from="scan" to="/scan_multi"/>
+      <!-- <remap from="odom" to="odom_temp"/> -->
+      <rosparam file="$(arg config_file)" command="load"/>
+    </node>
+
+  </launch>
+</launch>

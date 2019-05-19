@@ -31,36 +31,36 @@
   </node>
 
   <!-- Min and Max Laser Scan -->
-
+<!--
     <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left_range">
         <remap from="scan" to="/wheelchair_lasers/left" />
-        <remap from="scan_filtered" to="/scan_filtered_left_range"/>
+        <remap from="scan_filtered" to="/scan_filtered_left_range"/> -->
 	<!--<remap from="scan_filtered" to="/scan_multi"/>-->
-        <rosparam command="load" file="$(find wheelchair_description)/params/laserscan_filter.yaml" />
-    </node>
+<!--        <rosparam command="load" file="$(find wheelchair_description)/params/laserscan_filter.yaml" />
+</node> -->
 
-    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_right_range">
+<!--    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_right_range">
         <remap from="scan" to="/wheelchair_lasers/right" />
-        <remap from="scan_filtered" to="/scan_filtered_right_range"/>
+        <remap from="scan_filtered" to="/scan_filtered_right_range"/> -->
 	<!--<remap from="scan_filtered" to="/scan_multi"/>-->
-        <rosparam command="load" file="$(find wheelchair_description)/params/laserscan_filter.yaml" />
-    </node>
+<!--        <rosparam command="load" file="$(find wheelchair_description)/params/laserscan_filter.yaml" />
+</node> -->
 
 <!-- Shadow Filters -->
 
-    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left_shadow">
+<!--    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left_shadow">
         <remap from="scan" to="/scan_filtered_left_range" />
-        <remap from="scan_filtered" to="/scan_filtered_left_shadow"/>
+        <remap from="scan_filtered" to="/scan_filtered_left_shadow"/> -->
 	<!--<remap from="scan_filtered" to="/scan_multi"/>-->
-        <rosparam command="load" file="$(find wheelchair_description)/params/range_laser_filter.yaml" />
-    </node>
+<!--        <rosparam command="load" file="$(find wheelchair_description)/params/range_laser_filter.yaml" />
+</node> -->
 
-    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_right_shadow">
+<!--    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_right_shadow">
         <remap from="scan" to="/scan_filtered_right_range" />
-        <remap from="scan_filtered" to="/scan_filtered_right_shadow"/>
+        <remap from="scan_filtered" to="/scan_filtered_right_shadow"/> -->
 	<!--<remap from="scan_filtered" to="/scan_multi"/>-->
-        <rosparam command="load" file="$(find wheelchair_description)/params/range_laser_filter.yaml" />
-    </node>
+<!--        <rosparam command="load" file="$(find wheelchair_description)/params/range_laser_filter.yaml" />
+</node> -->
 
 <!-- Angle Filter -->
 <!--
@@ -75,7 +75,7 @@
     <remap from="scan_filtered" to="/scan_filtered_right_angle"/>
     <rosparam command="load" file="$(find wheelchair_description)/params/angle_laserscan_filter.yaml" />
 </node> -->
-
+<!--
 <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_left_box">
    <remap from="scan" to="/scan_filtered_left_shadow" />
    <remap from="scan_filtered" to="/scan_filtered_left"/>
@@ -86,7 +86,7 @@
    <remap from="scan" to="/scan_filtered_right_shadow" />
    <remap from="scan_filtered" to="/scan_filtered_right"/>
    <rosparam command="load" file="$(find wheelchair_description)/params/box_laserscan_filter.yaml" />
-</node>
+</node> -->
 
 <!--
 <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter_scan_multi">
