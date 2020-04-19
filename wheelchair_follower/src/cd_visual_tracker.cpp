@@ -12,7 +12,7 @@
 
 using namespace cv;
 static const std::string OPENCV_WINDOW = "Image window";
-int findBiggestContour(vector<vector<Point> >);
+int findBiggestContour(std::vector<std::vector<Point> >);
 
 class ImageConverter
 {
@@ -40,7 +40,7 @@ public:
     cv::destroyWindow(OPENCV_WINDOW);
   }
 
-  int findBiggestContour(vector<vector<Point> > contours){
+  int findBiggestContour(std::vector<std::vector<Point> > contours){
     int indexOfBiggestContour = -1;
     int sizeOfBiggestContour = 0;
     for (int i = 0; i < contours.size(); i++){
@@ -76,8 +76,8 @@ static void floodFillPostprocess( Mat& img, const Scalar& colorDiff=Scalar::all(
 	int largest_area=0;
 	  int largest_contour_index=0;
 
-	  vector< vector<Point> > contours; // Vector for storing contour
-	  vector<Vec4i> hierarchy;
+	  std::vector< std::vector<Point> > contours; // std::vector for storing contour
+	  std::vector<Vec4i> hierarchy;
 
 	  findContours( matImage, contours, hierarchy,CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE ); // Find the contours in the image
 
@@ -127,8 +127,8 @@ static void floodFillPostprocess( Mat& img, const Scalar& colorDiff=Scalar::all(
     // cv::inRange(hsv, cv::Scalar(0, 10, 60), cv::Scalar(20, 150, 255), bw);
     //
     // Mat canny_output;
-    // vector<vector<Point> > contours;
-    // vector<Vec4i> hierarchy;
+    // std::vector<std::vector<Point> > contours;
+    // std::vector<Vec4i> hierarchy;
     //
     // findContours( bw, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
     // int s = findBiggestContour(contours);
